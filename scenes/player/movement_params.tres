@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MovementParams" load_steps=2 format=3 uid="uid://kl5qqua4pvfg"]
+
+[ext_resource type="Script" path="res://scenes/player/movement_params.gd" id="1_4hh8l"]
+
+[resource]
+script = ExtResource("1_4hh8l")
+grapple_range = 1000.0
+max_walk_speed = 500.0
+walk_acceleration = 1500.0
+floor_friction = 1500.0
+sliding_friction = 300.0
+air_acceleration = 200.0
+retraction_power = 1000.0
+jump_speed = -700.0
+gravity = 980.0
+min_slide_speed = 50.0
+wall_slide_speed = 200.0

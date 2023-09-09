@@ -4,18 +4,9 @@ extends CharacterBody2D
 
 @export var instant_retract = true
 @export var auto_retract = false
-
-@export_group("Movement")
-@export var grapple_range = 1000.0
-@export var max_walk_speed = 300.0
-@export var walk_acceleration = 1500.0
-@export var floor_friction = 1500.0
-@export var sliding_friction = 300.0
-@export var air_acceleration = 100.0
-@export var retraction_power = 300.0
-@export var jump_speed = -400.0
-@export var gravity = 980.0
-@export var min_slide_speed = 50.0
+@export_category("Movement Parameters")
+## Movement Parameters
+@export var mp : MovementParams
 
 @onready var grapple_ray: RayCast2D = $GrappleRay
 @onready var grapple_line: Line2D = $GrappleLine
@@ -36,48 +27,50 @@ func _physics_process(delta: float) -> void:
 	$FloorDust.emitting = false
 	modulate = Color.WHITE
 	if is_on_floor():
-		var at_sliding_speed = abs(velocity.x) > max_walk_speed
+		var at_sliding_speed = abs(velocity.x) > mp.max_walk_speed
 		if (not at_sliding_speed and direction) or (at_sliding_speed and (sign(direction)==sign(-velocity.x))):
-			velocity.x = move_toward(velocity.x, direction * max_walk_speed, walk_acceleration*delta)
+			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta)
 		elif is_grappling or is_sliding:
 			modulate = Color.AQUA
-			velocity.x = move_toward(velocity.x, 0, sliding_friction*delta)
+			velocity.x = move_toward(velocity.x, 0, mp.sliding_friction*delta)
 		else:
 			modulate = Color.YELLOW
-			velocity.x = move_toward(velocity.x, 0, floor_friction*delta)
-		if Input.is_action_just_pressed("slide") and abs(velocity.x) > min_slide_speed:
+			velocity.x = move_toward(velocity.x, 0, mp.floor_friction*delta)
+		if Input.is_action_just_pressed("slide") and abs(velocity.x) > mp.min_slide_speed:
 			is_sliding = true
 		if at_sliding_speed:
 			$FloorDust.emitting = true
 	elif direction != 0:
-		velocity.x += direction*delta*air_acceleration
-	if abs(velocity.x) < min_slide_speed:
+		velocity.x += direction*delta*mp.air_acceleration
+	if abs(velocity.x) < mp.min_slide_speed:
 		is_sliding = false
 	
 	# Add the gravity.
 	$LeftWallDust.emitting = false
 	$RightWallDust.emitting = false
 	if not is_on_floor():
-		velocity.y += gravity * delta
-		if is_on_wall() and velocity.y > 0 and direction:
-			velocity.y = move_toward(velocity.y, 200.0, delta * floor_friction)
-			if direction > 0:
-				$RightWallDust.emitting = true
-			else:
-				$LeftWallDust.emitting = true
+		velocity.y += mp.gravity * delta
+		if is_on_wall():
+			if velocity.y > mp.wall_slide_speed and direction:
+				velocity.y = move_toward(velocity.y, mp.wall_slide_speed, delta * mp.floor_friction)
+			if abs(velocity.y)>mp.wall_slide_speed*0.3:
+				if direction > 0:
+					$RightWallDust.emitting = true
+				if direction < 0:
+					$LeftWallDust.emitting = true
 	
 	# Jumping
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
-			velocity.y = jump_speed
+			velocity.y = mp.jump_speed
 			is_sliding = false
 		if is_on_wall_only() and direction:
-			velocity.y = jump_speed
-			velocity.x = jump_speed * direction
+			velocity.y = mp.jump_speed
+			velocity.x = mp.jump_speed * direction
 			is_grappling = false
 	
 	if Input.is_action_just_pressed("grapple") and can_grapple:
-		grapple_ray.target_position = grapple_ray.get_local_mouse_position().normalized()*grapple_range
+		grapple_ray.target_position = grapple_ray.get_local_mouse_position().normalized()*mp.grapple_range
 		grapple_ray.force_raycast_update()
 		if grapple_ray.get_collider():
 			is_grappling = true
@@ -88,18 +81,18 @@ func _physics_process(delta: float) -> void:
 			if map:
 				var ac = map.get_cell_atlas_coords(0, map.local_to_map(grapple_ray.get_collision_point() - grapple_ray.get_collision_normal()))
 				if ac == WorldMap.boost_tile:
-					velocity += grapple_ray.global_position.direction_to(hook_position) * retraction_power
+					velocity += grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
 	
 	if Input.is_action_just_released("grapple") and is_grappling:
 		is_grappling = false
 	
 	if instant_retract:
 		if Input.is_action_just_pressed("retract") and is_grappling:
-			velocity += grapple_ray.global_position.direction_to(hook_position) * retraction_power
+			velocity += grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
 			is_grappling = false
 	else:
 		if Input.is_action_pressed("retract") and is_grappling:
-			grapple_length = move_toward(grapple_length, 0, retraction_power * delta)
+			grapple_length = move_toward(grapple_length, 0, mp.retraction_power * delta)
 	
 	if auto_retract:
 		grapple_length = min(grapple_length, hook_position.distance_to(global_position))
