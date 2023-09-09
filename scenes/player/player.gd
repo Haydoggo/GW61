@@ -81,7 +81,13 @@ func _physics_process(delta: float) -> void:
 			if map:
 				var hook_pos_adjusted = grapple_ray.get_collision_point() - grapple_ray.get_collision_normal()
 				if map.global_to_atlas_coords(hook_pos_adjusted) == WorldMap.boost_tile:
-					velocity += grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
+					var pull_vel = grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
+					if velocity.dot(pull_vel) < 0:
+						velocity = velocity.project(pull_vel.orthogonal())
+#						var orthogonal_pull_vec = pull_vel.normalized().orthogonal()
+#						orthogonal_pull_vec *= sign(velocity.dot(orthogonal_pull_vec))
+#						velocity *= orthogonal_pull_vec
+					velocity += pull_vel
 	
 	if Input.is_action_just_released("grapple") and is_grappling:
 		is_grappling = false
@@ -116,3 +122,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		$Sprite2D.scale.y = 1*0.5
 		$Sprite2D.position.y = 0
+
+func _draw() -> void:
+	draw_arc(Vector2(0,0), mp.grapple_range, 0, TAU, 32, Color.WHITE)

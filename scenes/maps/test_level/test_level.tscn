@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfqyto00kgjv1"]
 
-[ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="1_2mubu"]
-[ext_resource type="Script" path="res://scenes/player/camera.gd" id="2_cmo05"]
-[ext_resource type="PackedScene" uid="uid://ds7cl6uqqv27o" path="res://scenes/maps/test_level/test_map.tscn" id="3_tnbjs"]
+[ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="1_oqn3n"]
+[ext_resource type="Script" path="res://scenes/player/camera.gd" id="2_2r0jq"]
+[ext_resource type="PackedScene" uid="uid://ds7cl6uqqv27o" path="res://scenes/maps/test_level/test_map.tscn" id="3_0i1la"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vs8gn"]
 
@@ -20,13 +20,13 @@ func _pressed() -> void:
 
 [node name="TestLevel" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_2mubu")]
+[node name="Player" parent="." instance=ExtResource("1_oqn3n")]
 position = Vector2(356, 234)
 auto_retract = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.5, 0.5)
-script = ExtResource("2_cmo05")
+script = ExtResource("2_2r0jq")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -54,4 +54,4 @@ offset_bottom = 8.0
 text = "Restart "
 script = SubResource("GDScript_fg8m3")
 
-[node name="TestMap" parent="." instance=ExtResource("3_tnbjs")]
+[node name="TestMap" parent="." instance=ExtResource("3_0i1la")]
