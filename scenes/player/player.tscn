@@ -30,6 +30,7 @@ scale_curve = SubResource("CurveTexture_outn4")
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_p55oq")
+retraction_power = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

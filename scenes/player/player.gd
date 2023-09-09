@@ -74,6 +74,7 @@ func _physics_process(delta: float) -> void:
 		if is_on_wall_only() and direction:
 			velocity.y = jump_speed
 			velocity.x = jump_speed * direction
+			is_grappling = false
 	
 	if Input.is_action_just_pressed("grapple") and can_grapple:
 		grapple_ray.target_position = grapple_ray.get_local_mouse_position().normalized()*grapple_range
@@ -82,6 +83,12 @@ func _physics_process(delta: float) -> void:
 			is_grappling = true
 			hook_position = grapple_ray.get_collision_point()
 			grapple_length = hook_position.distance_to(grapple_ray.global_position)
+			
+			var map = grapple_ray.get_collider() as TileMap
+			if map:
+				var ac = map.get_cell_atlas_coords(0, map.local_to_map(grapple_ray.get_collision_point() - grapple_ray.get_collision_normal()))
+				if ac == WorldMap.boost_tile:
+					velocity += grapple_ray.global_position.direction_to(hook_position) * retraction_power
 	
 	if Input.is_action_just_released("grapple") and is_grappling:
 		is_grappling = false
@@ -116,4 +123,3 @@ func _physics_process(delta: float) -> void:
 	else:
 		$Sprite2D.scale.y = 1*0.5
 		$Sprite2D.position.y = 0
-		
