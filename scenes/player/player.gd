@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 
 @export var instant_retract = true
+@export var auto_retract = false
 
 @export_group("Movement")
 @export var grapple_range = 1000.0
@@ -76,7 +77,10 @@ func _physics_process(delta: float) -> void:
 			is_grappling = false
 	else:
 		if Input.is_action_pressed("retract") and is_grappling:
-			grapple_length = move_toward(grapple_length, 0, retraction_power * delta*0.5)
+			grapple_length = move_toward(grapple_length, 0, retraction_power * delta)
+	
+	if auto_retract:
+		grapple_length = min(grapple_length, hook_position.distance_to(global_position))
 	
 	if is_grappling:
 		var hook_dir = hook_position - grapple_ray.global_position
