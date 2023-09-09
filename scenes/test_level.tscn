@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfqyto00kgjv1"]
+
+[ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="1_2mubu"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vs8gn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xiov6"]
+seamless = true
+noise = SubResource("FastNoiseLite_vs8gn")
+
+[sub_resource type="Gradient" id="Gradient_ae3ii"]
+offsets = PackedFloat32Array(0.754902, 1)
+colors = PackedColorArray(0.197937, 0.197937, 0.197937, 1, 0.176419, 0.176419, 0.176419, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_syofs"]
+gradient = SubResource("Gradient_ae3ii")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nj5k1"]
+texture = SubResource("GradientTexture2D_syofs")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_laxwg"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_nj5k1")
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_2mubu")]
+position = Vector2(356, 234)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1152, 648)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_xiov6")
+stretch_mode = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_laxwg")
+format = 2
+layer_0/tile_data = PackedInt32Array(327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 393224, 0, 0, 393223, 0, 0, 393222, 0, 0, 393221, 0, 0, 393220, 0, 0, 393219, 0, 0, 393218, 0, 0)
