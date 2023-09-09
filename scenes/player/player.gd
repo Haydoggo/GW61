@@ -28,18 +28,12 @@ var grapple_length = 0.0
 var hook_position = Vector2()
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
 
-	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_speed
-		is_sliding = false
+	
 
-	# Get the input direction and handle the movement/deceleration.
+	# Walking + friction
 	var direction := Input.get_axis("move_left", "move_right")
-	$GPUParticles2D.emitting = false
+	$FloorDust.emitting = false
 	modulate = Color.WHITE
 	if is_on_floor():
 		var at_sliding_speed = abs(velocity.x) > max_walk_speed
@@ -54,11 +48,32 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("slide") and abs(velocity.x) > min_slide_speed:
 			is_sliding = true
 		if at_sliding_speed:
-			$GPUParticles2D.emitting = true
+			$FloorDust.emitting = true
 	elif direction != 0:
 		velocity.x += direction*delta*air_acceleration
 	if abs(velocity.x) < min_slide_speed:
 		is_sliding = false
+	
+	# Add the gravity.
+	$LeftWallDust.emitting = false
+	$RightWallDust.emitting = false
+	if not is_on_floor():
+		velocity.y += gravity * delta
+		if is_on_wall() and velocity.y > 0 and direction:
+			velocity.y = move_toward(velocity.y, 200.0, delta * floor_friction)
+			if direction > 0:
+				$RightWallDust.emitting = true
+			else:
+				$LeftWallDust.emitting = true
+	
+	# Jumping
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor():
+			velocity.y = jump_speed
+			is_sliding = false
+		if is_on_wall_only() and direction:
+			velocity.y = jump_speed
+			velocity.x = jump_speed * direction
 	
 	if Input.is_action_just_pressed("grapple") and can_grapple:
 		grapple_ray.target_position = grapple_ray.get_local_mouse_position().normalized()*grapple_range

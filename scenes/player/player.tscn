@@ -30,7 +30,6 @@ scale_curve = SubResource("CurveTexture_outn4")
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_p55oq")
-boost_speed = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -44,7 +43,19 @@ shape = SubResource("CapsuleShape2D_5ue3p")
 [node name="GrappleLine" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="FloorDust" type="GPUParticles2D" parent="."]
 position = Vector2(0, 32)
-amount = 800
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_untun")
+
+[node name="LeftWallDust" type="GPUParticles2D" parent="."]
+position = Vector2(-16, 0)
+rotation = -4.71238
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_untun")
+
+[node name="RightWallDust" type="GPUParticles2D" parent="."]
+position = Vector2(16, 0)
+rotation = -1.57079
+amount = 64
 process_material = SubResource("ParticleProcessMaterial_untun")
