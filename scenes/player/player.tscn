@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=7 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="1_6neeu"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
@@ -7,11 +7,32 @@
 radius = 16.0
 height = 64.0
 
+[sub_resource type="Curve" id="Curve_018rt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.10443, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_outn4"]
+curve = SubResource("Curve_018rt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_untun"]
+emission_shape = 3
+emission_box_extents = Vector3(24, 1, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 42.33
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 90.0
+scale_min = 8.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_outn4")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_p55oq")
 boost_speed = 1000.0
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_6neeu")
 
@@ -22,3 +43,8 @@ shape = SubResource("CapsuleShape2D_5ue3p")
 
 [node name="GrappleLine" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 32)
+amount = 800
+process_material = SubResource("ParticleProcessMaterial_untun")
