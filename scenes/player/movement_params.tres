@@ -6,7 +6,7 @@
 script = ExtResource("1_4hh8l")
 grapple_range = 1000.0
 max_walk_speed = 500.0
-walk_acceleration = 1500.0
+walk_acceleration = 2500.0
 floor_friction = 1500.0
 sliding_friction = 300.0
 air_acceleration = 200.0

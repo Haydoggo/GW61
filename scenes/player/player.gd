@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		if at_skidding_speed:
 			$FloorDust.emitting = true
 		# Apply walking force only if it will increase the player's speed in the intended direction
-		if (not at_skidding_speed and direction) or (at_skidding_speed and (sign(direction)==sign(-velocity.x))):
+		if (not at_skidding_speed and direction) or (sign(direction)==sign(-velocity.x)):
 			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta)
 		# Apply ground friction otherwise
 		elif is_grappling or is_sliding:
@@ -43,7 +43,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Air movement
 	elif direction != 0:
-		velocity.x += direction * delta * mp.air_acceleration
+		if abs(velocity.x) < mp.max_walk_speed or sign(direction)==sign(-velocity.x):
+			velocity.x += direction * delta * mp.walk_acceleration
+		else:
+			velocity.x += direction * delta * mp.air_acceleration
 	
 	# Add the gravity.
 	$LeftWallDust.emitting = false
