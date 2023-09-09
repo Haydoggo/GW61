@@ -10,46 +10,48 @@ extends CharacterBody2D
 
 @onready var grapple_ray: RayCast2D = $GrappleRay
 @onready var grapple_line: Line2D = $GrappleLine
+@onready var grapple_indicator: Line2D = $GrappleRay/GrappleIndicator
 
-
-var can_grapple = true
+var can_retract = false
 var is_grappling = false
 var is_sliding = false
 var grapple_length = 0.0
 var hook_position = Vector2()
 
 func _physics_process(delta: float) -> void:
-
-	
-
 	# Walking + friction
 	var direction := Input.get_axis("move_left", "move_right")
 	$FloorDust.emitting = false
-	modulate = Color.WHITE
 	if is_on_floor():
-		var at_sliding_speed = abs(velocity.x) > mp.max_walk_speed
-		if (not at_sliding_speed and direction) or (at_sliding_speed and (sign(direction)==sign(-velocity.x))):
+		var at_skidding_speed = abs(velocity.x) > mp.max_walk_speed
+		if at_skidding_speed:
+			$FloorDust.emitting = true
+		# Apply walking force only if it will increase the player's speed in the intended direction
+		if (not at_skidding_speed and direction) or (at_skidding_speed and (sign(direction)==sign(-velocity.x))):
 			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta)
+		# Apply ground friction otherwise
 		elif is_grappling or is_sliding:
-			modulate = Color.AQUA
 			velocity.x = move_toward(velocity.x, 0, mp.sliding_friction*delta)
 		else:
-			modulate = Color.YELLOW
 			velocity.x = move_toward(velocity.x, 0, mp.floor_friction*delta)
-		if Input.is_action_just_pressed("slide") and abs(velocity.x) > mp.min_slide_speed:
+		
+		# Player slide action
+		if Input.is_action_pressed("slide") and abs(velocity.x) > mp.min_slide_speed:
 			is_sliding = true
-		if at_sliding_speed:
-			$FloorDust.emitting = true
+		if abs(velocity.x) < mp.min_slide_speed:
+			is_sliding = false
+	
+	# Air movement
 	elif direction != 0:
-		velocity.x += direction*delta*mp.air_acceleration
-	if abs(velocity.x) < mp.min_slide_speed:
-		is_sliding = false
+		velocity.x += direction * delta * mp.air_acceleration
 	
 	# Add the gravity.
 	$LeftWallDust.emitting = false
 	$RightWallDust.emitting = false
 	if not is_on_floor():
 		velocity.y += mp.gravity * delta
+		
+		# Wall sliding logic
 		if is_on_wall():
 			if velocity.y > mp.wall_slide_speed and direction:
 				velocity.y = move_toward(velocity.y, mp.wall_slide_speed, delta * mp.floor_friction)
@@ -64,42 +66,51 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.y = mp.jump_speed
 			is_sliding = false
+		# Wall jumping
 		if is_on_wall_only() and direction:
 			velocity.y = mp.jump_speed
 			velocity.x = mp.jump_speed * direction
 			is_grappling = false
 	
-	if Input.is_action_just_pressed("grapple") and can_grapple:
-		grapple_ray.target_position = grapple_ray.get_local_mouse_position().normalized()*mp.grapple_range
-		grapple_ray.force_raycast_update()
-		if grapple_ray.get_collider():
+	# Grappling
+	grapple_ray.target_position = grapple_ray.get_local_mouse_position().normalized()*mp.grapple_range
+	grapple_ray.force_raycast_update()
+	grapple_indicator.points[1] = grapple_ray.target_position
+	
+	var hit_block_properties = WorldMap.TileProperty.NONE
+	grapple_indicator.default_color = Color.WHITE
+	if grapple_ray.get_collider():
+		var map = grapple_ray.get_collider() as WorldMap
+		if map:
+			grapple_indicator.default_color = Color.GREEN_YELLOW
+			var hook_pos_adjusted = grapple_ray.get_collision_point() - grapple_ray.get_collision_normal()
+			hit_block_properties = map.get_properties(hook_pos_adjusted)
+			if hit_block_properties & WorldMap.TileProperty.BOOST:
+				grapple_indicator.default_color = Color.AQUA
+	
+	if Input.is_action_just_pressed("grapple"):
+		if hit_block_properties & WorldMap.TileProperty.NORMAL:
 			is_grappling = true
 			hook_position = grapple_ray.get_collision_point()
 			grapple_length = hook_position.distance_to(grapple_ray.global_position)
-			
-			var map = grapple_ray.get_collider() as WorldMap
-			if map:
-				var hook_pos_adjusted = grapple_ray.get_collision_point() - grapple_ray.get_collision_normal()
-				if map.global_to_atlas_coords(hook_pos_adjusted) == WorldMap.boost_tile:
-					var pull_vel = grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
-					if velocity.dot(pull_vel) < 0:
-						velocity = velocity.project(pull_vel.orthogonal())
-#						var orthogonal_pull_vec = pull_vel.normalized().orthogonal()
-#						orthogonal_pull_vec *= sign(velocity.dot(orthogonal_pull_vec))
-#						velocity *= orthogonal_pull_vec
-					velocity += pull_vel
+			if hit_block_properties & WorldMap.TileProperty.BOOST:
+				var pull_vel = grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
+				if velocity.dot(pull_vel) < 0:
+					velocity = velocity.project(pull_vel.orthogonal())
+				velocity += pull_vel
 	
 	if Input.is_action_just_released("grapple") and is_grappling:
 		is_grappling = false
 	
-	if instant_retract:
-		if Input.is_action_just_pressed("retract") and is_grappling:
-			velocity += grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
-			is_grappling = false
-	else:
-		if Input.is_action_pressed("retract") and is_grappling:
-			grapple_length = move_toward(grapple_length, 0, mp.retraction_power * delta)
-	
+	if can_retract:
+		if instant_retract:
+			if Input.is_action_just_pressed("retract") and is_grappling:
+				velocity += grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
+				is_grappling = false
+		else:
+			if Input.is_action_pressed("retract") and is_grappling:
+				grapple_length = move_toward(grapple_length, 0, mp.retraction_power * delta)
+		
 	if auto_retract:
 		grapple_length = min(grapple_length, hook_position.distance_to(global_position))
 	
@@ -124,4 +135,4 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.position.y = 0
 
 func _draw() -> void:
-	draw_arc(Vector2(0,0), mp.grapple_range, 0, TAU, 32, Color.WHITE)
+	draw_arc(Vector2(0,0), mp.grapple_range, 0, TAU, 100, Color.WHITE)
