@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 
+
+@export var instant_retract = true
+
 @export_group("Movement")
 @export var grapple_range = 1000.0
 @export var max_walk_speed = 300.0
@@ -8,7 +11,7 @@ extends CharacterBody2D
 @export var floor_friction = 1500.0
 @export var sliding_friction = 300.0
 @export var air_acceleration = 100.0
-@export var boost_speed = 300.0
+@export var retraction_power = 300.0
 @export var jump_speed = -400.0
 @export var gravity = 980.0
 @export var min_slide_speed = 50.0
@@ -67,9 +70,13 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("grapple") and is_grappling:
 		is_grappling = false
 	
-	if Input.is_action_just_pressed("retract") and is_grappling:
-		velocity += grapple_ray.global_position.direction_to(hook_position) * boost_speed
-		is_grappling = false
+	if instant_retract:
+		if Input.is_action_just_pressed("retract") and is_grappling:
+			velocity += grapple_ray.global_position.direction_to(hook_position) * retraction_power
+			is_grappling = false
+	else:
+		if Input.is_action_pressed("retract") and is_grappling:
+			grapple_length = move_toward(grapple_length, 0, retraction_power * delta*0.5)
 	
 	if is_grappling:
 		var hook_dir = hook_position - grapple_ray.global_position
