@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfqyto00kgjv1"]
+
+[ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="1_2mubu"]
+[ext_resource type="Script" path="res://scenes/player/camera.gd" id="2_cmo05"]
+[ext_resource type="PackedScene" uid="uid://ds7cl6uqqv27o" path="res://scenes/maps/test_level/test_map.tscn" id="3_tnbjs"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vs8gn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xiov6"]
+seamless = true
+noise = SubResource("FastNoiseLite_vs8gn")
+
+[sub_resource type="GDScript" id="GDScript_fg8m3"]
+resource_name = "RestartButton"
+script/source = "extends Button
+
+func _pressed() -> void:
+	get_tree().reload_current_scene()
+"
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_2mubu")]
+position = Vector2(356, 234)
+auto_retract = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("2_cmo05")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1152, 648)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_xiov6")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Restart "
+script = SubResource("GDScript_fg8m3")
+
+[node name="TestMap" parent="." instance=ExtResource("3_tnbjs")]

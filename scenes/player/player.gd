@@ -77,10 +77,10 @@ func _physics_process(delta: float) -> void:
 			hook_position = grapple_ray.get_collision_point()
 			grapple_length = hook_position.distance_to(grapple_ray.global_position)
 			
-			var map = grapple_ray.get_collider() as TileMap
+			var map = grapple_ray.get_collider() as WorldMap
 			if map:
-				var ac = map.get_cell_atlas_coords(0, map.local_to_map(grapple_ray.get_collision_point() - grapple_ray.get_collision_normal()))
-				if ac == WorldMap.boost_tile:
+				var hook_pos_adjusted = grapple_ray.get_collision_point() - grapple_ray.get_collision_normal()
+				if map.global_to_atlas_coords(hook_pos_adjusted) == WorldMap.boost_tile:
 					velocity += grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
 	
 	if Input.is_action_just_released("grapple") and is_grappling:
