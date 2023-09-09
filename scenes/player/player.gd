@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var air_acceleration = 100.0
 @export var boost_speed = 300.0
 @export var jump_speed = -400.0
+@export var gravity = 980.0
 @export var min_slide_speed = 50.0
 
 @onready var grapple_ray: RayCast2D = $GrappleRay
@@ -21,9 +22,6 @@ var is_grappling = false
 var is_sliding = false
 var grapple_length = 0.0
 var hook_position = Vector2()
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -38,16 +36,20 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("move_left", "move_right")
 	$GPUParticles2D.emitting = false
+	modulate = Color.WHITE
 	if is_on_floor():
-		if direction:
+		var at_sliding_speed = abs(velocity.x) > max_walk_speed
+		if (not at_sliding_speed and direction) or (at_sliding_speed and (sign(direction)==sign(-velocity.x))):
 			velocity.x = move_toward(velocity.x, direction * max_walk_speed, walk_acceleration*delta)
 		elif is_grappling or is_sliding:
-			velocity.x = move_toward(velocity.x, 0, sliding_friction*delta*0.2)
+			modulate = Color.AQUA
+			velocity.x = move_toward(velocity.x, 0, sliding_friction*delta)
 		else:
+			modulate = Color.YELLOW
 			velocity.x = move_toward(velocity.x, 0, floor_friction*delta)
 		if Input.is_action_just_pressed("slide") and abs(velocity.x) > min_slide_speed:
 			is_sliding = true
-		if abs(velocity.x) > max_walk_speed:
+		if at_sliding_speed:
 			$GPUParticles2D.emitting = true
 	elif direction != 0:
 		velocity.x += direction*delta*air_acceleration
