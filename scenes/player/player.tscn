@@ -9,12 +9,16 @@ height = 64.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_p55oq")
+boost_speed = 1000.0
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(0, -32)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_6neeu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -32)
 shape = SubResource("CapsuleShape2D_5ue3p")
+
+[node name="GrappleRay" type="RayCast2D" parent="."]
+
+[node name="GrappleLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
