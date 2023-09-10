@@ -77,17 +77,13 @@ func _physics_process(delta: float) -> void:
 	
 	
 	# Colliding with tiles
-	for i in get_slide_collision_count():
-		var kc = get_slide_collision(i)
-		kc = get_last_slide_collision()
+	var kc = get_last_slide_collision()
+	if kc:
 		var p = kc.get_position() - kc.get_normal()
-			#floor collisions
-		if abs(kc.get_normal().angle_to(Vector2.UP)) < PI/5:
-			var map = kc.get_collider() as WorldMap
-			if map:
-				if map.get_properties(p) & WorldMap.TileProperty.JUMP:
-					velocity.y += mp.jump_speed * 2
-		break
+		var map = kc.get_collider() as WorldMap
+		if map:
+			if map.get_properties(p) & WorldMap.TileProperty.JUMP:
+				velocity -= Vector2.UP.rotated(-PI/2*map.get_alt_index(p)) * mp.jump_speed * 2
 	
 	# Grappling
 	grapple_ray.target_position = grapple_ray.get_local_mouse_position().normalized()*mp.grapple_range
