@@ -1,9 +1,6 @@
 extends CharacterBody2D
 
 
-
-@export var instant_retract = true
-@export var auto_retract = false
 @export_category("Movement Parameters")
 ## Movement Parameters
 @export var mp : MovementParams
@@ -11,8 +8,10 @@ extends CharacterBody2D
 @onready var grapple_ray: RayCast2D = $GrappleRay
 @onready var grapple_line: Line2D = $GrappleLine
 @onready var grapple_indicator: Line2D = $GrappleRay/GrappleIndicator
+@onready var retraction_timer: Timer = $RetractionTimer
 
 var can_retract = false
+var is_retracting = false
 var is_grappling = false
 var is_sliding = false
 var grapple_length = 0.0
@@ -107,16 +106,24 @@ func _physics_process(delta: float) -> void:
 			hook_position = grapple_ray.get_collision_point()
 			grapple_length = hook_position.distance_to(grapple_ray.global_position)
 			if hit_block_properties & WorldMap.TileProperty.BOOST:
-				var pull_vel = grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
-				if velocity.dot(pull_vel) < 0:
-					velocity = velocity.project(pull_vel.orthogonal())
-				velocity += pull_vel
+				is_retracting = true
+				retraction_timer.wait_time = mp.retraction_time
+				retraction_timer.start()
 	
 	if Input.is_action_just_released("grapple") and is_grappling:
+		retraction_timer.stop()
 		is_grappling = false
+		is_retracting = false
+	
+	if is_retracting:
+		var pull_vel = grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
+		if velocity.dot(pull_vel) < 0:
+			velocity = velocity.project(pull_vel.orthogonal())
+		velocity += pull_vel * delta / max(mp.retraction_time, delta)
+		
 	
 	if can_retract:
-		if instant_retract:
+		if mp.instant_retract:
 			if Input.is_action_just_pressed("retract") and is_grappling:
 				velocity += grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
 				is_grappling = false
@@ -124,7 +131,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed("retract") and is_grappling:
 				grapple_length = move_toward(grapple_length, 0, mp.retraction_power * delta)
 		
-	if auto_retract:
+	if mp.auto_retract:
 		grapple_length = min(grapple_length, hook_position.distance_to(global_position))
 	grapple_length = max(mp.min_grapple_length, grapple_length)
 	
@@ -151,3 +158,7 @@ func _physics_process(delta: float) -> void:
 
 func _draw() -> void:
 	draw_arc(Vector2(0,0), mp.grapple_range, 0, TAU, 100, Color.WHITE)
+
+
+func _on_retraction_timer_timeout() -> void:
+	is_retracting = false

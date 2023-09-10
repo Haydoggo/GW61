@@ -32,7 +32,6 @@ scale_curve = SubResource("CurveTexture_outn4")
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_p55oq")
-auto_retract = true
 mp = ExtResource("2_gcq0d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -74,3 +73,8 @@ rotation = -1.57079
 emitting = false
 amount = 64
 process_material = SubResource("ParticleProcessMaterial_untun")
+
+[node name="RetractionTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RetractionTimer" to="." method="_on_retraction_timer_timeout"]

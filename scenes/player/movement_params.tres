@@ -16,3 +16,4 @@ gravity = 1500.0
 min_slide_speed = 50.0
 wall_slide_speed = 200.0
 min_grapple_length = 200.0
+retraction_time = 0.2
