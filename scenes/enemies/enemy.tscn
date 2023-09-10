@@ -32,7 +32,7 @@ shape = SubResource("CircleShape2D_orxml")
 points = PackedVector2Array(0, 0, 0, -30)
 script = ExtResource("3_l85hy")
 
-[node name="Enemy" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -9)
 texture = ExtResource("1_h47mf")
 

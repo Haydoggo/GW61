@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+static var instance : Player
 
 @export_category("Movement Parameters")
 ## Movement Parameters
@@ -18,6 +19,9 @@ var grapple_length = 0.0
 var hook_position = Vector2()
 var ignored_tiles = []
 var time_last_on_floor = 0.0
+
+func _init() -> void:
+	instance = self
 
 func _physics_process(delta: float) -> void:
 	player_movement(delta)

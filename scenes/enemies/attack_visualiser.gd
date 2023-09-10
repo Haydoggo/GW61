@@ -2,4 +2,7 @@
 extends Line2D
 
 func _process(delta: float) -> void:
-	points[1] = owner.attack_vector/20.0
+	var v = owner.attack_vector
+	if $"../../Sprite".flip_h:
+		v.x *= -1
+	points[1] = v/20.0 
