@@ -75,6 +75,20 @@ func _physics_process(delta: float) -> void:
 			velocity.x = mp.jump_speed * direction
 			is_grappling = false
 	
+	
+	# Colliding with tiles
+	for i in get_slide_collision_count():
+		var kc = get_slide_collision(i)
+		kc = get_last_slide_collision()
+		var p = kc.get_position() - kc.get_normal()
+			#floor collisions
+		if abs(kc.get_normal().angle_to(Vector2.UP)) < PI/5:
+			var map = kc.get_collider() as WorldMap
+			if map:
+				if map.get_properties(p) & WorldMap.TileProperty.JUMP:
+					velocity.y += mp.jump_speed * 2
+		break
+	
 	# Grappling
 	grapple_ray.target_position = grapple_ray.get_local_mouse_position().normalized()*mp.grapple_range
 	grapple_ray.force_raycast_update()
@@ -116,6 +130,7 @@ func _physics_process(delta: float) -> void:
 		
 	if auto_retract:
 		grapple_length = min(grapple_length, hook_position.distance_to(global_position))
+	grapple_length = max(mp.min_grapple_length, grapple_length)
 	
 	if is_grappling:
 		var hook_dir = hook_position - grapple_ray.global_position
@@ -124,6 +139,7 @@ func _physics_process(delta: float) -> void:
 		velocity += (hook_dir - hook_dir.limit_length(grapple_length)) * 10
 	
 	move_and_slide()
+			
 	# Visuals
 	if is_grappling:
 		grapple_line.show()

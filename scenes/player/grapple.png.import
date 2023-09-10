@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvec5pfpv6y4h"
-path="res://.godot/imported/tileset.png-71df2ea1e3b75eefade66bd15b1b958b.ctex"
+uid="uid://dg18rnd0vw50m"
+path="res://.godot/imported/grapple.png-a0bdaa48cfda11b511f6dc8a84e173c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/maps/tileset.png"
-dest_files=["res://.godot/imported/tileset.png-71df2ea1e3b75eefade66bd15b1b958b.ctex"]
+source_file="res://scenes/player/grapple.png"
+dest_files=["res://.godot/imported/grapple.png-a0bdaa48cfda11b511f6dc8a84e173c7.ctex"]
 
 [params]
 

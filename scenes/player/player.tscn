@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=9 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="1_6neeu"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
 [ext_resource type="Resource" uid="uid://kl5qqua4pvfg" path="res://scenes/player/movement_params.tres" id="2_gcq0d"]
+[ext_resource type="Texture2D" uid="uid://dg18rnd0vw50m" path="res://scenes/player/grapple.png" id="4_k814l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ue3p"]
 radius = 16.0
@@ -31,11 +32,8 @@ scale_curve = SubResource("CurveTexture_outn4")
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_p55oq")
+auto_retract = true
 mp = ExtResource("2_gcq0d")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_6neeu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5ue3p")
@@ -47,7 +45,15 @@ modulate = Color(1, 1, 1, 0.247059)
 points = PackedVector2Array(0, 0, 0, 0)
 
 [node name="GrappleLine" type="Line2D" parent="."]
+texture_repeat = 2
 points = PackedVector2Array(0, 0, 0, 0)
+width = 21.0
+texture = ExtResource("4_k814l")
+texture_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_6neeu")
 
 [node name="FloorDust" type="GPUParticles2D" parent="."]
 position = Vector2(0, 30)

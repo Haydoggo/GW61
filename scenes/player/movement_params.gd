@@ -11,3 +11,4 @@ class_name MovementParams extends Resource
 @export var gravity = 980.0
 @export var min_slide_speed = 50.0
 @export var wall_slide_speed = 200.0
+@export var min_grapple_length = 200.0
