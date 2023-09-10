@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfqyto00kgjv1"]
+[gd_scene load_steps=8 format=3 uid="uid://cfqyto00kgjv1"]
 
 [ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="1_oqn3n"]
 [ext_resource type="Script" path="res://scenes/player/camera.gd" id="2_2r0jq"]
 [ext_resource type="PackedScene" uid="uid://ds7cl6uqqv27o" path="res://scenes/maps/test_level/test_map.tscn" id="3_0i1la"]
+[ext_resource type="PackedScene" uid="uid://cofnxquytticg" path="res://scenes/enemies/enemy.tscn" id="4_65gel"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vs8gn"]
 
@@ -54,3 +55,7 @@ text = "Restart "
 script = SubResource("GDScript_fg8m3")
 
 [node name="TestMap" parent="." instance=ExtResource("3_0i1la")]
+
+[node name="Enemy" parent="." instance=ExtResource("4_65gel")]
+position = Vector2(800, 288)
+attack_vector = Vector2(2000, -3000)

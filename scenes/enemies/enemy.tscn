@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cofnxquytticg"]
+
+[ext_resource type="Texture2D" uid="uid://cp5m83j2p861p" path="res://scenes/enemies/enemy.png" id="1_h47mf"]
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_q4bpl"]
+[ext_resource type="Script" path="res://scenes/enemies/attack_visualiser.gd" id="3_l85hy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1nxl"]
+radius = 16.0
+height = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_orxml"]
+radius = 27.0185
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_q4bpl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CapsuleShape2D_f1nxl")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_orxml")
+
+[node name="AttackVisualiser" type="Line2D" parent="DamageArea"]
+points = PackedVector2Array(0, 0, 0, -30)
+script = ExtResource("3_l85hy")
+
+[node name="Enemy" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+texture = ExtResource("1_h47mf")
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]

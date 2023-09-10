@@ -5,12 +5,14 @@ enum TileProperty {
 	NORMAL = 1,
 	BOOST = 2,
 	JUMP = 4,
+	DEATH = 8,
 }
 
 const TILE_PROPERTIES = {
 	Vector2i(0,0) : TileProperty.NORMAL,
 	Vector2i(1,0) : TileProperty.NORMAL | TileProperty.BOOST,
 	Vector2i(2,0) : TileProperty.NORMAL | TileProperty.JUMP,
+	Vector2i(3,0) : TileProperty.NORMAL | TileProperty.DEATH,
 }
 
 func global_to_atlas_coords(global_p : Vector2) -> Vector2i:

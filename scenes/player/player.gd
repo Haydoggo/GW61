@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 
 @export_category("Movement Parameters")
@@ -34,8 +34,9 @@ func _physics_process(delta: float) -> void:
 				ignored_tiles.append(c)
 				get_tree().create_timer(0.5).timeout.connect(func():ignored_tiles.erase(c))
 				if map.get_properties(p) & WorldMap.TileProperty.JUMP:
-					print("JUMP!")
 					velocity -= Vector2.UP.rotated(-PI/2*map.get_alt_index(p)) * mp.jump_speed * 2
+				if map.get_properties(p) & WorldMap.TileProperty.DEATH:
+					create_tween().tween_property(self, "modulate", Color.WHITE, 1.0).from(Color.RED)
 	
 	move_and_slide()
 			
