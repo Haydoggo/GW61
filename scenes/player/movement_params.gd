@@ -16,3 +16,5 @@ class_name MovementParams extends Resource
 @export var wall_slide_speed = 200.0
 @export var min_grapple_length = 200.0
 @export var retraction_time = 0.3
+@export var reverse_speed_mulitplier = 2.0
+@export var jump_buffer_time = 0.5

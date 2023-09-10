@@ -77,4 +77,6 @@ process_material = SubResource("ParticleProcessMaterial_untun")
 [node name="RetractionTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="JumpBufferTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="RetractionTimer" to="." method="_on_retraction_timer_timeout"]
