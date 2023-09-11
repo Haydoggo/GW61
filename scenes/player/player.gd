@@ -22,6 +22,7 @@ var ignored_tiles = []
 var time_last_on_floor = 0.0
 var time_of_last_wall_jump = 0.0
 var hit_block_properties = 0
+var respawn_point = global_position
 
 func _init() -> void:
 	instance = self
@@ -46,7 +47,9 @@ func _physics_process(delta: float) -> void:
 				if map.get_properties(p) & WorldMap.TileProperty.JUMP:
 					velocity -= Vector2.UP.rotated(-PI/2*map.get_alt_index(p)) * mp.jump_speed * 2
 				if map.get_properties(p) & WorldMap.TileProperty.DEATH:
-					create_tween().tween_property(self, "modulate", Color.WHITE, 1.0).from(Color.RED)
+					ignored_tiles.append(c)
+					get_tree().create_timer(2).timeout.connect(func():ignored_tiles.erase(c))
+					$AnimationPlayer.play("die")
 	
 	# Preemptive Collision check:
 	shape_cast.target_position = velocity * delta
@@ -196,6 +199,11 @@ func grapple_movement(delta: float) -> void:
 		if hook_dir.dot(velocity) < 0 and hook_dir.length() >= grapple_length:
 			velocity = velocity.project(hook_dir.orthogonal())
 		velocity += (hook_dir - hook_dir.limit_length(grapple_length)) * 10
+
+func respawn():
+	velocity = Vector2(0,0)
+	global_position = respawn_point
+	$Camera2D.align()
 
 func _on_retraction_timer_timeout() -> void:
 	is_retracting = false

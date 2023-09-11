@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcgldu3add1ja"]
+
+[ext_resource type="Script" path="res://scenes/maps/map_entities/checkpoint/checkpoint.gd" id="1_tjeso"]
+[ext_resource type="Script" path="res://scenes/maps/map_entities/checkpoint/helper_tool.gd" id="2_4qi3j"]
+[ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="3_hjfn6"]
+
+[sub_resource type="Gradient" id="Gradient_umbjw"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[node name="Checkpoint" type="Polygon2D"]
+color = Color(1, 0.678431, 0.117647, 0.478431)
+polygon = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
+script = ExtResource("1_tjeso")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+
+[node name="HelperTool" type="Node" parent="."]
+script = ExtResource("2_4qi3j")
+
+[node name="LinkLine" type="Line2D" parent="."]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 0, 0)
+gradient = SubResource("Gradient_umbjw")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+modulate = Color(1, 1, 1, 0.262745)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_hjfn6")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

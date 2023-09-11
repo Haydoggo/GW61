@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds7cl6uqqv27o"]
+[gd_scene load_steps=4 format=3 uid="uid://ds7cl6uqqv27o"]
 
 [ext_resource type="PackedScene" uid="uid://cc52ncp4q08yl" path="res://scenes/maps/base_map.tscn" id="1_xcj8p"]
+[ext_resource type="PackedScene" uid="uid://bcgldu3add1ja" path="res://scenes/maps/map_entities/checkpoint/checkpoint.tscn" id="3_qoo88"]
 [ext_resource type="PackedScene" uid="uid://cofnxquytticg" path="res://scenes/enemies/enemy.tscn" id="3_xgy0q"]
 
 [node name="BaseMap" instance=ExtResource("1_xcj8p")]
@@ -10,3 +11,11 @@ layer_0/tile_data = PackedInt32Array(-2621488, 0, 0, -2555952, 0, 0, -2490416, 0
 
 [node name="Enemy" parent="." index="3" instance=ExtResource("3_xgy0q")]
 position = Vector2(689, 76)
+
+[node name="Checkpoint" parent="." index="4" node_paths=PackedStringArray("respawn_point") instance=ExtResource("3_qoo88")]
+position = Vector2(4642, -935)
+polygon = PackedVector2Array(-70, -190, -64, 64, 64, 64, 60, -192)
+respawn_point = NodePath("CheckpointRespawn")
+
+[node name="CheckpointRespawn" type="Marker2D" parent="Checkpoint" index="4"]
+position = Vector2(-115, 36)
