@@ -1,20 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgjkpitq15dom"]
+[gd_scene load_steps=4 format=3 uid="uid://dsgrhid0btr8k"]
 
-[ext_resource type="Script" path="res://scenes/maps/window.gd" id="1_05pe0"]
-[ext_resource type="Texture2D" uid="uid://cakaaiixu7r3h" path="res://scenes/maps/window.png" id="1_6wduj"]
+[ext_resource type="Script" path="res://scenes/maps/map_entities/window/window.gd" id="1_x6h5j"]
+[ext_resource type="Texture2D" uid="uid://cakaaiixu7r3h" path="res://scenes/maps/map_entities/window/window.png" id="2_hiohk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5764"]
 size = Vector2(32, 64)
 
 [node name="Window" type="StaticBody2D"]
 collision_mask = 0
-script = ExtResource("1_05pe0")
+script = ExtResource("1_x6h5j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_u5764")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_6wduj")
+texture = ExtResource("2_hiohk")
 
 [node name="Up" type="RayCast2D" parent="."]
 target_position = Vector2(0, -64)

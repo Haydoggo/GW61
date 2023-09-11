@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	if kc:
 		var p = kc.get_position() - kc.get_normal()
 		var collider = kc.get_collider()
-		if collider.has_method("collide"):
+		if collider and collider.has_method("collide"):
 			collider.collide()
 		var map = collider as WorldMap
 		if map:
@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	shape_cast.target_position = velocity * delta
 	for i in shape_cast.get_collision_count():
 		var c = shape_cast.get_collider(i)
-		if c.has_method("collide"):
+		if c and c.has_method("collide"):
 			c.collide()
 	
 	move_and_slide()

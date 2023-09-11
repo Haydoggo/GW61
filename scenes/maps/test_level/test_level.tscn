@@ -1,15 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfqyto00kgjv1"]
+[gd_scene load_steps=6 format=3 uid="uid://cfqyto00kgjv1"]
 
 [ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="1_oqn3n"]
 [ext_resource type="Script" path="res://scenes/player/camera.gd" id="2_2r0jq"]
 [ext_resource type="PackedScene" uid="uid://ds7cl6uqqv27o" path="res://scenes/maps/test_level/test_map.tscn" id="3_0i1la"]
-[ext_resource type="PackedScene" uid="uid://cofnxquytticg" path="res://scenes/enemies/enemy.tscn" id="4_65gel"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vs8gn"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xiov6"]
-seamless = true
-noise = SubResource("FastNoiseLite_vs8gn")
+[ext_resource type="Script" path="res://scenes/maps/test_level/map_selector.gd" id="3_vitu8"]
 
 [sub_resource type="GDScript" id="GDScript_fg8m3"]
 resource_name = "RestartButton"
@@ -28,35 +22,16 @@ position = Vector2(356, 234)
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("2_2r0jq")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.5, 0.5)
-motion_mirroring = Vector2(2304, 1296)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 2304.0
-offset_bottom = 1296.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("NoiseTexture2D_xiov6")
-stretch_mode = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_vitu8")
+maps = Array[PackedScene]([ExtResource("3_0i1la")])
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
 text = "Restart "
 script = SubResource("GDScript_fg8m3")
-
-[node name="TestMap" parent="." instance=ExtResource("3_0i1la")]
-
-[node name="Enemy" parent="." instance=ExtResource("4_65gel")]
-position = Vector2(1376, 288)
-attack_angle = -0.523796
-attack_power = 3155.73
