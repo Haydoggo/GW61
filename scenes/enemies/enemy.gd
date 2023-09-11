@@ -4,7 +4,8 @@ extends CharacterBody2D
 @export_range(0,10000) var attack_power = 2000.0
 
 func _process(delta: float) -> void:
-	$Sprite.flip_h = Player.instance.global_position.x < global_position.x
+	if Player.instance:
+		$Sprite.flip_h = Player.instance.global_position.x < global_position.x
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	var player = body as Player

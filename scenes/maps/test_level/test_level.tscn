@@ -1,26 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfqyto00kgjv1"]
+[gd_scene load_steps=4 format=3 uid="uid://cfqyto00kgjv1"]
 
-[ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="1_oqn3n"]
-[ext_resource type="Script" path="res://scenes/player/camera.gd" id="2_2r0jq"]
 [ext_resource type="PackedScene" uid="uid://ds7cl6uqqv27o" path="res://scenes/maps/test_level/test_map.tscn" id="3_0i1la"]
+[ext_resource type="PackedScene" uid="uid://dgbe0iv128eau" path="res://scenes/maps/test_level/test_map1.tscn" id="3_8f3wu"]
 [ext_resource type="Script" path="res://scenes/maps/test_level/map_selector.gd" id="3_vitu8"]
 
-[sub_resource type="GDScript" id="GDScript_fg8m3"]
-resource_name = "RestartButton"
-script/source = "extends Button
-
-func _pressed() -> void:
-	get_tree().reload_current_scene()
-"
-
 [node name="TestLevel" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("1_oqn3n")]
-position = Vector2(356, 234)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.5, 0.5)
-script = ExtResource("2_2r0jq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -28,10 +12,4 @@ script = ExtResource("2_2r0jq")
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_vitu8")
-maps = Array[PackedScene]([ExtResource("3_0i1la")])
-
-[node name="RestartButton" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-focus_mode = 0
-text = "Restart "
-script = SubResource("GDScript_fg8m3")
+maps = Array[PackedScene]([ExtResource("3_0i1la"), ExtResource("3_8f3wu")])

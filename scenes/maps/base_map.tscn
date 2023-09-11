@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cc52ncp4q08yl"]
+
+[ext_resource type="TileSet" uid="uid://b6ss61cssx0ly" path="res://scenes/maps/tile_map.tres" id="1_6sxp2"]
+[ext_resource type="Script" path="res://scenes/maps/world_map.gd" id="2_qn174"]
+[ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="3_ym25y"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vs8gn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1ilub"]
+seamless = true
+noise = SubResource("FastNoiseLite_vs8gn")
+
+[node name="BaseMap" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(2304, 1296)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2304.0
+offset_bottom = 1296.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_1ilub")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_6sxp2")
+format = 2
+script = ExtResource("2_qn174")
+
+[node name="Player" parent="." instance=ExtResource("3_ym25y")]

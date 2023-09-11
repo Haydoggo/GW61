@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=10 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="1_6neeu"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
 [ext_resource type="Resource" uid="uid://kl5qqua4pvfg" path="res://scenes/player/movement_params.tres" id="2_gcq0d"]
 [ext_resource type="Texture2D" uid="uid://dg18rnd0vw50m" path="res://scenes/player/grapple.png" id="4_k814l"]
+[ext_resource type="Script" path="res://scenes/player/camera.gd" id="5_1g00w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ue3p"]
 radius = 16.0
@@ -84,5 +85,9 @@ one_shot = true
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 shape = SubResource("CapsuleShape2D_5ue3p")
 target_position = Vector2(0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("5_1g00w")
 
 [connection signal="timeout" from="RetractionTimer" to="." method="_on_retraction_timer_timeout"]
