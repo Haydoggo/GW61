@@ -116,3 +116,40 @@ metadata/_edit_group_ = true
 modulate = Color(1, 1, 1, 0.262745)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_3yggt")
+
+[node name="CameraThief2" parent="." index="11" node_paths=PackedStringArray("marker") instance=ExtResource("4_lqfak")]
+position = Vector2(-1398, 26)
+marker = NodePath("CameraThief2Respawn")
+visible_in_game = true
+temporary = false
+
+[node name="CameraThief2Respawn" type="AspectRatioContainer" parent="CameraThief2" index="4"]
+offset_left = -166.0
+offset_top = -433.0
+offset_right = 336.0
+offset_bottom = 120.0
+ratio = 1.7778
+metadata/_edit_group_ = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="CameraThief2/CameraThief2Respawn" index="0"]
+layout_mode = 2
+border_width = 3.0
+
+[node name="CameraThief3" parent="." index="12" node_paths=PackedStringArray("marker") instance=ExtResource("4_lqfak")]
+position = Vector2(-1597, 28)
+polygon = PackedVector2Array(-65, -98, -61, 85, 174, 87, 172, -104)
+marker = NodePath("CameraThief2Respawn")
+visible_in_game = true
+temporary = false
+
+[node name="CameraThief2Respawn" type="AspectRatioContainer" parent="CameraThief3" index="4"]
+offset_left = -245.0
+offset_top = -291.0
+offset_right = 242.0
+offset_bottom = 186.0
+ratio = 1.7778
+metadata/_edit_group_ = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="CameraThief3/CameraThief2Respawn" index="0"]
+layout_mode = 2
+border_width = 3.0

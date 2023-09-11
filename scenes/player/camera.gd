@@ -4,6 +4,7 @@ extends Camera2D
 var external_target_position : Vector2
 var target_position : Vector2
 var target_selection = 1.0 # range from 0 to 1 to lerp ext_targ to targ
+@onready var target_controller = Player.instance
 
 func _ready() -> void:
 	process_priority = 1000

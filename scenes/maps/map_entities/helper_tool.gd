@@ -6,6 +6,7 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		queue_free()
 		marker_template.queue_free()
+		return
 	await get_tree().process_frame
 	var new_owner = owner.owner
 	if new_owner and (owner.marker == null):
@@ -24,8 +25,12 @@ func _ready() -> void:
 				children.append_array(child.get_children())
 			i += 1
 		owner.marker = marker
+		marker.show()
 	marker_template.hide()
 
 func _process(delta: float) -> void:
 	if owner.marker:
-		link_line.points[0] = link_line.to_local(owner.marker.global_position)
+		var targ_pos = owner.marker.global_position
+		if owner.marker is Control:
+			targ_pos = owner.marker.global_position + owner.marker.size/2
+		link_line.points[0] = link_line.to_local(targ_pos)
