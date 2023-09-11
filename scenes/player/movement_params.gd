@@ -18,3 +18,4 @@ class_name MovementParams extends Resource
 @export var retraction_time = 0.3
 @export var reverse_speed_mulitplier = 2.0
 @export var jump_buffer_time = 0.5
+@export var wall_jump_time = 0.5

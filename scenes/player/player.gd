@@ -20,6 +20,7 @@ var grapple_length = 0.0
 var hook_position = Vector2()
 var ignored_tiles = []
 var time_last_on_floor = 0.0
+var time_of_last_wall_jump = 0.0
 
 func _init() -> void:
 	instance = self
@@ -83,7 +84,7 @@ func player_movement(delta: float) -> void:
 			$FloorDust.emitting = true
 		# Apply walking force only if it will increase the player's speed in the intended direction
 		if sign(direction)==sign(-velocity.x):
-			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta*3)
+			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta*mp.reverse_speed_mulitplier)
 		elif not at_skidding_speed and direction:
 			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta)
 		# Apply ground friction otherwise
@@ -100,8 +101,10 @@ func player_movement(delta: float) -> void:
 	
 	# Air movement
 	elif direction != 0:
+		var time_since_wall_jump = current_time - time_of_last_wall_jump
+		var adjusted_reverse_speed_multiplier = mp.reverse_speed_mulitplier * min(1.0, time_since_wall_jump)
 		if sign(direction)==sign(-velocity.x):
-			velocity.x += direction * delta * mp.walk_acceleration * 3
+			velocity.x += direction * delta * mp.walk_acceleration * adjusted_reverse_speed_multiplier
 		if abs(velocity.x) < mp.max_walk_speed:
 			velocity.x += direction * delta * mp.walk_acceleration
 		else:
@@ -131,6 +134,7 @@ func player_movement(delta: float) -> void:
 			is_sliding = false
 		# Wall jumping
 		if is_on_wall_only() and direction:
+			time_of_last_wall_jump = current_time
 			velocity.y = mp.jump_speed
 			velocity.x = mp.jump_speed * direction
 			is_grappling = false

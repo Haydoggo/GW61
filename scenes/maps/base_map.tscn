@@ -31,6 +31,7 @@ stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(0.8, 0.8)
 tile_set = ExtResource("1_6sxp2")
 format = 2
 script = ExtResource("2_qn174")
