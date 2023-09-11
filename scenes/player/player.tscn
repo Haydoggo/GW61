@@ -81,4 +81,8 @@ one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
 
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("CapsuleShape2D_5ue3p")
+target_position = Vector2(0, 0)
+
 [connection signal="timeout" from="RetractionTimer" to="." method="_on_retraction_timer_timeout"]

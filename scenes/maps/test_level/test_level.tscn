@@ -57,5 +57,6 @@ script = SubResource("GDScript_fg8m3")
 [node name="TestMap" parent="." instance=ExtResource("3_0i1la")]
 
 [node name="Enemy" parent="." instance=ExtResource("4_65gel")]
-position = Vector2(800, 288)
-attack_vector = Vector2(2000, -3000)
+position = Vector2(1376, 288)
+attack_angle = -0.523796
+attack_power = 3155.73

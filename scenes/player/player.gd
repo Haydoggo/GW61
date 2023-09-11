@@ -10,6 +10,7 @@ static var instance : Player
 @onready var grapple_line: Line2D = $GrappleLine
 @onready var grapple_indicator: Line2D = $GrappleRay/GrappleIndicator
 @onready var retraction_timer: Timer = $RetractionTimer
+@onready var shape_cast: ShapeCast2D = $ShapeCast2D
 
 var can_retract = false
 var is_retracting = false
@@ -31,7 +32,10 @@ func _physics_process(delta: float) -> void:
 	var kc = get_last_slide_collision()
 	if kc:
 		var p = kc.get_position() - kc.get_normal()
-		var map = kc.get_collider() as WorldMap
+		var collider = kc.get_collider()
+		if collider.has_method("collide"):
+			collider.collide()
+		var map = collider as WorldMap
 		if map:
 			var c = map.local_to_map(to_local(p))
 			if c not in ignored_tiles:
@@ -41,6 +45,13 @@ func _physics_process(delta: float) -> void:
 					velocity -= Vector2.UP.rotated(-PI/2*map.get_alt_index(p)) * mp.jump_speed * 2
 				if map.get_properties(p) & WorldMap.TileProperty.DEATH:
 					create_tween().tween_property(self, "modulate", Color.WHITE, 1.0).from(Color.RED)
+	
+	# Preemptive Collision check:
+	shape_cast.target_position = velocity * delta
+	for i in shape_cast.get_collision_count():
+		var c = shape_cast.get_collider(i)
+		if c.has_method("collide"):
+			c.collide()
 	
 	move_and_slide()
 			
@@ -135,14 +146,15 @@ func grapple_movement(delta: float) -> void:
 	if grapple_ray.get_collider():
 		var map = grapple_ray.get_collider() as WorldMap
 		if map:
-			grapple_indicator.default_color = Color.GREEN_YELLOW
 			var hook_pos_adjusted = grapple_ray.get_collision_point() - grapple_ray.get_collision_normal()
 			hit_block_properties = map.get_properties(hook_pos_adjusted)
+			if hit_block_properties & WorldMap.TileProperty.GRAPPLE:
+				grapple_indicator.default_color = Color.GREEN_YELLOW
 			if hit_block_properties & WorldMap.TileProperty.BOOST:
 				grapple_indicator.default_color = Color.AQUA
 	
 	if Input.is_action_just_pressed("grapple"):
-		if hit_block_properties & WorldMap.TileProperty.NORMAL:
+		if hit_block_properties & WorldMap.TileProperty.GRAPPLE:
 			is_grappling = true
 			hook_position = grapple_ray.get_collision_point()
 			grapple_length = hook_position.distance_to(grapple_ray.global_position)
