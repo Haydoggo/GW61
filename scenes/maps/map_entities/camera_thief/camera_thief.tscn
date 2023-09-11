@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://hkfl3h4cmhjn"]
+
+[ext_resource type="Script" path="res://scenes/maps/map_entities/camera_thief/camera_thief.gd" id="1_drayi"]
+[ext_resource type="Script" path="res://scenes/maps/map_entities/helper_tool.gd" id="2_1ss0e"]
+
+[sub_resource type="Gradient" id="Gradient_5yv6x"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[node name="CameraThief" type="Polygon2D"]
+color = Color(0.196078, 0.847059, 0.815686, 0.478431)
+polygon = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
+script = ExtResource("1_drayi")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+
+[node name="HelperTool" type="Node" parent="." node_paths=PackedStringArray("link_line", "marker_template")]
+script = ExtResource("2_1ss0e")
+link_line = NodePath("../LinkLine")
+marker_template = NodePath("../CameraArea")
+
+[node name="LinkLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+gradient = SubResource("Gradient_5yv6x")
+
+[node name="CameraArea" type="AspectRatioContainer" parent="."]
+visible = false
+offset_right = 62.0
+offset_bottom = 57.0
+ratio = 1.7778
+metadata/_edit_group_ = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="CameraArea"]
+layout_mode = 2
+border_width = 3.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

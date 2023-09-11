@@ -1,12 +1,14 @@
 extends Polygon2D
 
-@export var respawn_point : Node2D
+@export var marker : Node2D
+@export var visible_in_game = false
 
 func _ready() -> void:
 	$Area2D/CollisionPolygon2D.polygon = polygon
-	hide()
+	if not visible_in_game:
+		hide()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var player = body as Player
-	if player and respawn_point:
-		player.respawn_point = respawn_point.global_position
+	if player and marker:
+		player.respawn_point = marker.global_position
