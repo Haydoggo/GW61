@@ -20,6 +20,8 @@ var grapple_length = 0.0
 var hook_position = Vector2()
 var ignored_tiles = []
 var time_last_on_floor = 0.0
+var time_of_last_wall_jump = 0.0
+var hit_block_properties = 0
 
 func _init() -> void:
 	instance = self
@@ -68,6 +70,29 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.scale.y = 1*0.5
 		$Sprite2D.position.y = 0
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("grapple"):
+		if hit_block_properties & WorldMap.TileProperty.GRAPPLE:
+			is_grappling = true
+			hook_position = grapple_ray.get_collision_point()
+			grapple_length = hook_position.distance_to(grapple_ray.global_position)
+			if hit_block_properties & WorldMap.TileProperty.BOOST:
+				is_retracting = true
+				retraction_timer.wait_time = mp.retraction_time
+				retraction_timer.start()
+	
+	if event.is_action_released("grapple") and is_grappling:
+		retraction_timer.stop()
+		is_grappling = false
+		is_retracting = false
+	
+	if can_retract:
+		if event.is_action_pressed("retract"):
+			is_retracting = true
+			retraction_timer.wait_time = mp.retraction_time
+			retraction_timer.start()
+
+
 func _draw() -> void:
 	draw_arc(Vector2(0,0), mp.grapple_range, 0, TAU, 100, Color.WHITE)
 
@@ -83,7 +108,7 @@ func player_movement(delta: float) -> void:
 			$FloorDust.emitting = true
 		# Apply walking force only if it will increase the player's speed in the intended direction
 		if sign(direction)==sign(-velocity.x):
-			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta*3)
+			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta*mp.reverse_speed_mulitplier)
 		elif not at_skidding_speed and direction:
 			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta)
 		# Apply ground friction otherwise
@@ -100,8 +125,10 @@ func player_movement(delta: float) -> void:
 	
 	# Air movement
 	elif direction != 0:
+		var time_since_wall_jump = current_time - time_of_last_wall_jump
+		var adjusted_reverse_speed_multiplier = mp.reverse_speed_mulitplier * min(1.0, time_since_wall_jump)
 		if sign(direction)==sign(-velocity.x):
-			velocity.x += direction * delta * mp.walk_acceleration * 3
+			velocity.x += direction * delta * mp.walk_acceleration * adjusted_reverse_speed_multiplier
 		if abs(velocity.x) < mp.max_walk_speed:
 			velocity.x += direction * delta * mp.walk_acceleration
 		else:
@@ -131,6 +158,7 @@ func player_movement(delta: float) -> void:
 			is_sliding = false
 		# Wall jumping
 		if is_on_wall_only() and direction:
+			time_of_last_wall_jump = current_time
 			velocity.y = mp.jump_speed
 			velocity.x = mp.jump_speed * direction
 			is_grappling = false
@@ -141,7 +169,7 @@ func grapple_movement(delta: float) -> void:
 	grapple_ray.force_raycast_update()
 	grapple_indicator.points[1] = grapple_ray.target_position
 	
-	var hit_block_properties = WorldMap.TileProperty.NONE
+	hit_block_properties = WorldMap.TileProperty.NONE
 	grapple_indicator.default_color = Color.WHITE
 	if grapple_ray.get_collider():
 		var map = grapple_ray.get_collider() as WorldMap
@@ -153,36 +181,11 @@ func grapple_movement(delta: float) -> void:
 			if hit_block_properties & WorldMap.TileProperty.BOOST:
 				grapple_indicator.default_color = Color.AQUA
 	
-	if Input.is_action_just_pressed("grapple"):
-		if hit_block_properties & WorldMap.TileProperty.GRAPPLE:
-			is_grappling = true
-			hook_position = grapple_ray.get_collision_point()
-			grapple_length = hook_position.distance_to(grapple_ray.global_position)
-			if hit_block_properties & WorldMap.TileProperty.BOOST:
-				is_retracting = true
-				retraction_timer.wait_time = mp.retraction_time
-				retraction_timer.start()
-	
-	if Input.is_action_just_released("grapple") and is_grappling:
-		retraction_timer.stop()
-		is_grappling = false
-		is_retracting = false
-	
 	if is_retracting:
 		var pull_vel = grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
 		if velocity.dot(pull_vel) < 0:
 			velocity = velocity.project(pull_vel.orthogonal())
 		velocity += pull_vel * delta / max(mp.retraction_time, delta)
-		
-	
-	if can_retract:
-		if mp.instant_retract:
-			if Input.is_action_just_pressed("retract") and is_grappling:
-				velocity += grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
-				is_grappling = false
-		else:
-			if Input.is_action_pressed("retract") and is_grappling:
-				grapple_length = move_toward(grapple_length, 0, mp.retraction_power * delta)
 		
 	if mp.auto_retract:
 		grapple_length = min(grapple_length, hook_position.distance_to(global_position))

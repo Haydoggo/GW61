@@ -1,7 +1,6 @@
 class_name MovementParams extends Resource
 
 @export var auto_retract = true
-@export var instant_retract = false
 
 @export var grapple_range = 1000.0
 @export var max_walk_speed = 300.0
@@ -18,3 +17,4 @@ class_name MovementParams extends Resource
 @export var retraction_time = 0.3
 @export var reverse_speed_mulitplier = 2.0
 @export var jump_buffer_time = 0.5
+@export var wall_jump_time = 0.5
