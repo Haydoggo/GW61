@@ -11,7 +11,7 @@ func _on_damage_area_body_entered(body: Node2D) -> void:
 	var player = body as Player
 	if player:
 		var attack_vector = Vector2.RIGHT.rotated(attack_angle)*attack_power
-		if $Sprite.flip_h:
+		if Player.instance.velocity.x > 0:
 			attack_vector.x*=-1
 		player.velocity += attack_vector
 		player.is_grappling = false

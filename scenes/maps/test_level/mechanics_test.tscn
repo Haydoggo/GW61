@@ -89,8 +89,10 @@ attack_power = 4000.0
 
 [node name="CameraThief" parent="." index="9" node_paths=PackedStringArray("marker") instance=ExtResource("4_lqfak")]
 position = Vector2(630, -140)
-polygon = PackedVector2Array(13, -50, 14, 193, 352, 197, 344, -66)
+polygon = PackedVector2Array(13, -50, 14, 193, 375, 190, 384, -74)
 marker = NodePath("CameraThiefRespawn")
+zoom_out_time = 0.3
+zoom_only = true
 temporary = false
 can_leave_early = true
 
@@ -155,3 +157,16 @@ metadata/_edit_group_ = true
 [node name="ReferenceRect" type="ReferenceRect" parent="CameraThief3/CameraThief2Respawn" index="0"]
 layout_mode = 2
 border_width = 3.0
+
+[node name="Checkpoint2" parent="." index="13" node_paths=PackedStringArray("marker") instance=ExtResource("5_et3s2")]
+position = Vector2(1092, -71)
+marker = NodePath("Checkpoint2Respawn")
+
+[node name="Checkpoint2Respawn" type="Marker2D" parent="Checkpoint2" index="4"]
+position = Vector2(465, 14)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Checkpoint2/Checkpoint2Respawn" index="0"]
+modulate = Color(1, 1, 1, 0.262745)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_3yggt")
