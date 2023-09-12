@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsgrhid0btr8k"]
+[gd_scene load_steps=6 format=3 uid="uid://dsgrhid0btr8k"]
 
 [ext_resource type="Script" path="res://scenes/maps/map_entities/window/window.gd" id="1_x6h5j"]
 [ext_resource type="Texture2D" uid="uid://cakaaiixu7r3h" path="res://scenes/maps/map_entities/window/window.png" id="2_hiohk"]
@@ -6,7 +6,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5764"]
 size = Vector2(32, 64)
 
+[sub_resource type="Curve" id="Curve_sla1m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_dp4ni"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.223587)
+colors = PackedColorArray(0.605469, 0.9375, 0.960938, 1, 0.769531, 0.9375, 0.949219, 1)
+
 [node name="Window" type="StaticBody2D"]
+collision_layer = 3
 collision_mask = 0
 script = ExtResource("1_x6h5j")
 
@@ -18,3 +28,20 @@ texture = ExtResource("2_hiohk")
 
 [node name="Up" type="RayCast2D" parent="."]
 target_position = Vector2(0, -64)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.95
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(16, 32)
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+angle_max = 90.0
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_sla1m")
+color_initial_ramp = SubResource("Gradient_dp4ni")
