@@ -28,7 +28,7 @@ func _ready() -> void:
 		marker.show()
 	marker_template.hide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if owner.marker:
 		var targ_pos = owner.marker.global_position
 		if owner.marker is Control:

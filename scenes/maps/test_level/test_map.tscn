@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ds7cl6uqqv27o"]
+[gd_scene load_steps=6 format=3 uid="uid://ds7cl6uqqv27o"]
 
 [ext_resource type="PackedScene" uid="uid://cc52ncp4q08yl" path="res://scenes/maps/base_map.tscn" id="1_xcj8p"]
 [ext_resource type="PackedScene" uid="uid://bcgldu3add1ja" path="res://scenes/maps/map_entities/checkpoint/checkpoint.tscn" id="3_qoo88"]
 [ext_resource type="PackedScene" uid="uid://cofnxquytticg" path="res://scenes/enemies/enemy.tscn" id="3_xgy0q"]
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="4_rb3ri"]
+[ext_resource type="PackedScene" uid="uid://chn6n7stwkldl" path="res://scenes/maps/map_entities/document_pickup/document.tscn" id="5_feeke"]
 
 [node name="BaseMap" instance=ExtResource("1_xcj8p")]
 
@@ -26,3 +27,12 @@ metadata/_edit_group_ = true
 modulate = Color(1, 1, 1, 0.262745)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_rb3ri")
+
+[node name="Document" parent="." index="6" instance=ExtResource("5_feeke")]
+position = Vector2(790, -87)
+
+[node name="Document3" parent="." index="7" instance=ExtResource("5_feeke")]
+position = Vector2(2659, -678)
+
+[node name="Document4" parent="." index="8" instance=ExtResource("5_feeke")]
+position = Vector2(910, -1415)

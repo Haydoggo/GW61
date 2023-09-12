@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple"):
-		for i in $CanvasLayer/VBoxContainer/SpinBox.value:
+		for i in $UI/VBoxContainer/SpinBox.value:
 			await get_tree().physics_frame
 		if hit_block_properties & WorldMap.TileProperty.GRAPPLE:
 			is_grappling = true

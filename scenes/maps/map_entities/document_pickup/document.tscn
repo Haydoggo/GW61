@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://chn6n7stwkldl"]
+
+[ext_resource type="Script" path="res://scenes/maps/map_entities/document_pickup/document.gd" id="1_6pgai"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_suj8m"]
+radius = 16.0
+
+[sub_resource type="Curve" id="Curve_arajd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+metadata/_snap_enabled = true
+
+[sub_resource type="Animation" id="Animation_lwl2l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1180y"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, -8), Vector2(0, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w52v2"]
+_data = {
+"RESET": SubResource("Animation_lwl2l"),
+"float": SubResource("Animation_1180y")
+}
+
+[node name="Document" type="Area2D" groups=["Documents"]]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_6pgai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_suj8m")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Visual"]
+lifetime = 0.3
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_arajd")
+
+[node name="Polygon2D" type="Polygon2D" parent="Visual"]
+polygon = PackedVector2Array(-19, -19, -18, 24, 20, 22, 20, -11, 12, -18)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Visual"]
+color = Color(0.533333, 0.533333, 0.533333, 1)
+polygon = PackedVector2Array(11, -11, 20, -11, 12, -18)
+
+[node name="Line2D" type="Line2D" parent="Visual"]
+points = PackedVector2Array(-14, -4, 14, -3)
+width = 4.0
+default_color = Color(0.53125, 0.53125, 0.53125, 1)
+
+[node name="Line2D2" type="Line2D" parent="Visual"]
+position = Vector2(0, 9)
+points = PackedVector2Array(-14, -4, 9.96332, -3.14416, 14, -3)
+width = 4.0
+default_color = Color(0.53125, 0.53125, 0.53125, 1)
+
+[node name="Line2D3" type="Line2D" parent="Visual"]
+position = Vector2(0, 17)
+points = PackedVector2Array(-14, -4, 9.96332, -3.14416, 14, -3)
+width = 4.0
+default_color = Color(0.53125, 0.53125, 0.53125, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+libraries = {
+"": SubResource("AnimationLibrary_w52v2")
+}
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+rotation = 1.57079
+color = Color(0.729412, 0.258824, 0.215686, 1)
+polygon = PackedVector2Array(-75, -14, -31, 2, -70, 25, -59, 4)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

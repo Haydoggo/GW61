@@ -152,25 +152,28 @@ func _ready() -> void:
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.25, 0.1)
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(2304, 0)
 
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Sky"]
 offset_top = -225428.0
 offset_right = 2337.0
 offset_bottom = 680.0
 texture = SubResource("GradientTexture2D_3nwuc")
 
-[node name="Polygon2D" type="Polygon2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 0.1)
+motion_mirroring = Vector2(2304, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="ParallaxBackground/Clouds"]
 position = Vector2(-55, 1389)
 polygon = PackedVector2Array(-108, -1262, 443, -1265, 317, -1329, 303, -1376, 324, -1462, 301, -1519, 156, -1574, 75, -1550, 58, -1443, 6, -1493, -77, -1526, -137, -1512, -161, -1436, -156, -1381, -206, -1384, -242, -1362, -234, -1267, -182, -1248)
 
-[node name="Polygon2D2" type="Polygon2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Polygon2D2" type="Polygon2D" parent="ParallaxBackground/Clouds"]
 position = Vector2(386, 2352)
 polygon = PackedVector2Array(581, -3496, 649, -3478, 985, -3446, 1232, -3523, 1273, -3675, 1183, -3819, 1066, -3828, 999, -3756, 815, -3895, 586, -3949, 411, -3819, 370, -3698, 424, -3576, 514, -3523)
 
-[node name="Polygon2D3" type="Polygon2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Polygon2D3" type="Polygon2D" parent="ParallaxBackground/Clouds"]
 position = Vector2(-692, 1613)
 polygon = PackedVector2Array(581, -3496, 649, -3478, 985, -3446, 1232, -3523, 1273, -3675, 1183, -3819, 1066, -3828, 999, -3756, 815, -3895, 586, -3949, 411, -3819, 370, -3698, 424, -3576, 514, -3523)
 
