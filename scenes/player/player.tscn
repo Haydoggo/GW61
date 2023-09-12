@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=19 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="1_6neeu"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
@@ -63,6 +63,13 @@ scale_max = 30.0
 scale_curve = SubResource("CurveTexture_outn4")
 color_ramp = SubResource("GradientTexture1D_fq44p")
 color_initial_ramp = SubResource("GradientTexture1D_yaciu")
+
+[sub_resource type="GDScript" id="GDScript_n4nsl"]
+script/source = "extends SpinBox
+
+func _ready() -> void:
+	get_line_edit().focus_mode = Control.FOCUS_NONE
+"
 
 [sub_resource type="Animation" id="Animation_bee7s"]
 length = 0.001
@@ -297,6 +304,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.105882, 0.105882, 0.105882, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_top = 160.0
+offset_right = 186.0
+offset_bottom = 221.0
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Frames of grapple delay"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+script = SubResource("GDScript_n4nsl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

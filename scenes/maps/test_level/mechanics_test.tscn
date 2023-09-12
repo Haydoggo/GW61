@@ -89,8 +89,10 @@ attack_power = 4000.0
 
 [node name="CameraThief" parent="." index="9" node_paths=PackedStringArray("marker") instance=ExtResource("4_lqfak")]
 position = Vector2(630, -140)
-polygon = PackedVector2Array(13, -50, 14, 193, 318, 185, 313, -44)
+polygon = PackedVector2Array(13, -50, 14, 193, 352, 197, 344, -66)
 marker = NodePath("CameraThiefRespawn")
+temporary = false
+can_leave_early = true
 
 [node name="CameraThiefRespawn" type="AspectRatioContainer" parent="CameraThief" index="4"]
 offset_left = -227.0

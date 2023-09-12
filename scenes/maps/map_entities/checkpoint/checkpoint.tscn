@@ -29,6 +29,7 @@ points = PackedVector2Array(0, 0, 0, 0)
 gradient = SubResource("Gradient_umbjw")
 
 [node name="Marker2D" type="Marker2D" parent="."]
+visible = false
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
