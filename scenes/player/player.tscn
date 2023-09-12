@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=19 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="1_6neeu"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
@@ -10,12 +10,12 @@
 radius = 16.0
 height = 60.0
 
-[sub_resource type="Curve" id="Curve_018rt"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.10443, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+[sub_resource type="Curve" id="Curve_qp0b7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.126582, 1), 0.0, 0.0, 0, 0, Vector2(0.924051, 0.768421), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_outn4"]
-curve = SubResource("Curve_018rt")
+curve = SubResource("Curve_qp0b7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_untun"]
 emission_shape = 3
@@ -30,6 +30,193 @@ angle_max = 90.0
 scale_min = 8.0
 scale_max = 8.0
 scale_curve = SubResource("CurveTexture_outn4")
+
+[sub_resource type="Gradient" id="Gradient_yu4gf"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.540351, 0.768421)
+colors = PackedColorArray(0.643137, 0, 0, 1, 0.855193, 0.786282, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yaciu"]
+gradient = SubResource("Gradient_yu4gf")
+
+[sub_resource type="Gradient" id="Gradient_qrkko"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.00701754)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fq44p"]
+gradient = SubResource("Gradient_qrkko")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5uyba"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 1000.0
+damping_max = 1500.0
+scale_min = 10.0
+scale_max = 30.0
+scale_curve = SubResource("CurveTexture_outn4")
+color_ramp = SubResource("GradientTexture1D_fq44p")
+color_initial_ramp = SubResource("GradientTexture1D_yaciu")
+
+[sub_resource type="GDScript" id="GDScript_n4nsl"]
+script/source = "extends SpinBox
+
+func _ready() -> void:
+	get_line_edit().focus_mode = Control.FOCUS_NONE
+"
+
+[sub_resource type="Animation" id="Animation_bee7s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/DeathWipe:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-5.96047e-08]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Control/DeathWipe:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xvkli"]
+resource_name = "die"
+length = 1.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Death")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Death:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Control/DeathWipe:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Control/DeathWipe:anchor_left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-5.96047e-08, 1.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"set_process_input"
+}, {
+"args": [true],
+"method": &"set_process_input"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}, {
+"args": [true],
+"method": &"set_physics_process"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"respawn"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nfpi4"]
+_data = {
+"RESET": SubResource("Animation_bee7s"),
+"die": SubResource("Animation_xvkli")
+}
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
@@ -87,7 +274,54 @@ shape = SubResource("CapsuleShape2D_5ue3p")
 target_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+top_level = true
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("5_1g00w")
+
+[node name="Death" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_5uyba")
+one_shot = true
+explosiveness = 0.9
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DeathWipe" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.105882, 0.105882, 0.105882, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_top = 160.0
+offset_right = 186.0
+offset_bottom = 221.0
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Frames of grapple delay"
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+script = SubResource("GDScript_n4nsl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nfpi4")
+}
 
 [connection signal="timeout" from="RetractionTimer" to="." method="_on_retraction_timer_timeout"]

@@ -14,14 +14,26 @@ static var instance : Player
 
 var can_retract = false
 var is_retracting = false
-var is_grappling = false
+var is_grappling = false:
+	set(v):
+		var was_grappling = is_grappling
+		is_grappling = v
+		if is_grappling > was_grappling:
+			visual_grapple_length = 0.0
+			create_tween().tween_property(self,"visual_grapple_length", 1.0, 0.06)
+		if is_grappling < was_grappling:
+			visual_grapple_length = 1.0
+			create_tween().tween_property(self,"visual_grapple_length", 0.0, 0.1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 var is_sliding = false
 var grapple_length = 0.0
+var visual_grapple_length = 0.0
 var hook_position = Vector2()
 var ignored_tiles = []
 var time_last_on_floor = 0.0
 var time_of_last_wall_jump = 0.0
 var hit_block_properties = 0
+
+@onready var respawn_point = global_position
 
 func _init() -> void:
 	instance = self
@@ -32,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Colliding with tiles
 	var kc = get_last_slide_collision()
-	if kc:
+	if kc and (is_on_ceiling() or is_on_floor() or is_on_wall()):
 		var p = kc.get_position() - kc.get_normal()
 		var collider = kc.get_collider()
 		if collider and collider.has_method("collide"):
@@ -42,11 +54,11 @@ func _physics_process(delta: float) -> void:
 			var c = map.local_to_map(map.to_local(p))
 			if c not in ignored_tiles:
 				ignored_tiles.append(c)
-				get_tree().create_timer(0.5).timeout.connect(func():ignored_tiles.erase(c))
+				get_tree().create_timer(0.2).timeout.connect(func():ignored_tiles.erase(c))
 				if map.get_properties(p) & WorldMap.TileProperty.JUMP:
 					velocity -= Vector2.UP.rotated(-PI/2*map.get_alt_index(p)) * mp.jump_speed * 2
 				if map.get_properties(p) & WorldMap.TileProperty.DEATH:
-					create_tween().tween_property(self, "modulate", Color.WHITE, 1.0).from(Color.RED)
+					$AnimationPlayer.play("die")
 	
 	# Preemptive Collision check:
 	shape_cast.target_position = velocity * delta
@@ -58,9 +70,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 			
 	# Visuals
-	if is_grappling:
+#	if is_grappling:
+	if visual_grapple_length > 0:
 		grapple_line.show()
-		grapple_line.points[0] = grapple_line.to_local(hook_position)
+		grapple_line.points[0] = grapple_line.to_local(hook_position) * visual_grapple_length
 	else:
 		grapple_line.hide()
 	if is_sliding:
@@ -72,6 +85,8 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple"):
+		for i in $CanvasLayer/VBoxContainer/SpinBox.value:
+			await get_tree().physics_frame
 		if hit_block_properties & WorldMap.TileProperty.GRAPPLE:
 			is_grappling = true
 			hook_position = grapple_ray.get_collision_point()
@@ -196,6 +211,14 @@ func grapple_movement(delta: float) -> void:
 		if hook_dir.dot(velocity) < 0 and hook_dir.length() >= grapple_length:
 			velocity = velocity.project(hook_dir.orthogonal())
 		velocity += (hook_dir - hook_dir.limit_length(grapple_length)) * 10
+
+func respawn():
+	is_grappling = false
+	is_retracting = false
+	is_sliding = false
+	velocity = Vector2(0,0)
+	global_position = respawn_point
+	$Camera2D.align()
 
 func _on_retraction_timer_timeout() -> void:
 	is_retracting = false

@@ -29,7 +29,7 @@ position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_orxml")
 
 [node name="AttackVisualiser" type="Line2D" parent="DamageArea"]
-points = PackedVector2Array(0, 0, 0, -30)
+points = PackedVector2Array(0, 0, 100, 0)
 script = ExtResource("3_l85hy")
 
 [node name="Sprite" type="Sprite2D" parent="."]
