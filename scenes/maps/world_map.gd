@@ -10,11 +10,15 @@ enum TileProperty {
 }
 
 const TILE_PROPERTIES = {
-	Vector2i(0,0) : TileProperty.GRAPPLE,
-	Vector2i(1,0) : TileProperty.GRAPPLE | TileProperty.BOOST,
-	Vector2i(2,0) : TileProperty.GRAPPLE | TileProperty.JUMP,
-	Vector2i(3,0) : TileProperty.GRAPPLE | TileProperty.DEATH,
-	Vector2i(0,1) : TileProperty.FRAGILE,
+	Vector3i(0,0,0) : TileProperty.GRAPPLE,
+	Vector3i(1,0,0) : TileProperty.GRAPPLE | TileProperty.BOOST,
+	Vector3i(2,0,0) : TileProperty.GRAPPLE | TileProperty.JUMP,
+	Vector3i(3,0,0) : TileProperty.GRAPPLE | TileProperty.DEATH,
+	
+	# Sheet 2
+	# Spikes
+	Vector3i(9,2,2) : TileProperty.GRAPPLE | TileProperty.DEATH,
+	Vector3i(9,3,2) : TileProperty.GRAPPLE | TileProperty.DEATH,
 }
 
 func global_to_atlas_coords(global_p : Vector2) -> Vector2i:
@@ -26,5 +30,7 @@ func get_alt_index(global_p : Vector2) -> int:
 	return get_cell_alternative_tile(0, coords)
 
 func get_properties(global_p : Vector2) -> int:
+	var coords = local_to_map(to_local(global_p))
 	var ac = global_to_atlas_coords(global_p)
-	return TILE_PROPERTIES.get(ac, TileProperty.NONE)
+	var source = get_cell_source_id(0, coords)
+	return TILE_PROPERTIES.get(Vector3i(ac.x, ac.y, source), TileProperty.GRAPPLE)
