@@ -27,7 +27,7 @@ func _ready() -> void:
 func collide():
 	if has_shattered:
 		return
-	if abs(Player.instance.velocity.x) > 1000:
+	if abs(Player.instance.velocity.dot(global_transform.x)) > 1000:
 		for window in connected_windows:
 			window.shatter()
 

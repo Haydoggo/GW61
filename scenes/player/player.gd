@@ -87,14 +87,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple"):
 		for i in $UI/VBoxContainer/SpinBox.value:
 			await get_tree().physics_frame
+		if grapple_ray.get_collider() and grapple_ray.get_collider().has_method("grapple"):
+			if grapple_ray.get_collider().grapple():
+				is_grappling = true
+				hook_position = grapple_ray.get_collision_point()
+				grapple_length = hook_position.distance_to(grapple_ray.global_position)
+		
 		if hit_block_properties & WorldMap.TileProperty.GRAPPLE:
 			is_grappling = true
 			hook_position = grapple_ray.get_collision_point()
 			grapple_length = hook_position.distance_to(grapple_ray.global_position)
 			if hit_block_properties & WorldMap.TileProperty.BOOST:
-				is_retracting = true
-				retraction_timer.wait_time = mp.retraction_time
-				retraction_timer.start()
+				retract_grapple()
 	
 	if event.is_action_released("grapple") and is_grappling:
 		retraction_timer.stop()
@@ -103,9 +107,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if can_retract:
 		if event.is_action_pressed("retract"):
-			is_retracting = true
-			retraction_timer.wait_time = mp.retraction_time
-			retraction_timer.start()
+			retract_grapple()
 
 
 func _draw() -> void:
@@ -212,6 +214,11 @@ func grapple_movement(delta: float) -> void:
 		if hook_dir.dot(velocity) < 0 and hook_dir.length() >= grapple_length:
 			velocity = velocity.project(hook_dir.orthogonal())
 		velocity += (hook_dir - hook_dir.limit_length(grapple_length)) * 10
+
+func retract_grapple():
+	is_retracting = true
+	retraction_timer.wait_time = mp.retraction_time
+	retraction_timer.start()
 
 func respawn():
 	is_grappling = false

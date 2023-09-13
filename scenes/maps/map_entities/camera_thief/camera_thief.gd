@@ -6,7 +6,7 @@ extends Polygon2D
 @export var zoom_out_time = 1.0
 @export var zoom_only = false
 @export_group("Temporary zoom control")
-@export var temporary = true
+@export var temporary = false
 @export var linger_duration = 2.0
 @export var can_leave_early = false
 

@@ -5,7 +5,6 @@
 [resource]
 script = ExtResource("1_4hh8l")
 auto_retract = true
-instant_retract = false
 grapple_range = 1000.0
 max_walk_speed = 650.0
 walk_acceleration = 2500.0
