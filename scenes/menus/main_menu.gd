@@ -3,6 +3,9 @@ extends Control
 @onready var menu_content: CenterContainer = $MenuContent
 @onready var settings: Control = $Settings
 
+func _ready() -> void:
+	if OS.get_name() == "Web":
+		$MenuContent/VBoxContainer/Quit.hide()
 
 func _on_settings_pressed() -> void:
 	settings.show()

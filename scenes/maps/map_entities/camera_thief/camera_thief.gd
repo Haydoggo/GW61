@@ -43,9 +43,9 @@ func zoom_out():
 	t.parallel().tween_property(camera, "zoom", camera.default_zoom, zoom_out_time)
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
+	await get_tree().process_frame
 	zoom_in()
 	camera.target_controller = self
-
 
 func _on_area_2d_body_exited(_body: Node2D) -> void:
 	if not temporary or can_leave_early:

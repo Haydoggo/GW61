@@ -8,7 +8,7 @@ atlas = ExtResource("1_cj82j")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kswb3"]
-radius = 36.3456
+radius = 72.0
 
 [node name="GrappleNode" type="Area2D"]
 collision_layer = 2
@@ -22,3 +22,10 @@ texture = SubResource("AtlasTexture_folok")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kswb3")
+
+[node name="Highlight" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(-5.00003, -78, 42, -56, 67, -3, 53, 48, 8, 67, -54, 55, -74, 0, -54, -49, -4, -78)
+default_color = Color(0, 0.796078, 0.168627, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,5 +1,9 @@
 class_name Player extends CharacterBody2D
 
+signal grapple_hit()
+signal grapple_released()
+signal retraction_finised()
+
 static var instance : Player
 
 @export_category("Movement Parameters")
@@ -19,9 +23,11 @@ var is_grappling = false:
 		var was_grappling = is_grappling
 		is_grappling = v
 		if is_grappling > was_grappling:
+			grapple_hit.emit()
 			visual_grapple_length = 0.0
 			create_tween().tween_property(self,"visual_grapple_length", 1.0, 0.06)
 		if is_grappling < was_grappling:
+			grapple_released.emit()
 			visual_grapple_length = 1.0
 			create_tween().tween_property(self,"visual_grapple_length", 0.0, 0.1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 var is_sliding = false
@@ -32,6 +38,8 @@ var ignored_tiles = []
 var time_last_on_floor = 0.0
 var time_of_last_wall_jump = 0.0
 var hit_block_properties = 0
+
+var highlighted_obj = null
 
 @onready var respawn_point = global_position
 
@@ -188,7 +196,13 @@ func grapple_movement(delta: float) -> void:
 	
 	hit_block_properties = WorldMap.TileProperty.NONE
 	grapple_indicator.default_color = Color.WHITE
+	if highlighted_obj:
+		highlighted_obj.highlighted = false
+		highlighted_obj = null
 	if grapple_ray.get_collider():
+		if "highlighted" in grapple_ray.get_collider():
+			highlighted_obj = grapple_ray.get_collider()
+			highlighted_obj.highlighted = true
 		grapple_indicator.points[1] = grapple_indicator.to_local(grapple_ray.get_collision_point())
 		var map = grapple_ray.get_collider() as WorldMap
 		if map:
@@ -199,12 +213,14 @@ func grapple_movement(delta: float) -> void:
 			if hit_block_properties & WorldMap.TileProperty.BOOST:
 				grapple_indicator.default_color = Color.AQUA
 	
+	
 	if is_retracting:
 		var pull_vel = grapple_ray.global_position.direction_to(hook_position) * mp.retraction_power
 		if velocity.dot(pull_vel) < 0:
 			velocity = velocity.project(pull_vel.orthogonal())
 		velocity += pull_vel * delta / max(mp.retraction_time, delta)
-		
+		var v = pull_vel * delta / max(mp.retraction_time, delta)
+		prints(v, v.length())
 	if mp.auto_retract:
 		grapple_length = min(grapple_length, hook_position.distance_to(global_position))
 	grapple_length = max(mp.min_grapple_length, grapple_length)
@@ -219,6 +235,14 @@ func retract_grapple():
 	is_retracting = true
 	retraction_timer.wait_time = mp.retraction_time
 	retraction_timer.start()
+	var canceled_retraction = [false]
+	var set_canceled = func():
+		canceled_retraction[0] = true
+	grapple_released.connect(set_canceled)
+	await retraction_timer.timeout
+	grapple_released.disconnect(set_canceled)
+	if canceled_retraction == [false]:
+		retraction_finised.emit()
 
 func respawn():
 	is_grappling = false
