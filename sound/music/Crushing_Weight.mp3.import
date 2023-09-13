@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/Crushing_Weight.mp3-e66ea247c70f602dda9194c39
 
 [params]
 
-loop=false
-loop_offset=0.0
-bpm=0.0
-beat_count=0
+loop=true
+loop_offset=10.67
+bpm=180.0
+beat_count=368
 bar_beats=4

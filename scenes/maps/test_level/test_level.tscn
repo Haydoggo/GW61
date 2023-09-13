@@ -19,3 +19,4 @@ maps = Array[PackedScene]([ExtResource("3_0i1la"), ExtResource("3_8f3wu"), ExtRe
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_lfhql")
 autoplay = true
+bus = &"Music"
