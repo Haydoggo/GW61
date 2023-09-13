@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=24 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="1_6neeu"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://scenes/player/camera.gd" id="5_1g00w"]
 [ext_resource type="Script" path="res://scenes/player/document_indicator.gd" id="6_f0xow"]
 [ext_resource type="Script" path="res://scenes/player/forms_collected_display.gd" id="7_6h0yf"]
+[ext_resource type="AudioStream" uid="uid://c81703xkd3jrk" path="res://sound/sfx/death.sfxr" id="8_mpvyn"]
+[ext_resource type="AudioStream" uid="uid://bgj5awhned4aq" path="res://sound/sfx/grapple_hit.sfxr" id="9_o16hn"]
+[ext_resource type="AudioStream" uid="uid://b52mrxg4cy3rw" path="res://sound/sfx/grapple.sfxr" id="9_vq024"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ue3p"]
 radius = 16.0
@@ -213,6 +216,36 @@ tracks/7/keys = {
 "method": &"respawn"
 }]
 }
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Death")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_mpvyn")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/8/use_blend = true
+tracks/9/type = "audio"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("DeathSFX")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_mpvyn")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/9/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nfpi4"]
 _data = {
@@ -401,5 +434,16 @@ script = ExtResource("7_6h0yf")
 libraries = {
 "": SubResource("AnimationLibrary_nfpi4")
 }
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="GrappleHitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_o16hn")
+bus = &"SFX"
+
+[node name="RetractSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_vq024")
+bus = &"SFX"
 
 [connection signal="timeout" from="RetractionTimer" to="." method="_on_retraction_timer_timeout"]

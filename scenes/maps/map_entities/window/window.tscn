@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsgrhid0btr8k"]
+[gd_scene load_steps=7 format=3 uid="uid://dsgrhid0btr8k"]
 
 [ext_resource type="Script" path="res://scenes/maps/map_entities/window/window.gd" id="1_x6h5j"]
 [ext_resource type="Texture2D" uid="uid://cakaaiixu7r3h" path="res://scenes/maps/map_entities/window/window.png" id="2_hiohk"]
+[ext_resource type="AudioStream" uid="uid://bavfaexg1a20q" path="res://sound/sfx/shatter.sfxr" id="3_ry4q6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5764"]
 size = Vector2(32, 64)
@@ -45,3 +46,7 @@ scale_amount_min = 8.0
 scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_sla1m")
 color_initial_ramp = SubResource("Gradient_dp4ni")
+
+[node name="ShatterSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ry4q6")
+bus = &"SFX"

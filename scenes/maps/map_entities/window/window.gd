@@ -30,6 +30,13 @@ func collide():
 	if abs(Player.instance.velocity.dot(global_transform.x)) > 1000:
 		for window in connected_windows:
 			window.shatter()
+		var sfx = $ShatterSFX as AudioStreamPlayer
+		sfx.pitch_scale = randf_range(0.9, 1.1)
+		sfx.reparent(get_tree().root)
+		sfx.play()
+		sfx.finished.connect(sfx.queue_free)
+	
+	
 
 func shatter():
 	$CollisionShape2D.disabled = true

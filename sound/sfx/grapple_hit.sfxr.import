@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bgj5awhned4aq"
+path="res://.godot/imported/grapple_hit.sfxr-64d0868c62af16107b469b1bd77859fe.sample"
+
+[deps]
+
+source_file="res://sound/sfx/grapple_hit.sfxr"
+dest_files=["res://.godot/imported/grapple_hit.sfxr-64d0868c62af16107b469b1bd77859fe.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

@@ -24,6 +24,10 @@ PauseMenu="*res://scenes/menus/pause_menu.tscn"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdfxr/plugin.cfg")
+
 [input]
 
 move_left={

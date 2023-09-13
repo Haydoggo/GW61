@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://chn6n7stwkldl"]
+[gd_scene load_steps=8 format=3 uid="uid://chn6n7stwkldl"]
 
 [ext_resource type="Script" path="res://scenes/maps/map_entities/document_pickup/document.gd" id="1_6pgai"]
+[ext_resource type="AudioStream" uid="uid://15gsjg0dwfqn" path="res://sound/sfx/pickup.sfxr" id="2_qh1df"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_suj8m"]
 radius = 16.0
@@ -104,5 +105,9 @@ libraries = {
 rotation = 1.57079
 color = Color(0.729412, 0.258824, 0.215686, 1)
 polygon = PackedVector2Array(-75, -14, -31, 2, -70, 25, -59, 4)
+
+[node name="PickupSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_qh1df")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

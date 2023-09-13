@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bavfaexg1a20q"
+path="res://.godot/imported/shatter.sfxr-6ff3ac54f8401fcbae0a737bf7fab26a.sample"
+
+[deps]
+
+source_file="res://sound/sfx/shatter.sfxr"
+dest_files=["res://.godot/imported/shatter.sfxr-6ff3ac54f8401fcbae0a737bf7fab26a.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

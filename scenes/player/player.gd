@@ -25,7 +25,9 @@ var is_grappling = false:
 		if is_grappling > was_grappling:
 			grapple_hit.emit()
 			visual_grapple_length = 0.0
+			$GrappleHitSFX.play()
 			create_tween().tween_property(self,"visual_grapple_length", 1.0, 0.06)
+			
 		if is_grappling < was_grappling:
 			grapple_released.emit()
 			visual_grapple_length = 1.0
@@ -219,8 +221,6 @@ func grapple_movement(delta: float) -> void:
 		if velocity.dot(pull_vel) < 0:
 			velocity = velocity.project(pull_vel.orthogonal())
 		velocity += pull_vel * delta / max(mp.retraction_time, delta)
-		var v = pull_vel * delta / max(mp.retraction_time, delta)
-		prints(v, v.length())
 	if mp.auto_retract:
 		grapple_length = min(grapple_length, hook_position.distance_to(global_position))
 	grapple_length = max(mp.min_grapple_length, grapple_length)
@@ -232,6 +232,7 @@ func grapple_movement(delta: float) -> void:
 		velocity += (hook_dir - hook_dir.limit_length(grapple_length)) * 10
 
 func retract_grapple():
+	get_tree().create_timer(0.06).timeout.connect($RetractSFX.play)
 	is_retracting = true
 	retraction_timer.wait_time = mp.retraction_time
 	retraction_timer.start()
