@@ -15,6 +15,7 @@ static var instance : Player
 @onready var grapple_indicator: Line2D = $GrappleRay/GrappleIndicator
 @onready var retraction_timer: Timer = $RetractionTimer
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 
 var can_retract = false
 var is_retracting = false
@@ -86,12 +87,27 @@ func _physics_process(delta: float) -> void:
 		grapple_line.points[0] = grapple_line.to_local(hook_position) * visual_grapple_length
 	else:
 		grapple_line.hide()
-	if is_sliding:
-		$Sprite2D.scale.y = 0.5*0.5
-		$Sprite2D.position.y = 16
+	if velocity.x > 0:
+		sprite.flip_h = false
+	if velocity.x < 0:
+		sprite.flip_h = true
+	
+	if is_on_floor():
+		if velocity.x == 0:
+			sprite.play("idle")
+		else:
+			sprite.play("run")
 	else:
-		$Sprite2D.scale.y = 1*0.5
-		$Sprite2D.position.y = 0
+		if velocity.y > 0:
+			sprite.play("jump_up")
+		else:
+			sprite.play("jump_down")
+#	if is_sliding:
+#		$Sprite2D.scale.y = 0.5*0.5
+#		$Sprite2D.position.y = 16
+#	else:
+#		$Sprite2D.scale.y = 1*0.5
+#		$Sprite2D.position.y = 0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple"):
@@ -137,6 +153,7 @@ func player_movement(delta: float) -> void:
 		if sign(direction)==sign(-velocity.x):
 			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta*mp.reverse_speed_mulitplier)
 		elif not at_skidding_speed and direction:
+			sprite.play("run")
 			velocity.x = move_toward(velocity.x, direction * mp.max_walk_speed, mp.walk_acceleration*delta)
 		# Apply ground friction otherwise
 		elif is_grappling or is_sliding:
@@ -160,6 +177,7 @@ func player_movement(delta: float) -> void:
 			velocity.x += direction * delta * mp.walk_acceleration
 		else:
 			velocity.x += direction * delta * mp.air_acceleration
+		
 	
 	# Add the gravity.
 	$LeftWallDust.emitting = false
