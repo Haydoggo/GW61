@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dgbe0iv128eau" path="res://scenes/maps/test_level/test_map1.tscn" id="3_8f3wu"]
 [ext_resource type="Script" path="res://scenes/maps/test_level/map_selector.gd" id="3_vitu8"]
 [ext_resource type="PackedScene" uid="uid://pb4rl4f8kfyp" path="res://scenes/maps/test_level/mechanics_test.tscn" id="4_lgu57"]
-[ext_resource type="AudioStream" uid="uid://cr4jsjg37plck" path="res://sound/music/V2_Crushing_Weight_of_a_Speeding_Ticket.mp3" id="5_8cyvb"]
+[ext_resource type="AudioStream" uid="uid://cr4jsjg37plck" path="res://sound/music/Crushing_Weight.mp3" id="5_lfhql"]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -17,5 +17,5 @@ script = ExtResource("3_vitu8")
 maps = Array[PackedScene]([ExtResource("3_0i1la"), ExtResource("3_8f3wu"), ExtResource("4_lgu57")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_8cyvb")
+stream = ExtResource("5_lfhql")
 autoplay = true

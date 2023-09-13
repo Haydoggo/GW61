@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple"):
-		for i in $CanvasLayer/VBoxContainer/SpinBox.value:
+		for i in $UI/VBoxContainer/SpinBox.value:
 			await get_tree().physics_frame
 		if hit_block_properties & WorldMap.TileProperty.GRAPPLE:
 			is_grappling = true
@@ -187,6 +187,7 @@ func grapple_movement(delta: float) -> void:
 	hit_block_properties = WorldMap.TileProperty.NONE
 	grapple_indicator.default_color = Color.WHITE
 	if grapple_ray.get_collider():
+		grapple_indicator.points[1] = grapple_indicator.to_local(grapple_ray.get_collision_point())
 		var map = grapple_ray.get_collider() as WorldMap
 		if map:
 			var hook_pos_adjusted = grapple_ray.get_collision_point() - grapple_ray.get_collision_normal()

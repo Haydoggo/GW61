@@ -10,7 +10,7 @@ var target_selection = 1.0 # range from 0 to 1 to lerp ext_targ to targ
 func _ready() -> void:
 	process_priority = 1000
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	target_position = get_parent().global_position.lerp(get_global_mouse_position(), 0.2)
 	global_position = external_target_position.lerp(target_position, target_selection)
 	align()

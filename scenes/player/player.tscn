@@ -1,10 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=21 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="1_6neeu"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
 [ext_resource type="Resource" uid="uid://kl5qqua4pvfg" path="res://scenes/player/movement_params.tres" id="2_gcq0d"]
 [ext_resource type="Texture2D" uid="uid://dg18rnd0vw50m" path="res://scenes/player/grapple.png" id="4_k814l"]
 [ext_resource type="Script" path="res://scenes/player/camera.gd" id="5_1g00w"]
+[ext_resource type="Script" path="res://scenes/player/document_indicator.gd" id="6_f0xow"]
+[ext_resource type="Script" path="res://scenes/player/forms_collected_display.gd" id="7_6h0yf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ue3p"]
 radius = 16.0
@@ -76,7 +78,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/Control/DeathWipe:anchor_left")
+tracks/0/path = NodePath("UI/Control/DeathWipe:anchor_left")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -88,7 +90,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/Control/DeathWipe:anchor_right")
+tracks/1/path = NodePath("UI/Control/DeathWipe:anchor_right")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -130,7 +132,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer/Control/DeathWipe:anchor_right")
+tracks/2/path = NodePath("UI/Control/DeathWipe:anchor_right")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -142,7 +144,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CanvasLayer/Control/DeathWipe:anchor_left")
+tracks/3/path = NodePath("UI/Control/DeathWipe:anchor_left")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -228,6 +230,7 @@ shape = SubResource("CapsuleShape2D_5ue3p")
 
 [node name="GrappleRay" type="RayCast2D" parent="."]
 collision_mask = 2
+collide_with_areas = true
 
 [node name="GrappleIndicator" type="Line2D" parent="GrappleRay"]
 modulate = Color(1, 1, 1, 0.247059)
@@ -285,9 +288,9 @@ process_material = SubResource("ParticleProcessMaterial_5uyba")
 one_shot = true
 explosiveness = 0.9
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -296,7 +299,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="DeathWipe" type="ColorRect" parent="CanvasLayer/Control"]
+[node name="DeathWipe" type="ColorRect" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 1.0
@@ -305,19 +308,91 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.105882, 0.105882, 0.105882, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 offset_top = 160.0
 offset_right = 186.0
 offset_bottom = 221.0
 
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
 text = "Frames of grapple delay"
 
-[node name="SpinBox" type="SpinBox" parent="CanvasLayer/VBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="UI/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 script = SubResource("GDScript_n4nsl")
+
+[node name="DocumentIndicator" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_f0xow")
+
+[node name="Visual" type="Node2D" parent="UI/DocumentIndicator"]
+position = Vector2(404, 7)
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/DocumentIndicator/Visual"]
+polygon = PackedVector2Array(-19, -19, -18, 24, 20, 22, 20, -11, 12, -18)
+
+[node name="Polygon2D2" type="Polygon2D" parent="UI/DocumentIndicator/Visual"]
+color = Color(0.533333, 0.533333, 0.533333, 1)
+polygon = PackedVector2Array(11, -11, 20, -11, 12, -18)
+
+[node name="Line2D" type="Line2D" parent="UI/DocumentIndicator/Visual"]
+points = PackedVector2Array(-14, -4, 14, -3)
+width = 4.0
+default_color = Color(0.53125, 0.53125, 0.53125, 1)
+
+[node name="Line2D2" type="Line2D" parent="UI/DocumentIndicator/Visual"]
+position = Vector2(0, 9)
+points = PackedVector2Array(-14, -4, 9.96332, -3.14416, 14, -3)
+width = 4.0
+default_color = Color(0.53125, 0.53125, 0.53125, 1)
+
+[node name="Line2D3" type="Line2D" parent="UI/DocumentIndicator/Visual"]
+position = Vector2(0, 17)
+points = PackedVector2Array(-14, -4, 9.96332, -3.14416, 14, -3)
+width = 4.0
+default_color = Color(0.53125, 0.53125, 0.53125, 1)
+
+[node name="Polygon2D3" type="Polygon2D" parent="UI/DocumentIndicator"]
+position = Vector2(404, 7)
+color = Color(0.729412, 0.258824, 0.215686, 1)
+polygon = PackedVector2Array(-75, -14, -31, 2, -70, 25, -59, 4)
+
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
+offset_left = 941.0
+offset_top = 14.0
+offset_right = 1157.0
+offset_bottom = 79.0
+rotation = 0.126334
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Forms collected: "
+
+[node name="FormsCollected" type="Label" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "0/0"
+script = ExtResource("7_6h0yf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

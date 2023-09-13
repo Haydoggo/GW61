@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export_range(-PI/2, PI/2) var attack_angle = 0.0
 @export_range(0,10000) var attack_power = 2000.0
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Player.instance:
 		$Sprite.flip_h = Player.instance.global_position.x < global_position.x
 
