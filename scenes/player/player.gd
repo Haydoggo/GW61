@@ -52,6 +52,9 @@ func _init() -> void:
 	instance = self
 	
 func _physics_process(delta: float) -> void:
+	if Input.is_key_pressed(KEY_HOME):
+		global_position = get_global_mouse_position()
+	
 	player_movement(delta)
 	grapple_movement(delta)
 	
