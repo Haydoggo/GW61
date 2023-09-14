@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=60 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
 [ext_resource type="Resource" uid="uid://kl5qqua4pvfg" path="res://scenes/player/movement_params.tres" id="2_gcq0d"]
@@ -20,6 +20,21 @@
 [ext_resource type="AudioStream" uid="uid://skfa5jrwttds" path="res://sound/sfx/SFX_Foostep_06.mp3" id="11_ic0ay"]
 [ext_resource type="AudioStream" uid="uid://cdh01rvkpxxbo" path="res://sound/sfx/SFX_Foostep_07.mp3" id="12_o06po"]
 [ext_resource type="AudioStream" uid="uid://bu8pntk3smgvu" path="res://sound/sfx/SFX_Foostep_08.mp3" id="13_krkx5"]
+[ext_resource type="Script" path="res://sound/sound_randomiser.gd" id="20_awp6r"]
+[ext_resource type="AudioStream" uid="uid://crtewqnyokghl" path="res://sound/sfx/SFX_Jump_01.mp3" id="21_mk7ob"]
+[ext_resource type="AudioStream" uid="uid://f2nnq5cujtxu" path="res://sound/sfx/SFX_Jump_02.mp3" id="22_a6xdn"]
+[ext_resource type="AudioStream" uid="uid://dvvf82q15dqka" path="res://sound/sfx/SFX_Jump_03.mp3" id="23_en3bw"]
+[ext_resource type="AudioStream" uid="uid://b4my7rkjmcuhv" path="res://sound/sfx/SFX_Jump_04.mp3" id="24_ye1fq"]
+[ext_resource type="AudioStream" uid="uid://dgdajdxyi3a8j" path="res://sound/sfx/SFX_Jump_05.mp3" id="25_fbtfd"]
+[ext_resource type="AudioStream" uid="uid://csqsp5jrqh6gb" path="res://sound/sfx/SFX_Jump_06.mp3" id="26_rqrfx"]
+[ext_resource type="AudioStream" uid="uid://bys5xrkvcgwfg" path="res://sound/sfx/SFX_Jump_07.mp3" id="27_0cyvj"]
+[ext_resource type="AudioStream" uid="uid://dsg71xk5l3ncq" path="res://sound/sfx/SFX_Jump_08.mp3" id="28_gxcci"]
+[ext_resource type="AudioStream" uid="uid://cqcwqq4u5jfhm" path="res://sound/sfx/SFX_Land_01.mp3" id="29_8h1fi"]
+[ext_resource type="AudioStream" uid="uid://beocjpeklr12r" path="res://sound/sfx/SFX_Land_02.mp3" id="30_hnse8"]
+[ext_resource type="AudioStream" uid="uid://3cafocdky08e" path="res://sound/sfx/SFX_Land_03.mp3" id="31_hiblo"]
+[ext_resource type="AudioStream" uid="uid://cq6tat5f883fv" path="res://sound/sfx/SFX_Land_04.mp3" id="32_rg1fo"]
+[ext_resource type="AudioStream" uid="uid://dso0q7x6w0c5g" path="res://sound/sfx/SFX_Land_05.mp3" id="33_jikxx"]
+[ext_resource type="AudioStream" uid="uid://dxo85uoy3ica6" path="res://sound/sfx/SFX_Land_06.mp3" id="34_rt1nh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ue3p"]
 radius = 16.0
@@ -556,6 +571,16 @@ bus = &"SFX"
 [node name="GrappleShootSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_73u3a")
 bus = &"SFX"
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+script = ExtResource("20_awp6r")
+sounds = Array[AudioStream]([ExtResource("21_mk7ob"), ExtResource("22_a6xdn"), ExtResource("23_en3bw"), ExtResource("24_ye1fq"), ExtResource("25_fbtfd"), ExtResource("26_rqrfx"), ExtResource("27_0cyvj"), ExtResource("28_gxcci")])
+
+[node name="LandSFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+script = ExtResource("20_awp6r")
+sounds = Array[AudioStream]([ExtResource("29_8h1fi"), ExtResource("30_hnse8"), ExtResource("31_hiblo"), ExtResource("32_rg1fo"), ExtResource("33_jikxx"), ExtResource("34_rt1nh")])
 
 [node name="RetractSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_3hrbu")

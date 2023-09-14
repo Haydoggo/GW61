@@ -93,7 +93,10 @@ func _physics_process(delta: float) -> void:
 		if c and c.has_method("collide"):
 			c.collide()
 	
+	var was_on_floor = is_on_floor()
 	move_and_slide()
+	if is_on_floor() > was_on_floor:
+		$LandSFX.play_random()
 			
 	# Visuals
 #	if is_grappling:
@@ -216,12 +219,14 @@ func player_movement(delta: float) -> void:
 			time_last_on_floor = 0.0
 			velocity.y = mp.jump_speed
 			is_sliding = false
+			$JumpSFX.play_random()
 		# Wall jumping
 		if is_on_wall_only() and direction:
 			time_of_last_wall_jump = current_time
 			velocity.y = mp.jump_speed
 			velocity.x = mp.jump_speed * direction
 			is_grappling = false
+			$JumpSFX.play_random()
 
 func grapple_movement(delta: float) -> void:
 	# Grappling
