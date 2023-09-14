@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scenes/maps/map_entities/window/window.gd" id="1_x6h5j"]
 [ext_resource type="Texture2D" uid="uid://cakaaiixu7r3h" path="res://scenes/maps/map_entities/window/window.png" id="2_hiohk"]
-[ext_resource type="AudioStream" uid="uid://bavfaexg1a20q" path="res://sound/sfx/shatter.sfxr" id="3_ry4q6"]
+[ext_resource type="AudioStream" uid="uid://cur8sbfswqta6" path="res://sound/sfx/shatter.sfxr" id="3_ry4q6"]
 [ext_resource type="Script" path="res://sound/sound_randomiser.gd" id="4_kp1h5"]
-[ext_resource type="AudioStream" uid="uid://cn75fgjtwnf7t" path="res://sound/sfx/SFX_GlassShatter_01.mp3" id="5_8umst"]
-[ext_resource type="AudioStream" uid="uid://ct0kkxkq2g6y5" path="res://sound/sfx/SFX_GlassShatter_02.mp3" id="6_pil3d"]
-[ext_resource type="AudioStream" uid="uid://cvgoefnyd7xa1" path="res://sound/sfx/SFX_GlassShatter_03.mp3" id="7_w87n1"]
+[ext_resource type="AudioStream" uid="uid://cmo3ecssbs3yu" path="res://sound/sfx/SFX_Shatter_01.mp3" id="5_jaehl"]
+[ext_resource type="AudioStream" uid="uid://chf7afqeayxct" path="res://sound/sfx/SFX_Shatter_02.mp3" id="6_4oobx"]
+[ext_resource type="AudioStream" uid="uid://blv0yoiwvajq7" path="res://sound/sfx/SFX_Shatter_03.mp3" id="7_ixdx4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5764"]
 size = Vector2(32, 64)
@@ -60,4 +60,4 @@ sounds = Array[AudioStream]([ExtResource("3_ry4q6")])
 volume_db = -10.0
 bus = &"SFX"
 script = ExtResource("4_kp1h5")
-sounds = Array[AudioStream]([ExtResource("5_8umst"), ExtResource("6_pil3d"), ExtResource("7_w87n1")])
+sounds = Array[AudioStream]([ExtResource("5_jaehl"), ExtResource("6_4oobx"), ExtResource("7_ixdx4")])

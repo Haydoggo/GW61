@@ -33,8 +33,8 @@ var is_grappling = false:
 		if is_grappling > was_grappling:
 			grapple_hit.emit()
 			visual_grapple_length = 0.0
-			$GrappleShootSFX.play()
-			get_tree().create_timer(0.06).timeout.connect($GrappleHitSFX.play)
+			$GrappleShootSFX.play(0.1)
+#			get_tree().create_timer(0.06).timeout.connect($GrappleHitSFX.play)
 			
 			create_tween().tween_property(self,"visual_grapple_length", 1.0, 0.06)
 			
@@ -99,7 +99,6 @@ func _physics_process(delta: float) -> void:
 		$LandSFX.play_random()
 			
 	# Visuals
-#	if is_grappling:
 	if visual_grapple_length > 0:
 		grapple_line.show()
 		grapple_line.points[0] = grapple_line.to_local(hook_position) * visual_grapple_length
@@ -120,12 +119,6 @@ func _physics_process(delta: float) -> void:
 			sprite.play("jump_up")
 		else:
 			sprite.play("jump_down")
-#	if is_sliding:
-#		$Sprite2D.scale.y = 0.5*0.5
-#		$Sprite2D.position.y = 16
-#	else:
-#		$Sprite2D.scale.y = 1*0.5
-#		$Sprite2D.position.y = 0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple") and can_grapple:
