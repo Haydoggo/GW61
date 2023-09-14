@@ -26,7 +26,9 @@ var is_grappling = false:
 		if is_grappling > was_grappling:
 			grapple_hit.emit()
 			visual_grapple_length = 0.0
-			$GrappleHitSFX.play()
+			$GrappleShootSFX.play()
+			get_tree().create_timer(0.06).timeout.connect($GrappleHitSFX.play)
+			
 			create_tween().tween_property(self,"visual_grapple_length", 1.0, 0.06)
 			
 		if is_grappling < was_grappling:
@@ -50,6 +52,9 @@ func _init() -> void:
 	instance = self
 	
 func _physics_process(delta: float) -> void:
+	if Input.is_key_pressed(KEY_HOME):
+		global_position = get_global_mouse_position()
+	
 	player_movement(delta)
 	grapple_movement(delta)
 	
@@ -98,7 +103,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			sprite.play("run")
 	else:
-		if velocity.y > 0:
+		if velocity.y < 0:
 			sprite.play("jump_up")
 		else:
 			sprite.play("jump_down")
