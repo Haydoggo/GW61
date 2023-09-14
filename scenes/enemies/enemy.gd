@@ -10,6 +10,9 @@ func _process(_delta: float) -> void:
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	var player = body as Player
 	if player:
+		$HitEffect.global_position = player.global_position
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("attack")
 		var attack_vector = Vector2.RIGHT.rotated(attack_angle)*attack_power
 		if Player.instance.velocity.x > 0:
 			attack_vector.x*=-1

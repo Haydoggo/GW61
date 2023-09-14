@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cofnxquytticg"]
+[gd_scene load_steps=10 format=3 uid="uid://cofnxquytticg"]
 
 [ext_resource type="Texture2D" uid="uid://cp5m83j2p861p" path="res://scenes/enemies/enemy.png" id="1_h47mf"]
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_q4bpl"]
 [ext_resource type="Script" path="res://scenes/enemies/attack_visualiser.gd" id="3_l85hy"]
+[ext_resource type="AudioStream" uid="uid://bvjrp6pk77i0y" path="res://sound/sfx/hit.sfxr" id="4_gckjl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1nxl"]
 radius = 16.0
@@ -11,8 +12,83 @@ height = 60.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_orxml"]
 radius = 27.0185
 
+[sub_resource type="Animation" id="Animation_vsoay"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0488359, 0.109002, 0.8),
+"transitions": PackedFloat32Array(-2, 2, -2, 1),
+"update": 0,
+"values": [0.0, -0.0872665, 0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitEffect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitSFX")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_gckjl")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_jt7ns"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitEffect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ombf0"]
+_data = {
+"RESET": SubResource("Animation_jt7ns"),
+"attack": SubResource("Animation_vsoay")
+}
+
 [node name="Enemy" type="CharacterBody2D"]
-collision_layer = 8
+collision_layer = 0
 script = ExtResource("1_q4bpl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -35,5 +111,18 @@ script = ExtResource("3_l85hy")
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -9)
 texture = ExtResource("1_h47mf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ombf0")
+}
+
+[node name="HitEffect" type="Polygon2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+color = Color(1, 1, 0, 1)
+polygon = PackedVector2Array(-21, -30, -8, -17, 2, -34, 6, -17, 36, -23, 20, -4, 45, -1, 19, 8, 33, 28, 12, 21, 3, 39, -2, 23, -26, 37, -13, 16, -34, 12, -14, 7, -32, -12, -12, -6)
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
