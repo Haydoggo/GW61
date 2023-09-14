@@ -439,3 +439,6 @@ position = Vector2(-16954, -14184)
 
 [node name="GrappleNode7" parent="GrappleNodes" index="6" instance=ExtResource("4_2vxbf")]
 position = Vector2(-16591, -12421)
+
+[node name="GrappleNode8" parent="GrappleNodes" index="7" instance=ExtResource("4_2vxbf")]
+position = Vector2(-16637, -17383)
