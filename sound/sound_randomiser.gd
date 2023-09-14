@@ -8,4 +8,3 @@ func play_random():
 	add_child(asp)
 	asp.play()
 	asp.finished.connect(asp.queue_free)
-	print(random_stream.resource_path)
