@@ -401,7 +401,6 @@ sprite_frames = SubResource("SpriteFrames_fct2s")
 animation = &"run"
 
 [node name="Footsteps" type="AudioStreamPlayer" parent="Sprite2D"]
-volume_db = 20.0
 bus = &"SFX"
 script = ExtResource("5_aalta")
 sounds = Array[AudioStream]([ExtResource("6_hnrvr"), ExtResource("7_t1ixc"), ExtResource("8_n3igq"), ExtResource("9_n0ggj"), ExtResource("10_g4anl"), ExtResource("11_5j4sx"), ExtResource("12_255s5"), ExtResource("13_ht0y4")])

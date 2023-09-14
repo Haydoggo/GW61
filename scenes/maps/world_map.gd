@@ -23,7 +23,7 @@ const TILE_PROPERTIES = {
 }
 
 func _use_tile_data_runtime_update(layer: int, coords: Vector2i) -> bool:
-	return layer > 0
+	return not Engine.is_editor_hint() and layer > 0
 
 func _tile_data_runtime_update(layer: int, coords: Vector2i, tile_data: TileData) -> void:
 	tile_data.set_collision_polygons_count(0, 0)
