@@ -5,10 +5,7 @@ extends Polygon2D
 @export var zoom_in_time = 1.0
 @export var zoom_out_time = 1.0
 @export var zoom_only = false
-@export_group("Temporary zoom control")
 @export var temporary = false
-@export var linger_duration = 2.0
-@export var can_leave_early = false
 
 @onready var camera = get_viewport().get_camera_2d()
 
@@ -20,7 +17,7 @@ func _ready() -> void:
 
 func zoom_in():
 	var rect = marker.get_global_rect()
-	var zoom = Vector2.ONE * (get_window().size.y / rect.size.y)
+	var zoom = Vector2.ONE * (ProjectSettings.get("display/window/size/viewport_height") / rect.size.y)
 	var t = create_tween()
 	t.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	var targ_pos = rect.position + rect.size/2
@@ -31,10 +28,6 @@ func zoom_in():
 		else:
 			t.tween_property(camera, "external_target_position", targ_pos, zoom_in_time)
 	t.parallel().tween_property(camera, "zoom", zoom, zoom_in_time)
-	if temporary:
-		t.tween_interval(linger_duration)
-		await t.finished
-		zoom_out()
 
 func zoom_out():
 	var t = create_tween()
@@ -48,7 +41,6 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 	camera.target_controller = self
 
 func _on_area_2d_body_exited(_body: Node2D) -> void:
-	if not temporary or can_leave_early:
-		if camera.target_controller == self:
-			zoom_out()
-			camera.target_controller = Player.instance
+	if temporary and camera.target_controller == self:
+		zoom_out()
+		camera.target_controller = Player.instance

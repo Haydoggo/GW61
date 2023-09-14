@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsgrhid0btr8k"]
+[gd_scene load_steps=11 format=3 uid="uid://dsgrhid0btr8k"]
 
 [ext_resource type="Script" path="res://scenes/maps/map_entities/window/window.gd" id="1_x6h5j"]
 [ext_resource type="Texture2D" uid="uid://cakaaiixu7r3h" path="res://scenes/maps/map_entities/window/window.png" id="2_hiohk"]
 [ext_resource type="AudioStream" uid="uid://bavfaexg1a20q" path="res://sound/sfx/shatter.sfxr" id="3_ry4q6"]
+[ext_resource type="Script" path="res://sound/sound_randomiser.gd" id="4_kp1h5"]
+[ext_resource type="AudioStream" uid="uid://cn75fgjtwnf7t" path="res://sound/sfx/SFX_GlassShatter_01.mp3" id="5_8umst"]
+[ext_resource type="AudioStream" uid="uid://ct0kkxkq2g6y5" path="res://sound/sfx/SFX_GlassShatter_02.mp3" id="6_pil3d"]
+[ext_resource type="AudioStream" uid="uid://cvgoefnyd7xa1" path="res://sound/sfx/SFX_GlassShatter_03.mp3" id="7_w87n1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5764"]
 size = Vector2(32, 64)
@@ -48,5 +52,12 @@ scale_amount_curve = SubResource("Curve_sla1m")
 color_initial_ramp = SubResource("Gradient_dp4ni")
 
 [node name="ShatterSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_ry4q6")
 bus = &"SFX"
+script = ExtResource("4_kp1h5")
+sounds = Array[AudioStream]([ExtResource("3_ry4q6")])
+
+[node name="ShatterSFX2" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+bus = &"SFX"
+script = ExtResource("4_kp1h5")
+sounds = Array[AudioStream]([ExtResource("5_8umst"), ExtResource("6_pil3d"), ExtResource("7_w87n1")])

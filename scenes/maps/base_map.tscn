@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cc52ncp4q08yl"]
+[gd_scene load_steps=12 format=3 uid="uid://cc52ncp4q08yl"]
 
 [ext_resource type="TileSet" uid="uid://b6ss61cssx0ly" path="res://scenes/maps/tile_map.tres" id="1_6sxp2"]
 [ext_resource type="Script" path="res://scenes/maps/world_map.gd" id="2_qn174"]
 [ext_resource type="Texture2D" uid="uid://bljxfnq5dxs53" path="res://scenes/maps/platformerPack_industrial_tilesheet.png" id="3_80jil"]
 [ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="3_ym25y"]
+[ext_resource type="Script" path="res://scenes/maps/world_barrier.gd" id="5_syvnl"]
 
 [sub_resource type="Gradient" id="Gradient_82sck"]
 offsets = PackedFloat32Array(0, 0.13382, 0.399027, 0.627737, 1)
@@ -147,6 +148,8 @@ func _ready() -> void:
 		tint_tiles = false
 "
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib1hj"]
+
 [node name="BaseMap" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -191,6 +194,35 @@ polygon = PackedVector2Array(581, -3496, 649, -3478, 985, -3446, 1232, -3523, 12
 scale = Vector2(0.8, 0.8)
 tile_set = ExtResource("1_6sxp2")
 format = 2
+layer_0/name = "Collisions"
+layer_1/name = "SuperForeground"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 20
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Foreground"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 10
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Background"
+layer_3/enabled = true
+layer_3/modulate = Color(1, 1, 1, 1)
+layer_3/y_sort_enabled = false
+layer_3/y_sort_origin = 0
+layer_3/z_index = -10
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = "SuperBackground"
+layer_4/enabled = true
+layer_4/modulate = Color(1, 1, 1, 1)
+layer_4/y_sort_enabled = false
+layer_4/y_sort_origin = 0
+layer_4/z_index = -20
+layer_4/tile_data = PackedInt32Array()
 script = ExtResource("2_qn174")
 
 [node name="DecorativeTileMap" type="TileMap" parent="."]
@@ -209,3 +241,13 @@ layer_1/tile_data = PackedInt32Array()
 script = SubResource("GDScript_s6on4")
 
 [node name="Player" parent="." instance=ExtResource("3_ym25y")]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(16, 2448)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("5_syvnl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_ib1hj")

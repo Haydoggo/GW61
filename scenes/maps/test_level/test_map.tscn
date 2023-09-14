@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds7cl6uqqv27o"]
+[gd_scene load_steps=7 format=3 uid="uid://ds7cl6uqqv27o"]
 
 [ext_resource type="PackedScene" uid="uid://cc52ncp4q08yl" path="res://scenes/maps/base_map.tscn" id="1_xcj8p"]
 [ext_resource type="PackedScene" uid="uid://bcgldu3add1ja" path="res://scenes/maps/map_entities/checkpoint/checkpoint.tscn" id="3_qoo88"]
 [ext_resource type="PackedScene" uid="uid://cofnxquytticg" path="res://scenes/enemies/enemy.tscn" id="3_xgy0q"]
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="4_rb3ri"]
 [ext_resource type="PackedScene" uid="uid://chn6n7stwkldl" path="res://scenes/maps/map_entities/document_pickup/document.tscn" id="5_feeke"]
+[ext_resource type="PackedScene" uid="uid://dh8hnnikphbde" path="res://scenes/maps/map_entities/grapple_node/grapple_node.tscn" id="6_dngmo"]
 
 [node name="BaseMap" instance=ExtResource("1_xcj8p")]
 
@@ -36,3 +37,6 @@ position = Vector2(2659, -678)
 
 [node name="Document4" parent="." index="8" instance=ExtResource("5_feeke")]
 position = Vector2(910, -1415)
+
+[node name="GrappleNode" parent="." index="10" instance=ExtResource("6_dngmo")]
+position = Vector2(-231, -11)

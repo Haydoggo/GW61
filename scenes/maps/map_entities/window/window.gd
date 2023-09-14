@@ -30,11 +30,11 @@ func collide():
 	if abs(Player.instance.velocity.dot(global_transform.x)) > 800:
 		for window in connected_windows:
 			window.shatter()
-		var sfx = $ShatterSFX as AudioStreamPlayer
-		sfx.pitch_scale = randf_range(0.9, 1.1)
-		sfx.reparent(get_tree().root)
-		sfx.play()
-		sfx.finished.connect(sfx.queue_free)
+		for sfx in [$ShatterSFX, $ShatterSFX2]:
+			sfx.pitch_scale = randf_range(0.9, 1.1)
+			sfx.reparent(get_tree().root)
+			sfx.play_random()
+			sfx.finished.connect(sfx.queue_free)
 	
 	
 

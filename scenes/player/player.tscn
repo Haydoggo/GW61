@@ -1,16 +1,25 @@
-[gd_scene load_steps=36 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=45 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
 [ext_resource type="Resource" uid="uid://kl5qqua4pvfg" path="res://scenes/player/movement_params.tres" id="2_gcq0d"]
 [ext_resource type="Texture2D" uid="uid://dg18rnd0vw50m" path="res://scenes/player/grapple.png" id="4_k814l"]
 [ext_resource type="Texture2D" uid="uid://k803t13omhc5" path="res://scenes/player/spritesheet.png" id="4_op2pq"]
 [ext_resource type="Script" path="res://scenes/player/camera.gd" id="5_1g00w"]
+[ext_resource type="Script" path="res://scenes/player/footsteps.gd" id="5_aalta"]
+[ext_resource type="AudioStream" uid="uid://dsbpeajiyd8my" path="res://sound/sfx/SFX_Foostep_01.mp3" id="6_6g4jf"]
 [ext_resource type="Script" path="res://scenes/player/document_indicator.gd" id="6_f0xow"]
 [ext_resource type="Script" path="res://scenes/player/forms_collected_display.gd" id="7_6h0yf"]
+[ext_resource type="AudioStream" uid="uid://rh2dojtgkvv5" path="res://sound/sfx/SFX_Foostep_02.mp3" id="7_nga8i"]
 [ext_resource type="AudioStream" uid="uid://c81703xkd3jrk" path="res://sound/sfx/death.sfxr" id="8_mpvyn"]
+[ext_resource type="AudioStream" uid="uid://dopt4rjw24lfn" path="res://sound/sfx/SFX_Foostep_03.mp3" id="8_oeh1q"]
 [ext_resource type="AudioStream" uid="uid://bgj5awhned4aq" path="res://sound/sfx/grapple_shoot.sfxr" id="9_73u3a"]
+[ext_resource type="AudioStream" uid="uid://v6wi5ivg45qe" path="res://sound/sfx/SFX_Foostep_04.mp3" id="9_cj6dd"]
 [ext_resource type="AudioStream" uid="uid://c52edclj4rftl" path="res://sound/sfx/grapple_hit.sfxr" id="9_o16hn"]
 [ext_resource type="AudioStream" uid="uid://b52mrxg4cy3rw" path="res://sound/sfx/grapple_pull.sfxr" id="10_3hrbu"]
+[ext_resource type="AudioStream" uid="uid://ds56jjgnsukqo" path="res://sound/sfx/SFX_Foostep_05.mp3" id="10_bwqmo"]
+[ext_resource type="AudioStream" uid="uid://skfa5jrwttds" path="res://sound/sfx/SFX_Foostep_06.mp3" id="11_ic0ay"]
+[ext_resource type="AudioStream" uid="uid://cdh01rvkpxxbo" path="res://sound/sfx/SFX_Foostep_07.mp3" id="12_o06po"]
+[ext_resource type="AudioStream" uid="uid://bu8pntk3smgvu" path="res://sound/sfx/SFX_Foostep_08.mp3" id="13_krkx5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ue3p"]
 radius = 16.0
@@ -67,7 +76,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -374,7 +383,13 @@ texture_mode = 1
 position = Vector2(0, -7)
 scale = Vector2(0.44, 0.44)
 sprite_frames = SubResource("SpriteFrames_fct2s")
-animation = &"jump_down"
+animation = &"run"
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="Sprite2D"]
+volume_db = 20.0
+bus = &"SFX"
+script = ExtResource("5_aalta")
+sounds = Array[AudioStream]([ExtResource("6_6g4jf"), ExtResource("7_nga8i"), ExtResource("8_oeh1q"), ExtResource("9_cj6dd"), ExtResource("10_bwqmo"), ExtResource("11_ic0ay"), ExtResource("12_o06po"), ExtResource("13_krkx5")])
 
 [node name="FloorDust" type="GPUParticles2D" parent="."]
 position = Vector2(0, 30)

@@ -1,6 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cw8og54hjiism"]
+[gd_scene load_steps=6 format=3 uid="uid://cw8og54hjiism"]
 
 [ext_resource type="Script" path="res://scenes/menus/settings_menu.gd" id="1_yaq2d"]
+[ext_resource type="AudioStream" uid="uid://bgj5awhned4aq" path="res://sound/sfx/grapple_shoot.sfxr" id="2_nrv2l"]
+
+[sub_resource type="GDScript" id="GDScript_mb5ea"]
+resource_name = "SoundPreview"
+script/source = "extends HSlider
+
+func _value_changed(_new_value: float) -> void:
+	if not %Sound.playing:
+		%Sound.play()
+"
 
 [sub_resource type="InputEventAction" id="InputEventAction_rrqyq"]
 action = &"ui_cancel"
@@ -47,6 +57,7 @@ custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 value = 100.0
+script = SubResource("GDScript_mb5ea")
 
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/HSlider"]
 custom_minimum_size = Vector2(64, 0)
@@ -99,6 +110,7 @@ custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 value = 100.0
+script = SubResource("GDScript_mb5ea")
 
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer3/HSlider"]
 custom_minimum_size = Vector2(64, 0)
@@ -117,5 +129,10 @@ text = "100%"
 layout_mode = 2
 shortcut = SubResource("Shortcut_vy5dm")
 text = "Return"
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_nrv2l")
+bus = &"SFX"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Return" to="." method="_on_return_pressed"]

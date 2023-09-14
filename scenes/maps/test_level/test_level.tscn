@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfqyto00kgjv1"]
+[gd_scene load_steps=8 format=3 uid="uid://cfqyto00kgjv1"]
 
 [ext_resource type="PackedScene" uid="uid://ds7cl6uqqv27o" path="res://scenes/maps/test_level/test_map.tscn" id="3_0i1la"]
 [ext_resource type="PackedScene" uid="uid://dgbe0iv128eau" path="res://scenes/maps/test_level/test_map1.tscn" id="3_8f3wu"]
 [ext_resource type="Script" path="res://scenes/maps/test_level/map_selector.gd" id="3_vitu8"]
 [ext_resource type="PackedScene" uid="uid://pb4rl4f8kfyp" path="res://scenes/maps/test_level/mechanics_test.tscn" id="4_lgu57"]
+[ext_resource type="PackedScene" uid="uid://b3j7sxsumwrjy" path="res://scenes/maps/tutorial.tscn" id="5_bmgtu"]
 [ext_resource type="AudioStream" uid="uid://cr4jsjg37plck" path="res://sound/music/Crushing_Weight.mp3" id="5_lfhql"]
 [ext_resource type="PackedScene" uid="uid://dxb4r5t7dk0lr" path="res://scenes/menus/pause_menu.tscn" id="6_uagpu"]
 
@@ -15,9 +16,10 @@
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_vitu8")
-maps = Array[PackedScene]([ExtResource("3_0i1la"), ExtResource("3_8f3wu"), ExtResource("4_lgu57")])
+maps = Array[PackedScene]([ExtResource("3_0i1la"), ExtResource("3_8f3wu"), ExtResource("4_lgu57"), ExtResource("5_bmgtu")])
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("5_lfhql")
 autoplay = true
 bus = &"Music"

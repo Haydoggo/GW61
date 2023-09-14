@@ -4,7 +4,7 @@ const default_zoom = Vector2(0.5, 0.5)
 #to be controlled externally by things like cutscenes
 var external_target_position : Vector2
 var target_position : Vector2
-var target_selection = 1.0 # range from 0 to 1 to lerp ext_targ to targ
+@export var target_selection = 1.0 # range from 0 to 1 to lerp ext_targ to targ
 @onready var target_controller = Player.instance
 
 func _ready() -> void:

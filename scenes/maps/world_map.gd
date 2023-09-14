@@ -1,3 +1,4 @@
+@tool
 class_name WorldMap extends TileMap
 
 enum TileProperty {
@@ -20,6 +21,17 @@ const TILE_PROPERTIES = {
 	Vector3i(9,2,2) : TileProperty.GRAPPLE | TileProperty.DEATH,
 	Vector3i(9,3,2) : TileProperty.GRAPPLE | TileProperty.DEATH,
 }
+
+@export var tint_tiles = false:
+	set(v):
+		tint_tiles = v
+		var col = Color.GREEN if tint_tiles else Color.WHITE
+		for l in [1,2,3,4]:
+			set("layer_%d/modulate"%l, col)
+
+func _ready() -> void:
+	if not Engine.is_editor_hint():
+		tint_tiles = false
 
 func global_to_atlas_coords(global_p : Vector2) -> Vector2i:
 	var coords = local_to_map(to_local(global_p))

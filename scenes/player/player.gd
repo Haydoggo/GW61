@@ -9,6 +9,13 @@ static var instance : Player
 @export_category("Movement Parameters")
 ## Movement Parameters
 @export var mp : MovementParams
+@export var can_grapple = true:
+	set(v):
+		can_grapple = v
+		if not is_node_ready():
+			await ready
+		grapple_indicator.visible = can_grapple
+		
 
 @onready var grapple_ray: RayCast2D = $GrappleRay
 @onready var grapple_line: Line2D = $GrappleLine
@@ -50,7 +57,10 @@ var highlighted_obj = null
 
 func _init() -> void:
 	instance = self
-	
+
+func _ready() -> void:
+	can_grapple = can_grapple
+
 func _physics_process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_HOME):
 		global_position = get_global_mouse_position()
@@ -74,7 +84,7 @@ func _physics_process(delta: float) -> void:
 				if map.get_properties(p) & WorldMap.TileProperty.JUMP:
 					velocity -= Vector2.UP.rotated(-PI/2*map.get_alt_index(p)) * mp.jump_speed * 2
 				if map.get_properties(p) & WorldMap.TileProperty.DEATH:
-					$AnimationPlayer.play("die")
+					die()
 	
 	# Preemptive Collision check:
 	shape_cast.target_position = velocity * delta
@@ -115,7 +125,7 @@ func _physics_process(delta: float) -> void:
 #		$Sprite2D.position.y = 0
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("grapple"):
+	if event.is_action_pressed("grapple") and can_grapple:
 		for i in $UI/VBoxContainer/SpinBox.value:
 			await get_tree().physics_frame
 		if grapple_ray.get_collider() and grapple_ray.get_collider().has_method("grapple"):
@@ -267,6 +277,9 @@ func retract_grapple():
 	grapple_released.disconnect(set_canceled)
 	if canceled_retraction == [false]:
 		retraction_finised.emit()
+
+func die():
+	$AnimationPlayer.play("die")
 
 func respawn():
 	is_grappling = false
