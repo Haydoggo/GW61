@@ -253,101 +253,96 @@ position = Vector2(5570, -2634)
 attack_angle = 0.708204
 attack_power = 3971.83
 
-[node name="Enemy63" parent="Enemies" index="62" instance=ExtResource("2_hfx7n")]
-position = Vector2(1763, -7498)
-attack_angle = -0.375796
-attack_power = 4820.04
-
-[node name="Enemy64" parent="Enemies" index="63" instance=ExtResource("2_hfx7n")]
+[node name="Enemy64" parent="Enemies" index="62" instance=ExtResource("2_hfx7n")]
 position = Vector2(-17075, -10519)
 attack_power = 4042.25
 
-[node name="Enemy65" parent="Enemies" index="64" instance=ExtResource("2_hfx7n")]
+[node name="Enemy65" parent="Enemies" index="63" instance=ExtResource("2_hfx7n")]
 position = Vector2(-16975, -10724)
 
-[node name="Enemy66" parent="Enemies" index="65" instance=ExtResource("2_hfx7n")]
+[node name="Enemy66" parent="Enemies" index="64" instance=ExtResource("2_hfx7n")]
 position = Vector2(-17078, -10927)
 
-[node name="Enemy67" parent="Enemies" index="66" instance=ExtResource("2_hfx7n")]
+[node name="Enemy67" parent="Enemies" index="65" instance=ExtResource("2_hfx7n")]
 position = Vector2(-17079, -11134)
 
-[node name="Enemy68" parent="Enemies" index="67" instance=ExtResource("2_hfx7n")]
+[node name="Enemy68" parent="Enemies" index="66" instance=ExtResource("2_hfx7n")]
 position = Vector2(-16667, -10723)
 
-[node name="Enemy69" parent="Enemies" index="68" instance=ExtResource("2_hfx7n")]
+[node name="Enemy69" parent="Enemies" index="67" instance=ExtResource("2_hfx7n")]
 position = Vector2(-16668, -10519)
 
-[node name="Enemy70" parent="Enemies" index="69" instance=ExtResource("2_hfx7n")]
+[node name="Enemy70" parent="Enemies" index="68" instance=ExtResource("2_hfx7n")]
 position = Vector2(-16629, -10928)
 attack_angle = -0.818796
 attack_power = 4253.52
 
-[node name="Enemy71" parent="Enemies" index="70" instance=ExtResource("2_hfx7n")]
+[node name="Enemy71" parent="Enemies" index="69" instance=ExtResource("2_hfx7n")]
 position = Vector2(-16814, -11135)
 attack_angle = -0.699796
 attack_power = 10000.0
 
-[node name="Enemy72" parent="Enemies" index="71" instance=ExtResource("2_hfx7n")]
+[node name="Enemy72" parent="Enemies" index="70" instance=ExtResource("2_hfx7n")]
 position = Vector2(-354, -11287)
 attack_angle = 1.3942
 attack_power = 5521.13
 
-[node name="Enemy73" parent="Enemies" index="72" instance=ExtResource("2_hfx7n")]
+[node name="Enemy73" parent="Enemies" index="71" instance=ExtResource("2_hfx7n")]
 position = Vector2(-356, -11491)
 attack_angle = 1.3942
 attack_power = 5521.13
 
-[node name="Enemy74" parent="Enemies" index="73" instance=ExtResource("2_hfx7n")]
+[node name="Enemy74" parent="Enemies" index="72" instance=ExtResource("2_hfx7n")]
 position = Vector2(-354, -11696)
 attack_angle = 1.3942
 attack_power = 5521.13
 
-[node name="Enemy75" parent="Enemies" index="74" instance=ExtResource("2_hfx7n")]
+[node name="Enemy75" parent="Enemies" index="73" instance=ExtResource("2_hfx7n")]
 position = Vector2(-353, -11901)
 attack_angle = 1.3942
 attack_power = 5521.13
 
-[node name="Enemy76" parent="Enemies" index="75" instance=ExtResource("2_hfx7n")]
+[node name="Enemy76" parent="Enemies" index="74" instance=ExtResource("2_hfx7n")]
 position = Vector2(-355, -12106)
 attack_angle = 0.583204
 attack_power = 7633.8
 
-[node name="Enemy77" parent="Enemies" index="76" instance=ExtResource("2_hfx7n")]
+[node name="Enemy77" parent="Enemies" index="75" instance=ExtResource("2_hfx7n")]
 position = Vector2(-15268, -17018)
 attack_angle = 0.885204
 attack_power = 3971.83
 
-[node name="Enemy78" parent="Enemies" index="77" instance=ExtResource("2_hfx7n")]
+[node name="Enemy78" parent="Enemies" index="76" instance=ExtResource("2_hfx7n")]
 position = Vector2(-18477, -12978)
 attack_angle = 0.796204
 attack_power = 4253.52
 
-[node name="Enemy79" parent="Enemies" index="78" instance=ExtResource("2_hfx7n")]
+[node name="Enemy79" parent="Enemies" index="77" instance=ExtResource("2_hfx7n")]
 position = Vector2(-18478, -13183)
 attack_angle = 0.796204
 attack_power = 4253.52
 
-[node name="Enemy80" parent="Enemies" index="79" instance=ExtResource("2_hfx7n")]
+[node name="Enemy80" parent="Enemies" index="78" instance=ExtResource("2_hfx7n")]
 position = Vector2(-18476, -13389)
 attack_angle = 0.796204
 attack_power = 4253.52
 
-[node name="Enemy81" parent="Enemies" index="80" instance=ExtResource("2_hfx7n")]
+[node name="Enemy81" parent="Enemies" index="79" instance=ExtResource("2_hfx7n")]
 position = Vector2(-18476, -13591)
 attack_angle = 0.796204
 attack_power = 4253.52
 
-[node name="Enemy82" parent="Enemies" index="81" instance=ExtResource("2_hfx7n")]
+[node name="Enemy82" parent="Enemies" index="80" instance=ExtResource("2_hfx7n")]
 position = Vector2(-18476, -13798)
 attack_angle = 0.796204
 attack_power = 4253.52
 
-[node name="Enemy83" parent="Enemies" index="82" instance=ExtResource("2_hfx7n")]
+[node name="Enemy83" parent="Enemies" index="81" instance=ExtResource("2_hfx7n")]
 position = Vector2(5705, -10315)
 attack_angle = -0.729796
 attack_power = 4464.79
 
-[node name="Enemy84" parent="Enemies" index="83" instance=ExtResource("2_hfx7n")]
+[node name="Enemy84" parent="Enemies" index="82" instance=ExtResource("2_hfx7n")]
 position = Vector2(-3516, -14148)
 
 [node name="Documents" type="Node2D" parent="." index="5"]
