@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://b6ss61cssx0ly"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://b6ss61cssx0ly"]
 
 [ext_resource type="Texture2D" uid="uid://dvec5pfpv6y4h" path="res://scenes/maps/tileset.png" id="1_pwyub"]
 [ext_resource type="PackedScene" uid="uid://dsgrhid0btr8k" path="res://scenes/maps/map_entities/window/window.tscn" id="2_h4h7g"]
 [ext_resource type="Texture2D" uid="uid://bljxfnq5dxs53" path="res://scenes/maps/platformerPack_industrial_tilesheet.png" id="3_lfrxg"]
+[ext_resource type="PackedScene" uid="uid://bf0jm2y8y5f84" path="res://scenes/maps/map_entities/window/window_sideways.tscn" id="3_n1s37"]
 [ext_resource type="Texture2D" uid="uid://bi4ecghtpu174" path="res://scenes/maps/concrete.png" id="4_wo4b8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8truj"]
@@ -111,6 +112,7 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_r4sho"]
 resource_name = "Dynamic"
 scenes/1/scene = ExtResource("2_h4h7g")
+scenes/2/scene = ExtResource("3_n1s37")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qtpy"]
 resource_name = "Static"
@@ -238,11 +240,21 @@ texture_region_size = Vector2i(64, 64)
 5:3/0 = 0
 5:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:3/0/physics_layer_0/angular_velocity = 0.0
+6:3/next_alternative_id = 4
 6:3/0 = 0
 6:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:3/0/physics_layer_0/angular_velocity = 0.0
 6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 0, -32, 0)
 6:3/0/physics_layer_0/polygon_0/one_way = true
+6:3/1 = 1
+6:3/1/transpose = true
+6:3/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:3/1/physics_layer_0/angular_velocity = 0.0
+6:3/2 = 2
+6:3/2/flip_h = true
+6:3/2/transpose = true
+6:3/2/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:3/2/physics_layer_0/angular_velocity = 0.0
 7:4/0 = 0
 7:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:4/0/physics_layer_0/angular_velocity = 0.0
@@ -374,16 +386,36 @@ texture_region_size = Vector2i(64, 64)
 5:4/0 = 0
 5:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:4/0/physics_layer_0/angular_velocity = 0.0
+7:3/next_alternative_id = 3
 7:3/0 = 0
 7:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:3/0/physics_layer_0/angular_velocity = 0.0
 7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 0, -32, 0)
 7:3/0/physics_layer_0/polygon_0/one_way = true
+7:3/1 = 1
+7:3/1/transpose = true
+7:3/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:3/1/physics_layer_0/angular_velocity = 0.0
+7:3/2 = 2
+7:3/2/flip_h = true
+7:3/2/transpose = true
+7:3/2/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:3/2/physics_layer_0/angular_velocity = 0.0
+8:3/next_alternative_id = 3
 8:3/0 = 0
 8:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:3/0/physics_layer_0/angular_velocity = 0.0
 8:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 0, -32, 0)
 8:3/0/physics_layer_0/polygon_0/one_way = true
+8:3/1 = 1
+8:3/1/transpose = true
+8:3/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+8:3/1/physics_layer_0/angular_velocity = 0.0
+8:3/2 = 2
+8:3/2/flip_h = true
+8:3/2/transpose = true
+8:3/2/physics_layer_0/linear_velocity = Vector2(0, 0)
+8:3/2/physics_layer_0/angular_velocity = 0.0
 9:3/0 = 0
 9:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:3/0/physics_layer_0/angular_velocity = 0.0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf0jm2y8y5f84"]
+
+[ext_resource type="PackedScene" uid="uid://dsgrhid0btr8k" path="res://scenes/maps/map_entities/window/window.tscn" id="1_wwp0n"]
+
+[node name="WindowSideways" instance=ExtResource("1_wwp0n")]
+rotation = 1.5708

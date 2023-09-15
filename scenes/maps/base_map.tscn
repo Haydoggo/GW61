@@ -158,10 +158,10 @@ func _ready() -> void:
 scroll_ignore_camera_zoom = true
 
 [node name="BackSky" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(2304, 0)
+motion_mirroring = Vector2(2304, 2000)
 
 [node name="TextureRect" type="ColorRect" parent="ParallaxBackground/BackSky"]
-offset_right = 2337.0
+offset_right = 2304.0
 offset_bottom = 2000.0
 color = Color(0, 0, 0, 1)
 
