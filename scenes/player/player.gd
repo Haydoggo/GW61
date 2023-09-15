@@ -8,6 +8,10 @@ static var instance : Player
 
 @export_category("Movement Parameters")
 ## Movement Parameters
+@export var input_enabled = true:
+	set(v):
+		input_enabled = v
+		set_process_unhandled_input(input_enabled)
 @export var mp : MovementParams
 @export var can_grapple = true:
 	set(v):
@@ -62,7 +66,7 @@ func _ready() -> void:
 	can_grapple = can_grapple
 
 func _physics_process(delta: float) -> void:
-	if Input.is_key_pressed(KEY_HOME):
+	if Input.is_key_pressed(KEY_HOME) and OS.is_debug_build():
 		global_position = get_global_mouse_position()
 	
 	player_movement(delta)
@@ -151,8 +155,9 @@ func _draw() -> void:
 	draw_arc(Vector2(0,0), mp.grapple_range, 0, TAU, 100, Color.WHITE)
 
 func player_movement(delta: float) -> void:
+	
 	# Walking + friction
-	var direction := Input.get_axis("move_left", "move_right")
+	var direction := Input.get_axis("move_left", "move_right") * int(input_enabled)
 	$FloorDust.emitting = false
 	var current_time = Time.get_ticks_msec()/1000.0
 	if is_on_floor():
@@ -173,7 +178,7 @@ func player_movement(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, mp.floor_friction*delta)
 		
 		# Player slide action
-		if Input.is_action_pressed("slide") and abs(velocity.x) > mp.min_slide_speed:
+		if Input.is_action_pressed("slide") and abs(velocity.x) > mp.min_slide_speed and input_enabled:
 			is_sliding = true
 		if abs(velocity.x) < mp.min_slide_speed:
 			is_sliding = false
@@ -207,7 +212,7 @@ func player_movement(delta: float) -> void:
 					$LeftWallDust.emitting = true
 	
 	# Jumping
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and input_enabled:
 		if is_on_floor() or (current_time - time_last_on_floor) < mp.jump_buffer_time:
 			time_last_on_floor = 0.0
 			velocity.y = mp.jump_speed

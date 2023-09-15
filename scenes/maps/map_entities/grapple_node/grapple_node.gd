@@ -4,7 +4,7 @@ extends Area2D
 var highlighted = false :
 	set(v):
 		highlighted = v
-		$Highlight.visible = highlighted
+		$Highlight.visible = highlighted and player.can_grapple
 
 var attached = false:
 	set(v):

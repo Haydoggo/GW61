@@ -1,6 +1,6 @@
 extends Camera2D
 
-const default_zoom = Vector2(0.5, 0.5)
+@export var default_zoom = Vector2(0.5, 0.5)
 #to be controlled externally by things like cutscenes
 var external_target_position : Vector2
 var target_position : Vector2

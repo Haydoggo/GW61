@@ -1,7 +1,9 @@
 extends Polygon2D
 
+signal activated()
 
 @export var enabled = true
+@export var oneshot = false
 @export var marker : CanvasItem
 @export var visible_in_game = false
 @export var zoom_in_time = 1.0
@@ -18,6 +20,7 @@ func _ready() -> void:
 
 
 func zoom_in():
+	activated.emit()
 	var rect = marker.get_global_rect()
 	var zoom = Vector2.ONE * (ProjectSettings.get("display/window/size/viewport_height") / rect.size.y)
 	var t = create_tween()
@@ -40,6 +43,8 @@ func zoom_out():
 func _on_area_2d_body_entered(_body: Node2D) -> void:
 	if enabled:
 		await get_tree().process_frame
+		if oneshot:
+			enabled = false
 		zoom_in()
 		camera.target_controller = self
 
