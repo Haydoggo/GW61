@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://chn6n7stwkldl"]
 
 [ext_resource type="Script" path="res://scenes/maps/map_entities/document_pickup/document.gd" id="1_6pgai"]
-[ext_resource type="AudioStream" uid="uid://15gsjg0dwfqn" path="res://sound/sfx/pickup.sfxr" id="2_qh1df"]
+[ext_resource type="AudioStream" uid="uid://b2hsfdn2owkjo" path="res://sound/sfx/pickup.sfxr" id="2_qh1df"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_suj8m"]
 radius = 16.0
