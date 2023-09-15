@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cp5m83j2p861p" path="res://scenes/enemies/enemy.png" id="1_h47mf"]
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_q4bpl"]
 [ext_resource type="Script" path="res://scenes/enemies/attack_visualiser.gd" id="3_l85hy"]
-[ext_resource type="AudioStream" uid="uid://bvjrp6pk77i0y" path="res://sound/sfx/hit.sfxr" id="4_gckjl"]
+[ext_resource type="AudioStream" uid="uid://cj5pv6mq501dr" path="res://sound/sfx/hit.sfxr" id="4_gckjl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1nxl"]
 radius = 16.0
