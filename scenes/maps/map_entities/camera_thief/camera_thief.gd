@@ -27,11 +27,11 @@ func zoom_in():
 	t.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	var targ_pos = rect.position + rect.size/2
 	if not zoom_only:
-		if camera.target_controller == Player.instance:
+		if camera.target_controller != Player.instance and not camera.target_controller.zoom_only:
+			t.tween_property(camera, "external_target_position", targ_pos, zoom_in_time)
+		else:
 			camera.external_target_position = targ_pos
 			t.tween_property(camera, "target_selection", 0.0, zoom_in_time)
-		else:
-			t.tween_property(camera, "external_target_position", targ_pos, zoom_in_time)
 	t.parallel().tween_property(camera, "zoom", zoom, zoom_in_time)
 
 func zoom_out():
