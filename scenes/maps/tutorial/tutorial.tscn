@@ -398,20 +398,18 @@ text = "Jump while pressing against
 a wall to jump off it"
 horizontal_alignment = 1
 
-[node name="CanvasGroup" type="CanvasGroup" parent="Hints/WallJumpHint" index="1"]
-self_modulate = Color(0, 0.780392, 0.176471, 0.160784)
-z_index = -5
-
-[node name="Line2D" type="Line2D" parent="Hints/WallJumpHint/CanvasGroup" index="0"]
+[node name="Line2D" type="Line2D" parent="Hints/WallJumpHint" index="1"]
+modulate = Color(0.152941, 0.294118, 0.2, 1)
+z_index = -10
 points = PackedVector2Array(272, 220, 281, 200, 296, 172, 315, 146, 335, 122, 355, 106, 384, 85, 412, 71, 441, 61, 482, 53, 474, 21, 458, -11, 440, -45, 407, -72, 378, -89, 334, -106, 297, -113, 257, -123, 223, -125, 189, -125)
 
-[node name="Polygon2D" type="Polygon2D" parent="Hints/WallJumpHint/CanvasGroup/Line2D" index="0"]
+[node name="Polygon2D" type="Polygon2D" parent="Hints/WallJumpHint/Line2D" index="0"]
 polygon = PackedVector2Array(264, 241, 210, 237, 246, 229, 224, 201, 250, 212, 253, 180, 268, 203, 293, 176, 285, 212, 335, 199, 292, 225, 334, 234)
 
-[node name="Polygon2D2" type="Polygon2D" parent="Hints/WallJumpHint/CanvasGroup/Line2D" index="1"]
+[node name="Polygon2D2" type="Polygon2D" parent="Hints/WallJumpHint/Line2D" index="1"]
 polygon = PackedVector2Array(497, 48, 490, -8, 485, 22, 466, -3, 471, 34, 446, 19, 456, 45, 428, 52, 457, 62, 438, 80, 473, 70, 461, 102, 488, 78)
 
-[node name="Polygon2D3" type="Polygon2D" parent="Hints/WallJumpHint/CanvasGroup/Line2D" index="2"]
+[node name="Polygon2D3" type="Polygon2D" parent="Hints/WallJumpHint/Line2D" index="2"]
 polygon = PackedVector2Array(172, -130, 224, -154, 206, -124, 223, -98)
 
 [node name="CameraZones" type="Node2D" parent="." index="11"]
