@@ -28,4 +28,8 @@ visible = false
 points = PackedVector2Array(-5.00003, -78, 42, -56, 67, -3, 53, 48, 8, 67, -54, 55, -74, 0, -54, -49, -4, -78)
 default_color = Color(0, 0.796078, 0.168627, 1)
 
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
