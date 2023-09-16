@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuxl5ea6n1kfj"]
+
+[ext_resource type="Script" path="res://scenes/maps/map_entities/deco_chain.gd" id="1_rcuik"]
+[ext_resource type="Texture2D" uid="uid://dcudb4s2pvmxo" path="res://scenes/maps/map_entities/textures/chain.png" id="1_tjo8o"]
+
+[sub_resource type="Curve2D" id="Curve2D_kvjgd"]
+resource_local_to_scene = true
+bake_interval = 20.0
+
+[node name="DecoChain" type="Path2D"]
+curve = SubResource("Curve2D_kvjgd")
+script = ExtResource("1_rcuik")
+
+[node name="Line2D" type="Line2D" parent="."]
+modulate = Color(0.305882, 0.305882, 0.305882, 1)
+z_index = -10
+texture_repeat = 2
+width = 128.0
+texture = ExtResource("1_tjo8o")
+texture_mode = 1
