@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgbe0iv128eau"]
+[gd_scene load_steps=7 format=3 uid="uid://dgbe0iv128eau"]
 
 [ext_resource type="PackedScene" uid="uid://cc52ncp4q08yl" path="res://scenes/maps/base_map.tscn" id="1_hqhlo"]
 [ext_resource type="PackedScene" uid="uid://cofnxquytticg" path="res://scenes/enemies/enemy.tscn" id="2_hfx7n"]
 [ext_resource type="PackedScene" uid="uid://chn6n7stwkldl" path="res://scenes/maps/map_entities/document_pickup/document.tscn" id="3_rqkl8"]
 [ext_resource type="PackedScene" uid="uid://dh8hnnikphbde" path="res://scenes/maps/map_entities/grapple_node/grapple_node.tscn" id="4_2vxbf"]
+[ext_resource type="PackedScene" uid="uid://hkfl3h4cmhjn" path="res://scenes/maps/map_entities/camera_thief/camera_thief.tscn" id="5_kbpiy"]
+[ext_resource type="Script" path="res://scenes/maps/map_entities/camera_thief/camera_area.gd" id="6_bfguc"]
 
 [node name="BaseMap" instance=ExtResource("1_hqhlo")]
 
@@ -300,7 +302,7 @@ position = Vector2(5451, -14832)
 position = Vector2(-3612, -14108)
 
 [node name="Document8" parent="Documents" index="7" instance=ExtResource("3_rqkl8")]
-position = Vector2(-76, -21174)
+position = Vector2(420, -21180)
 
 [node name="GrappleNodes" type="Node2D" parent="." index="6"]
 
@@ -411,3 +413,22 @@ position = Vector2(5905, -14325)
 
 [node name="GrappleNode2" parent="." index="10" instance=ExtResource("4_2vxbf")]
 position = Vector2(5032, -4883)
+
+[node name="CameraThief" parent="." index="11" node_paths=PackedStringArray("marker") instance=ExtResource("5_kbpiy")]
+position = Vector2(130, -21353)
+polygon = PackedVector2Array(-75, -84, -80, 206, 632, 202, 636, -95, 276, -93)
+marker = NodePath("CameraThiefRespawn")
+
+[node name="CameraThiefRespawn" type="AspectRatioContainer" parent="CameraThief" index="4"]
+offset_left = -110.0
+offset_top = -196.0
+offset_right = 677.0
+offset_bottom = 265.0
+ratio = 1.7778
+script = ExtResource("6_bfguc")
+zoom = 1.46009
+metadata/_edit_group_ = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="CameraThief/CameraThiefRespawn" index="0"]
+layout_mode = 2
+border_width = 3.0
