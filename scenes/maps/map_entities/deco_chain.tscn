@@ -5,7 +5,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_kvjgd"]
 resource_local_to_scene = true
-bake_interval = 20.0
+bake_interval = 32.0
 
 [node name="DecoChain" type="Path2D"]
 curve = SubResource("Curve2D_kvjgd")

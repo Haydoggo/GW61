@@ -33,6 +33,8 @@ func zoom_in():
 			camera.external_target_position = targ_pos
 			t.tween_property(camera, "target_selection", 0.0, zoom_in_time)
 	t.parallel().tween_property(camera, "zoom", zoom, zoom_in_time)
+	if not temporary:
+		camera.default_zoom = zoom
 
 func zoom_out():
 	var t = create_tween()

@@ -244,12 +244,12 @@ script = SubResource("GDScript_s6on4")
 
 [node name="Player" parent="." instance=ExtResource("3_ym25y")]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="DeathBarrier" type="Area2D" parent="."]
 position = Vector2(16, 2448)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("5_syvnl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBarrier"]
 shape = SubResource("WorldBoundaryShape2D_ib1hj")

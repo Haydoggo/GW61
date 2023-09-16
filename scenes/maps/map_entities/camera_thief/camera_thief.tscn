@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://hkfl3h4cmhjn"]
+[gd_scene load_steps=5 format=3 uid="uid://hkfl3h4cmhjn"]
 
 [ext_resource type="Script" path="res://scenes/maps/map_entities/camera_thief/camera_thief.gd" id="1_drayi"]
 [ext_resource type="Script" path="res://scenes/maps/map_entities/helper_tool.gd" id="2_1ss0e"]
+[ext_resource type="Script" path="res://scenes/maps/map_entities/camera_thief/camera_area.gd" id="3_sf7u2"]
 
 [sub_resource type="Gradient" id="Gradient_5yv6x"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
@@ -29,9 +30,10 @@ gradient = SubResource("Gradient_5yv6x")
 
 [node name="CameraArea" type="AspectRatioContainer" parent="."]
 visible = false
-offset_right = 62.0
-offset_bottom = 57.0
+offset_right = 1152.0
+offset_bottom = 648.0
 ratio = 1.7778
+script = ExtResource("3_sf7u2")
 metadata/_edit_group_ = true
 
 [node name="ReferenceRect" type="ReferenceRect" parent="CameraArea"]
