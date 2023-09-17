@@ -16,7 +16,7 @@
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_vitu8")
-maps = Array[PackedScene]([ExtResource("3_0i1la"), ExtResource("3_8f3wu"), ExtResource("4_lgu57"), ExtResource("5_bmgtu")])
+maps = Array[PackedScene]([ExtResource("3_8f3wu"), ExtResource("3_0i1la"), ExtResource("4_lgu57"), ExtResource("5_bmgtu")])
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
