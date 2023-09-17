@@ -51,6 +51,10 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_18k4o")
 text = "Resume"
 
+[node name="Respawn" type="Button" parent="MarginContainer/PauseMenuContent/VBoxContainer"]
+layout_mode = 2
+text = "Respawn"
+
 [node name="Settings" type="Button" parent="MarginContainer/PauseMenuContent/VBoxContainer"]
 layout_mode = 2
 text = "Settings
@@ -65,6 +69,7 @@ visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/PauseMenuContent/VBoxContainer/Resume" to="." method="unpause"]
+[connection signal="pressed" from="MarginContainer/PauseMenuContent/VBoxContainer/Respawn" to="." method="_on_respawn_pressed"]
 [connection signal="pressed" from="MarginContainer/PauseMenuContent/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/PauseMenuContent/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="return_to_previous" from="MarginContainer/SettingsMenuContent" to="." method="_on_settings_menu_return_to_previous"]

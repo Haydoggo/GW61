@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bvd5c508fvhdx"]
+[gd_scene load_steps=51 format=3 uid="uid://bvd5c508fvhdx"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p55oq"]
 [ext_resource type="Resource" uid="uid://kl5qqua4pvfg" path="res://scenes/player/movement_params.tres" id="2_gcq0d"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://bx5r2nd0sp04f" path="res://sound/sfx/SFX_Footstep_07.mp3" id="12_255s5"]
 [ext_resource type="AudioStream" uid="uid://bbfq1xbg34w8x" path="res://sound/sfx/SFX_Footstep_08.mp3" id="13_ht0y4"]
 [ext_resource type="Script" path="res://scenes/player/zoom_effect.gd" id="17_frb6g"]
+[ext_resource type="AudioStream" uid="uid://bygplcgmdf8qy" path="res://sound/sfx/SFX_SpeedWoosh.mp3" id="19_bofdt"]
 [ext_resource type="AudioStream" uid="uid://dla0ha3flex3e" path="res://sound/sfx/SFX_Grapple.mp3" id="19_f5y1i"]
 [ext_resource type="Script" path="res://sound/sound_randomiser.gd" id="20_awp6r"]
 [ext_resource type="AudioStream" uid="uid://wc0aa7acidcx" path="res://sound/sfx/SFX_Jump_01.mp3" id="21_mk7ob"]
@@ -486,6 +487,10 @@ libraries = {
 
 [node name="DeathSFX" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
+
+[node name="WooshSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_bofdt")
+autoplay = true
 
 [node name="GrappleHitSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_o16hn")

@@ -35,3 +35,9 @@ func _on_settings_menu_return_to_previous() -> void:
 func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
 	unpause()
+
+
+func _on_respawn_pressed() -> void:
+	if Player.instance:
+		Player.instance.die()
+		unpause()

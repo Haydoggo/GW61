@@ -5,6 +5,8 @@ extends Control
 		intensity = v
 		modulate.a = intensity
 @export var spike_count = 64
+@onready var woosh_sfx: AudioStreamPlayer = $"../../WooshSFX"
+
 @onready var spike_templates = get_children()
 
 var spikes = []
@@ -18,8 +20,9 @@ func _ready() -> void:
 		spike.show()
 		spikes.append(spike)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	intensity = clamp(inverse_lerp(1000, 5000, Player.instance.velocity.length()), 0, 1)
+	woosh_sfx.volume_db = linear_to_db(move_toward(db_to_linear(woosh_sfx.volume_db), min(intensity*2.0, 1), delta * 6))
 	if intensity == 0: return
 	var ratio = size.x/size.y
 	for spike in spikes:
