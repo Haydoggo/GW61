@@ -5,10 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://ds7cl6uqqv27o" path="res://scenes/maps/test_level/test_map.tscn" id="3_deayu"]
 [ext_resource type="PackedScene" uid="uid://pb4rl4f8kfyp" path="res://scenes/maps/test_level/mechanics_test.tscn" id="4_2smvf"]
 [ext_resource type="PackedScene" uid="uid://b3j7sxsumwrjy" path="res://scenes/maps/test_level/tutorial.tscn" id="5_ksq3s"]
-[ext_resource type="AudioStream" uid="uid://cr4jsjg37plck" path="res://sound/music/Crushing_Weight.mp3" id="6_tj5xd"]
+[ext_resource type="AudioStream" uid="uid://lr3plpqnhl1a" path="res://sound/music/MUS_MainLoop.mp3" id="6_81kjh"]
 [ext_resource type="PackedScene" uid="uid://dxb4r5t7dk0lr" path="res://scenes/menus/pause_menu.tscn" id="7_0tc77"]
 
-[node name="LevelManager" type="Node2D"]
+[node name="LevelManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -20,7 +26,7 @@ maps = Array[PackedScene]([ExtResource("2_selhs"), ExtResource("3_deayu"), ExtRe
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("6_tj5xd")
+stream = ExtResource("6_81kjh")
 volume_db = -4.0
 autoplay = true
 bus = &"Music"

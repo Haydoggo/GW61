@@ -19,3 +19,7 @@ func _on_settings_return_to_previous() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_play_pressed() -> void:
+	get_tree().current_scene.get_node("CanvasLayer/VBoxContainer").change_to_map.call_deferred(preload("res://scenes/maps/game_map.tscn"))

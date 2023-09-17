@@ -33,7 +33,7 @@ func _on_settings_menu_return_to_previous() -> void:
 
 
 func _on_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
+	get_tree().current_scene.get_node("CanvasLayer/VBoxContainer").change_to_map.call_deferred(preload("res://scenes/menus/main_menu.tscn"))
 	unpause()
 
 

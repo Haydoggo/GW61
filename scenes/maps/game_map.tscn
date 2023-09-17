@@ -320,7 +320,7 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib1hj"]
 
-[sub_resource type="Curve2D" id="Curve2D_wljj1"]
+[sub_resource type="Curve2D" id="Curve2D_aygjg"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -328,7 +328,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_h7slg"]
+[sub_resource type="Curve2D" id="Curve2D_a3b36"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -336,7 +336,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_uwyoq"]
+[sub_resource type="Curve2D" id="Curve2D_dkyim"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -344,7 +344,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_ibg0w"]
+[sub_resource type="Curve2D" id="Curve2D_r5su6"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -352,7 +352,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_xfcyd"]
+[sub_resource type="Curve2D" id="Curve2D_pq8l5"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -1576,23 +1576,23 @@ position = Vector2(-8655.61, 3481.6)
 
 [node name="DecoChain" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(4156.35, -390.137)
-curve = SubResource("Curve2D_wljj1")
+curve = SubResource("Curve2D_aygjg")
 
 [node name="DecoChain2" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(4890.73, -1112.5)
-curve = SubResource("Curve2D_h7slg")
+curve = SubResource("Curve2D_a3b36")
 
 [node name="DecoChain3" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(6813.38, -1367.45)
-curve = SubResource("Curve2D_uwyoq")
+curve = SubResource("Curve2D_dkyim")
 
 [node name="DecoChain4" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(7455.54, -1441.31)
-curve = SubResource("Curve2D_ibg0w")
+curve = SubResource("Curve2D_r5su6")
 
 [node name="DecoChain5" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(8649.67, -1278.97)
-curve = SubResource("Curve2D_xfcyd")
+curve = SubResource("Curve2D_pq8l5")
 
 [node name="Label" type="Label" parent="Decorations"]
 offset_left = 1330.61
@@ -1651,9 +1651,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_abt24")
 
 [connection signal="body_entered" from="TileMap/GrapplePickup" to="TileMap/GrapplePickup" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/GrappleNode" to="TileMap/GrappleNode" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@170367" to="TileMap/@Area2D@170367" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@170371" to="TileMap/@Area2D@170371" method="_on_body_entered" flags=18]
 [connection signal="finished" from="AnimationPlayer/KioskCutscene" to="AnimationPlayer" method="play" flags=18 binds= [&"kiosk_end"]]
 [connection signal="activated" from="CameraZones/KioskCamera" to="AnimationPlayer" method="play" flags=18 binds= [&"kiosk"]]
 

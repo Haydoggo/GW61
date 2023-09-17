@@ -39,6 +39,7 @@ text = "Quit"
 visible = false
 layout_mode = 1
 
+[connection signal="pressed" from="MenuContent/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MenuContent/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MenuContent/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="return_to_previous" from="Settings" to="." method="_on_settings_return_to_previous"]

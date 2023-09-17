@@ -5,6 +5,9 @@ var current_map
 var last_map : PackedScene
 
 func _ready() -> void:
+	if not OS.is_debug_build():
+		change_to_map.call_deferred(preload("res://scenes/menus/main_menu.tscn"))
+		return
 	var restart_button = Button.new()
 	restart_button.text = "Restart"
 	restart_button.focus_mode = Control.FOCUS_NONE
