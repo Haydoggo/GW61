@@ -422,8 +422,8 @@ marker = NodePath("CameraThiefRespawn")
 [node name="CameraThiefRespawn" type="AspectRatioContainer" parent="CameraThief" index="4"]
 offset_left = -110.0
 offset_top = -196.0
-offset_right = 677.0
-offset_bottom = 265.0
+offset_right = 679.002
+offset_bottom = 247.808
 ratio = 1.7778
 script = ExtResource("6_bfguc")
 zoom = 1.46009

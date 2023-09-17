@@ -208,7 +208,7 @@ _data = {
 "kiosk_end": SubResource("Animation_otuoq")
 }
 
-[sub_resource type="Curve2D" id="Curve2D_83rxb"]
+[sub_resource type="Curve2D" id="Curve2D_mpo7b"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -216,7 +216,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_uiox0"]
+[sub_resource type="Curve2D" id="Curve2D_vjy23"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -224,7 +224,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_djsfr"]
+[sub_resource type="Curve2D" id="Curve2D_yfnxt"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -232,7 +232,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_ytonl"]
+[sub_resource type="Curve2D" id="Curve2D_tmoac"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -240,7 +240,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_48p6h"]
+[sub_resource type="Curve2D" id="Curve2D_irg3h"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -762,28 +762,25 @@ position = Vector2(9549, -1045)
 
 [node name="DecoChain" parent="Decorations" index="0" instance=ExtResource("8_v2d5m")]
 position = Vector2(4156.35, -390.137)
-curve = SubResource("Curve2D_83rxb")
+curve = SubResource("Curve2D_mpo7b")
 
 [node name="DecoChain2" parent="Decorations" index="1" instance=ExtResource("8_v2d5m")]
 position = Vector2(4890.73, -1112.5)
-curve = SubResource("Curve2D_uiox0")
+curve = SubResource("Curve2D_vjy23")
 
 [node name="DecoChain3" parent="Decorations" index="2" instance=ExtResource("8_v2d5m")]
 position = Vector2(6813.38, -1367.45)
-curve = SubResource("Curve2D_djsfr")
+curve = SubResource("Curve2D_yfnxt")
 
 [node name="DecoChain4" parent="Decorations" index="3" instance=ExtResource("8_v2d5m")]
 position = Vector2(7455.54, -1441.31)
-curve = SubResource("Curve2D_ytonl")
+curve = SubResource("Curve2D_tmoac")
 
 [node name="DecoChain5" parent="Decorations" index="4" instance=ExtResource("8_v2d5m")]
 position = Vector2(8649.67, -1278.97)
-curve = SubResource("Curve2D_48p6h")
+curve = SubResource("Curve2D_irg3h")
 
 [connection signal="body_entered" from="TileMap/GrapplePickup" to="TileMap/GrapplePickup" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/GrappleNode" to="TileMap/GrappleNode" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@659792" to="TileMap/@Area2D@659792" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@659795" to="TileMap/@Area2D@659795" method="_on_body_entered" flags=18]
 [connection signal="finished" from="AnimationPlayer/KioskCutscene" to="AnimationPlayer" method="play" binds= [&"kiosk_end"]]
 [connection signal="activated" from="CameraZones/KioskCamera" to="AnimationPlayer" method="play" binds= [&"kiosk"]]
 

@@ -171,12 +171,13 @@ motion_mirroring = Vector2(1152, 0)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Sky"]
 offset_left = -576.0
-offset_top = -91650.0
+offset_top = -32533.0
 offset_right = 1728.0
 offset_bottom = 2978.0
 texture = SubResource("GradientTexture2D_3nwuc")
 
 [node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(1, 1, 1, 0.247059)
 motion_scale = Vector2(0.25, 0.1)
 motion_mirroring = Vector2(2304, 0)
 
