@@ -320,7 +320,7 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib1hj"]
 
-[sub_resource type="Curve2D" id="Curve2D_aygjg"]
+[sub_resource type="Curve2D" id="Curve2D_rjh0b"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -328,7 +328,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_a3b36"]
+[sub_resource type="Curve2D" id="Curve2D_dph6s"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -336,7 +336,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_dkyim"]
+[sub_resource type="Curve2D" id="Curve2D_re6hy"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -344,7 +344,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_r5su6"]
+[sub_resource type="Curve2D" id="Curve2D_3aqvl"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -352,7 +352,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_pq8l5"]
+[sub_resource type="Curve2D" id="Curve2D_x1llc"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -1576,23 +1576,23 @@ position = Vector2(-8655.61, 3481.6)
 
 [node name="DecoChain" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(4156.35, -390.137)
-curve = SubResource("Curve2D_aygjg")
+curve = SubResource("Curve2D_rjh0b")
 
 [node name="DecoChain2" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(4890.73, -1112.5)
-curve = SubResource("Curve2D_a3b36")
+curve = SubResource("Curve2D_dph6s")
 
 [node name="DecoChain3" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(6813.38, -1367.45)
-curve = SubResource("Curve2D_dkyim")
+curve = SubResource("Curve2D_re6hy")
 
 [node name="DecoChain4" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(7455.54, -1441.31)
-curve = SubResource("Curve2D_r5su6")
+curve = SubResource("Curve2D_3aqvl")
 
 [node name="DecoChain5" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(8649.67, -1278.97)
-curve = SubResource("Curve2D_pq8l5")
+curve = SubResource("Curve2D_x1llc")
 
 [node name="Label" type="Label" parent="Decorations"]
 offset_left = 1330.61
