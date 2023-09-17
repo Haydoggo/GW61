@@ -28,12 +28,12 @@ func _run() -> void:
 				tm.set_cell(Collision if (dtm_layer==0) else SuperBackground, cell, 2, ac)
 				dtm.erase_cell(dtm_layer, cell)
 	
-	for cell in tm.get_used_cells(Collision):
+	for cell in tm.get_used_cells(Foreground):
 		var screens = [Vector2i(2,2), Vector2i(2,3), Vector2i(3,2), Vector2i(3,3)]
-		var ac = tm.get_cell_atlas_coords(Collision, cell)
-		if tm.get_cell_source_id(Collision, cell) == 2 and ac in screens:
-			tm.set_cell(Collision, cell)
-			tm.set_cell(Foreground, cell, 2, ac)
+		var ac = tm.get_cell_atlas_coords(Foreground, cell)
+		if tm.get_cell_source_id(Foreground, cell) == 2 and ac in screens:
+			tm.set_cell(Foreground, cell)
+			tm.set_cell(Background, cell, 2, ac)
 			print(cell)
 	
 	# convert grey blocks to terrain
