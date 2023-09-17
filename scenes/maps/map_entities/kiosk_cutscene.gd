@@ -78,4 +78,9 @@ func show_message(message : Message):
 		continue_button.grab_focus()
 	if message.done_callback:
 		message.done_callback.call()
-	
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.keycode == KEY_ESCAPE and event.shift_pressed:
+			finished.emit()
+			get_viewport().set_input_as_handled()

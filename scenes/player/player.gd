@@ -4,6 +4,9 @@ signal grapple_hit()
 signal grapple_released()
 signal retraction_finised()
 
+const grapple_frames = preload("res://scenes/player/grapple_frame.tres")
+const no_grapple_frames = preload("res://scenes/player/no_grapple_frames.tres")
+
 static var instance : Player
 
 @export_category("Movement Parameters")
@@ -19,6 +22,7 @@ static var instance : Player
 		if not is_node_ready():
 			await ready
 		grapple_indicator.visible = can_grapple
+		sprite.sprite_frames = grapple_frames if can_grapple else no_grapple_frames
 		
 
 @onready var grapple_ray: RayCast2D = $GrappleRay
@@ -101,7 +105,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if is_on_floor() > was_on_floor:
 		$LandSFX.play_random()
-			
+	
+	var direction = Input.get_axis("move_left", "move_right")
+	
 	# Visuals
 	if visual_grapple_length > 0:
 		grapple_line.show()
@@ -123,6 +129,19 @@ func _physics_process(delta: float) -> void:
 			sprite.play("jump_up")
 		else:
 			sprite.play("jump_down")
+	if is_on_wall() and not is_on_floor() and direction:
+		sprite.play("slide")
+		sprite.flip_h = direction > 0
+	
+	if is_grappling:
+		sprite.play("grapple_hold")
+		var angle_from_up = abs(global_position.direction_to(hook_position).angle_to(Vector2.UP))
+		if angle_from_up < TAU/6:
+			sprite.frame = 0
+		elif angle_from_up < 2 * TAU/6:
+			sprite.frame = 1
+		else:
+			sprite.frame = 2
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple") and can_grapple:
