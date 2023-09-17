@@ -6,7 +6,6 @@ var setter_enabled = true
 	set(v):
 		zoom = v
 		if setter_enabled:
-			var current_ratio = size.x/size.y
 			size.y = ProjectSettings.get("display/window/size/viewport_height") / zoom
 			size.x = size.y * ratio
 

@@ -18,7 +18,7 @@ func _ready() -> void:
 		spike.show()
 		spikes.append(spike)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	intensity = clamp(inverse_lerp(1000, 5000, Player.instance.velocity.length()), 0, 1)
 	if intensity == 0: return
 	var ratio = size.x/size.y

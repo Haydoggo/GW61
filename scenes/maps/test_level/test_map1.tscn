@@ -224,7 +224,7 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib1hj"]
 
-[sub_resource type="Curve2D" id="Curve2D_phyxd"]
+[sub_resource type="Curve2D" id="Curve2D_36sen"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -232,7 +232,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_o4m3r"]
+[sub_resource type="Curve2D" id="Curve2D_g218u"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -240,7 +240,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_3xf1r"]
+[sub_resource type="Curve2D" id="Curve2D_ok7yw"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -248,7 +248,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_c7f0b"]
+[sub_resource type="Curve2D" id="Curve2D_0ffwm"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -256,7 +256,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_q13vs"]
+[sub_resource type="Curve2D" id="Curve2D_4b16j"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -780,10 +780,10 @@ libraries = {
 }
 
 [node name="KioskCutscene" parent="AnimationPlayer" instance=ExtResource("11_regho")]
-offset_left = -4302.0
-offset_top = 2468.0
-offset_right = -4302.0
-offset_bottom = 2468.0
+offset_left = -4299.0
+offset_top = 2517.0
+offset_right = -4299.0
+offset_bottom = 2517.0
 
 [node name="DeathBarrier" type="Area2D" parent="."]
 position = Vector2(-8639.61, 5929.6)
@@ -1235,23 +1235,23 @@ position = Vector2(-8655.61, 3481.6)
 
 [node name="DecoChain" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(4156.35, -390.137)
-curve = SubResource("Curve2D_phyxd")
+curve = SubResource("Curve2D_36sen")
 
 [node name="DecoChain2" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(4890.73, -1112.5)
-curve = SubResource("Curve2D_o4m3r")
+curve = SubResource("Curve2D_g218u")
 
 [node name="DecoChain3" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(6813.38, -1367.45)
-curve = SubResource("Curve2D_3xf1r")
+curve = SubResource("Curve2D_ok7yw")
 
 [node name="DecoChain4" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(7455.54, -1441.31)
-curve = SubResource("Curve2D_c7f0b")
+curve = SubResource("Curve2D_0ffwm")
 
 [node name="DecoChain5" parent="Decorations" instance=ExtResource("16_ue20s")]
 position = Vector2(8649.67, -1278.97)
-curve = SubResource("Curve2D_q13vs")
+curve = SubResource("Curve2D_4b16j")
 
 [node name="Label" type="Label" parent="Decorations"]
 offset_left = 1330.61
@@ -1282,9 +1282,9 @@ scale = Vector2(5.81818, 5.81818)
 polygon = PackedVector2Array(15.5, 11, -15.5, 11, -15.5, -11, 15.5, -11)
 
 [connection signal="body_entered" from="TileMap/GrapplePickup" to="TileMap/GrapplePickup" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/GrappleNode" to="TileMap/GrappleNode" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@142522" to="TileMap/@Area2D@142522" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@142526" to="TileMap/@Area2D@142526" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="TileMap/@Area2D@22443" to="TileMap/@Area2D@22443" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="TileMap/@Area2D@22449" to="TileMap/@Area2D@22449" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="TileMap/@Area2D@22453" to="TileMap/@Area2D@22453" method="_on_body_entered" flags=18]
 [connection signal="finished" from="AnimationPlayer/KioskCutscene" to="AnimationPlayer" method="play" flags=18 binds= [&"kiosk_end"]]
 [connection signal="activated" from="CameraZones/KioskCamera" to="AnimationPlayer" method="play" flags=18 binds= [&"kiosk"]]
 

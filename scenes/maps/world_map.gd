@@ -25,7 +25,7 @@ const TILE_PROPERTIES = {
 func _ready() -> void:
 	set_process(Engine.is_editor_hint())
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_T) and Input.is_key_pressed(KEY_ALT):
 		var ei = ClassDB.instantiate("EditorScript").get_editor_interface()
 		var s = ei.get_selection()
@@ -33,10 +33,10 @@ func _process(delta: float) -> void:
 		s.add_node(self)
 		ei.edit_node(self)
 
-func _use_tile_data_runtime_update(layer: int, coords: Vector2i) -> bool:
+func _use_tile_data_runtime_update(layer: int, _coords: Vector2i) -> bool:
 	return not Engine.is_editor_hint() and layer > 0
 
-func _tile_data_runtime_update(layer: int, coords: Vector2i, tile_data: TileData) -> void:
+func _tile_data_runtime_update(_layer: int, _coords: Vector2i, tile_data: TileData) -> void:
 	tile_data.set_collision_polygons_count(0, 0)
 
 func global_to_atlas_coords(global_p : Vector2) -> Vector2i:
