@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://buggsqqisu3vq"]
 
-[ext_resource type="Script" path="res://scenes/maps/tutorial/kiosk_cutscene.gd" id="1_tjjvm"]
+[ext_resource type="Script" path="res://scenes/maps/map_entities/kiosk_cutscene.gd" id="1_tjjvm"]
 
 [node name="KioskCutscene" type="Control"]
 layout_mode = 3

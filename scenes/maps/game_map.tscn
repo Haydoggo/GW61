@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scenes/maps/world_map.gd" id="8_btxhn"]
 [ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="9_monpm"]
 [ext_resource type="Texture2D" uid="uid://blxodhimjkgap" path="res://scenes/maps/map_entities/textures/carRed4_005.png" id="10_dsisi"]
-[ext_resource type="PackedScene" uid="uid://buggsqqisu3vq" path="res://scenes/maps/tutorial/kiosk_cutscene.tscn" id="11_regho"]
+[ext_resource type="PackedScene" uid="uid://buggsqqisu3vq" path="res://scenes/maps/map_entities/kiosk_cutscene.tscn" id="11_regho"]
 [ext_resource type="Script" path="res://scenes/maps/world_barrier.gd" id="12_74ld2"]
 [ext_resource type="PackedScene" uid="uid://bcgldu3add1ja" path="res://scenes/maps/map_entities/checkpoint/checkpoint.tscn" id="13_ca6wj"]
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="14_abt24"]
@@ -379,7 +379,7 @@ motion_mirroring = Vector2(1152, 0)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Sky"]
 offset_left = -576.0
-offset_top = -32533.0
+offset_top = -60008.0
 offset_right = 1728.0
 offset_bottom = 6270.0
 texture = SubResource("GradientTexture2D_3nwuc")
@@ -1378,9 +1378,6 @@ scale = Vector2(5.81818, 5.81818)
 polygon = PackedVector2Array(15.5, 11, -15.5, 11, -15.5, -11, 15.5, -11)
 
 [connection signal="body_entered" from="TileMap/GrapplePickup" to="TileMap/GrapplePickup" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/GrappleNode" to="TileMap/GrappleNode" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@48316" to="TileMap/@Area2D@48316" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@48320" to="TileMap/@Area2D@48320" method="_on_body_entered" flags=18]
 [connection signal="finished" from="AnimationPlayer/KioskCutscene" to="AnimationPlayer" method="play" flags=18 binds= [&"kiosk_end"]]
 [connection signal="activated" from="CameraZones/KioskCamera" to="AnimationPlayer" method="play" flags=18 binds= [&"kiosk"]]
 

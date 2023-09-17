@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://blxodhimjkgap" path="res://scenes/maps/map_entities/textures/carRed4_005.png" id="3_lterk"]
 [ext_resource type="PackedScene" uid="uid://bcgldu3add1ja" path="res://scenes/maps/map_entities/checkpoint/checkpoint.tscn" id="4_xqfsj"]
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="5_pl3pn"]
-[ext_resource type="PackedScene" uid="uid://buggsqqisu3vq" path="res://scenes/maps/tutorial/kiosk_cutscene.tscn" id="5_swfdy"]
+[ext_resource type="PackedScene" uid="uid://buggsqqisu3vq" path="res://scenes/maps/map_entities/kiosk_cutscene.tscn" id="5_swfdy"]
 [ext_resource type="Script" path="res://scenes/maps/teleport_button.gd" id="6_t5g0i"]
 [ext_resource type="PackedScene" uid="uid://cuxl5ea6n1kfj" path="res://scenes/maps/map_entities/deco_chain.tscn" id="8_v2d5m"]
 [ext_resource type="Script" path="res://scenes/maps/map_entities/camera_thief/camera_area.gd" id="9_ho5k5"]
