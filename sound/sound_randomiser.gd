@@ -9,6 +9,6 @@ func play_random():
 	add_child(asp)
 	asp.play()
 	asp.finished.connect(func():
-		asp.queue_free
+		asp.queue_free()
 		finished.emit()
 		)
