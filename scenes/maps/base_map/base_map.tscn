@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cc52ncp4q08yl"]
 
-[ext_resource type="TileSet" uid="uid://b6ss61cssx0ly" path="res://scenes/maps/tile_map.tres" id="1_6sxp2"]
-[ext_resource type="Script" path="res://scenes/maps/world_map.gd" id="2_qn174"]
-[ext_resource type="Script" path="res://addons/selection_shortcut/selector_node.gd" id="3_jk1ai"]
-[ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="3_ym25y"]
-[ext_resource type="Script" path="res://scenes/maps/world_barrier.gd" id="5_syvnl"]
+[ext_resource type="TileSet" uid="uid://b6ss61cssx0ly" path="res://scenes/maps/base_map/tileset/tile_map.tres" id="1_gt004"]
+[ext_resource type="Script" path="res://scenes/maps/base_map/world_map.gd" id="2_pjunf"]
+[ext_resource type="Script" path="res://addons/selection_shortcut/selector_node.gd" id="3_7w4j2"]
+[ext_resource type="PackedScene" uid="uid://bvd5c508fvhdx" path="res://scenes/player/player.tscn" id="4_4slf4"]
+[ext_resource type="Script" path="res://scenes/maps/base_map/world_barrier.gd" id="5_skevq"]
 
 [sub_resource type="Gradient" id="Gradient_82sck"]
 offsets = PackedFloat32Array(0, 0.13382, 0.399027, 0.627737, 1)
@@ -61,7 +61,7 @@ polygon = PackedVector2Array(581, -3496, 649, -3478, 985, -3446, 1232, -3523, 12
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(0.8, 0.8)
-tile_set = ExtResource("1_6sxp2")
+tile_set = ExtResource("1_gt004")
 format = 2
 layer_0/name = "Collisions"
 layer_1/name = "SuperForeground"
@@ -92,20 +92,20 @@ layer_4/y_sort_enabled = false
 layer_4/y_sort_origin = 0
 layer_4/z_index = -20
 layer_4/tile_data = PackedInt32Array()
-script = ExtResource("2_qn174")
+script = ExtResource("2_pjunf")
 
 [node name="SelectorNode" type="Node" parent="TileMap"]
-script = ExtResource("3_jk1ai")
+script = ExtResource("3_7w4j2")
 shortcut = SubResource("InputEventKey_k8f7y")
 
-[node name="Player" parent="." instance=ExtResource("3_ym25y")]
+[node name="Player" parent="." instance=ExtResource("4_4slf4")]
 
 [node name="DeathBarrier" type="Area2D" parent="."]
 position = Vector2(16, 2448)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
-script = ExtResource("5_syvnl")
+script = ExtResource("5_skevq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBarrier"]
 shape = SubResource("WorldBoundaryShape2D_ib1hj")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dh8hnnikphbde"]
 
 [ext_resource type="Script" path="res://scenes/maps/map_entities/grapple_node/grapple_node.gd" id="1_4efnf"]
-[ext_resource type="Texture2D" uid="uid://dvec5pfpv6y4h" path="res://scenes/maps/tileset.png" id="1_cj82j"]
+[ext_resource type="Texture2D" uid="uid://dvec5pfpv6y4h" path="res://scenes/maps/base_map/tileset/tileset.png" id="1_cj82j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_folok"]
 atlas = ExtResource("1_cj82j")

@@ -1,10 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cfqyto00kgjv1"]
 
-[ext_resource type="Script" path="res://scenes/maps/map_selector.gd" id="1_nlneb"]
-[ext_resource type="PackedScene" uid="uid://dgbe0iv128eau" path="res://scenes/maps/game_map.tscn" id="2_selhs"]
+[ext_resource type="Script" path="res://scenes/menus/level_manager/map_selector.gd" id="1_nlneb"]
+[ext_resource type="PackedScene" uid="uid://cth66jd5yyvck" path="res://scenes/maps/game_map.tscn" id="2_selhs"]
 [ext_resource type="PackedScene" uid="uid://ds7cl6uqqv27o" path="res://scenes/maps/test_level/test_map.tscn" id="3_deayu"]
 [ext_resource type="PackedScene" uid="uid://pb4rl4f8kfyp" path="res://scenes/maps/test_level/mechanics_test.tscn" id="4_2smvf"]
-[ext_resource type="PackedScene" uid="uid://b3j7sxsumwrjy" path="res://scenes/maps/test_level/tutorial.tscn" id="5_ksq3s"]
 [ext_resource type="AudioStream" uid="uid://lr3plpqnhl1a" path="res://sound/music/MUS_MainLoop.mp3" id="6_81kjh"]
 [ext_resource type="PackedScene" uid="uid://dxb4r5t7dk0lr" path="res://scenes/menus/pause_menu.tscn" id="7_0tc77"]
 
@@ -23,7 +22,7 @@ mouse_filter = 2
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_nlneb")
-maps = Array[PackedScene]([ExtResource("2_selhs"), ExtResource("3_deayu"), ExtResource("4_2smvf"), ExtResource("5_ksq3s")])
+maps = Array[PackedScene]([ExtResource("2_selhs"), ExtResource("3_deayu"), ExtResource("4_2smvf")])
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
