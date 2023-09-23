@@ -301,7 +301,6 @@ func retract_grapple():
 		retraction_finised.emit()
 
 func die():
-	print_stack()
 	$AnimationPlayer.play("die")
 
 func respawn():
