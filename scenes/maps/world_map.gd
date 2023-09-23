@@ -1,4 +1,3 @@
-@tool
 class_name WorldMap extends TileMap
 
 enum TileProperty {
@@ -24,14 +23,6 @@ const TILE_PROPERTIES = {
 
 func _ready() -> void:
 	set_process(Engine.is_editor_hint())
-
-func _process(_delta: float) -> void:
-	if Input.is_key_pressed(KEY_T) and Input.is_key_pressed(KEY_ALT):
-		var ei = ClassDB.instantiate("EditorScript").get_editor_interface()
-		var s = ei.get_selection()
-		s.clear()
-		s.add_node(self)
-		ei.edit_node(self)
 
 func _use_tile_data_runtime_update(layer: int, _coords: Vector2i) -> bool:
 	return not Engine.is_editor_hint() and layer > 0
