@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dvec5pfpv6y4h" path="res://scenes/maps/base_map/tileset/tileset.png" id="1_wjshu"]
 [ext_resource type="PackedScene" uid="uid://dsgrhid0btr8k" path="res://scenes/maps/map_entities/window/window.tscn" id="2_v0de8"]
-[ext_resource type="PackedScene" path="res://scenes/maps/map_entities/window/window_sideways.tscn" id="3_7kjni"]
+[ext_resource type="PackedScene" uid="uid://bf0jm2y8y5f84" path="res://scenes/maps/map_entities/window/window_sideways.tscn" id="3_7kjni"]
 [ext_resource type="PackedScene" uid="uid://dh8hnnikphbde" path="res://scenes/maps/map_entities/grapple_node/grapple_node.tscn" id="4_kavwf"]
 [ext_resource type="Texture2D" uid="uid://bljxfnq5dxs53" path="res://scenes/maps/base_map/tileset/platformerPack_industrial_tilesheet.png" id="5_ewbfr"]
 [ext_resource type="Texture2D" uid="uid://bi4ecghtpu174" path="res://scenes/maps/base_map/tileset/concrete.png" id="6_688ks"]

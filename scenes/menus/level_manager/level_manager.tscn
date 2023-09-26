@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfqyto00kgjv1"]
+[gd_scene load_steps=7 format=3 uid="uid://cfqyto00kgjv1"]
 
 [ext_resource type="Script" path="res://scenes/menus/level_manager/map_selector.gd" id="1_nlneb"]
 [ext_resource type="PackedScene" uid="uid://cth66jd5yyvck" path="res://scenes/maps/game_map.tscn" id="2_selhs"]

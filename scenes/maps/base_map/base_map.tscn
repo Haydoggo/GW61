@@ -15,6 +15,9 @@ gradient = SubResource("Gradient_82sck")
 fill_from = Vector2(1, 1)
 
 [sub_resource type="InputEventKey" id="InputEventKey_k8f7y"]
+device = -1
+alt_pressed = true
+keycode = 84
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib1hj"]
 

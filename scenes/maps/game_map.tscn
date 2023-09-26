@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cofnxquytticg" path="res://scenes/enemies/enemy.tscn" id="3_diogn"]
 [ext_resource type="PackedScene" uid="uid://chn6n7stwkldl" path="res://scenes/maps/map_entities/document_pickup/document.tscn" id="4_du3s0"]
 [ext_resource type="PackedScene" uid="uid://dh8hnnikphbde" path="res://scenes/maps/map_entities/grapple_node/grapple_node.tscn" id="5_ln17r"]
-[ext_resource type="PackedScene" path="res://scenes/maps/map_entities/kiosk_cutscene.tscn" id="7_n8by2"]
+[ext_resource type="PackedScene" uid="uid://buggsqqisu3vq" path="res://scenes/maps/map_entities/kiosk_cutscene.tscn" id="7_n8by2"]
 [ext_resource type="PackedScene" uid="uid://bcgldu3add1ja" path="res://scenes/maps/map_entities/checkpoint/checkpoint.tscn" id="9_a4ey7"]
 [ext_resource type="Texture2D" uid="uid://d1n7w4aw37v5j" path="res://icon.svg" id="10_1cpki"]
 [ext_resource type="PackedScene" uid="uid://hkfl3h4cmhjn" path="res://scenes/maps/map_entities/camera_thief/camera_thief.tscn" id="11_02lwl"]
 [ext_resource type="Script" path="res://scenes/maps/map_entities/camera_thief/camera_area.gd" id="12_kqysb"]
 [ext_resource type="Script" path="res://scenes/maps/test_level/teleport_button.gd" id="13_ba405"]
-[ext_resource type="PackedScene" path="res://scenes/maps/map_entities/deco_chain.tscn" id="14_jrdvc"]
+[ext_resource type="PackedScene" uid="uid://cuxl5ea6n1kfj" path="res://scenes/maps/map_entities/deco_chain.tscn" id="14_jrdvc"]
 [ext_resource type="Texture2D" uid="uid://blxodhimjkgap" path="res://scenes/maps/map_entities/textures/carRed4_005.png" id="15_7lmg7"]
 
 [sub_resource type="GDScript" id="GDScript_jd4w3"]
@@ -307,7 +307,7 @@ _data = {
 "kiosk_end": SubResource("Animation_otuoq")
 }
 
-[sub_resource type="Curve2D" id="Curve2D_nrsbx"]
+[sub_resource type="Curve2D" id="Curve2D_dfxun"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -315,7 +315,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_eshjy"]
+[sub_resource type="Curve2D" id="Curve2D_y4m5l"]
 resource_local_to_scene = true
 bake_interval = 20.0
 _data = {
@@ -323,7 +323,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_8571u"]
+[sub_resource type="Curve2D" id="Curve2D_v1giv"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -331,7 +331,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_3r8fh"]
+[sub_resource type="Curve2D" id="Curve2D_j22rw"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -339,7 +339,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_gilef"]
+[sub_resource type="Curve2D" id="Curve2D_cw57u"]
 resource_local_to_scene = true
 bake_interval = 32.0
 _data = {
@@ -1506,23 +1506,23 @@ position = Vector2(-8655.61, 3481.6)
 
 [node name="DecoChain" parent="Decorations" index="0" instance=ExtResource("14_jrdvc")]
 position = Vector2(4156.35, -390.137)
-curve = SubResource("Curve2D_nrsbx")
+curve = SubResource("Curve2D_dfxun")
 
 [node name="DecoChain2" parent="Decorations" index="1" instance=ExtResource("14_jrdvc")]
 position = Vector2(4890.73, -1112.5)
-curve = SubResource("Curve2D_eshjy")
+curve = SubResource("Curve2D_y4m5l")
 
 [node name="DecoChain3" parent="Decorations" index="2" instance=ExtResource("14_jrdvc")]
 position = Vector2(6813.38, -1367.45)
-curve = SubResource("Curve2D_8571u")
+curve = SubResource("Curve2D_v1giv")
 
 [node name="DecoChain4" parent="Decorations" index="3" instance=ExtResource("14_jrdvc")]
 position = Vector2(7455.54, -1441.31)
-curve = SubResource("Curve2D_3r8fh")
+curve = SubResource("Curve2D_j22rw")
 
 [node name="DecoChain5" parent="Decorations" index="4" instance=ExtResource("14_jrdvc")]
 position = Vector2(8649.67, -1278.97)
-curve = SubResource("Curve2D_gilef")
+curve = SubResource("Curve2D_cw57u")
 
 [node name="Label" type="Label" parent="Decorations" index="5"]
 offset_left = 1330.61
@@ -1585,9 +1585,6 @@ position = Vector2(548, -21168)
 attack_power = 28.169
 
 [connection signal="body_entered" from="TileMap/GrapplePickup" to="TileMap/GrapplePickup" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/GrappleNode" to="TileMap/GrappleNode" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@27802" to="TileMap/@Area2D@27802" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="TileMap/@Area2D@27806" to="TileMap/@Area2D@27806" method="_on_body_entered" flags=18]
 [connection signal="finished" from="AnimationPlayer/KioskCutscene" to="AnimationPlayer" method="play" flags=18 binds= [&"kiosk_end"]]
 [connection signal="activated" from="CameraZones/KioskCamera" to="AnimationPlayer" method="play" flags=18 binds= [&"kiosk"]]
 
